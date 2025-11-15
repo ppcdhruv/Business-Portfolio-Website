@@ -1,6 +1,7 @@
 import React from 'react';
 import Container from './ui/Container';
 import { View } from '../App';
+import { motion } from 'framer-motion';
 
 const Logo = () => (
   <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -15,7 +16,13 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ setView }) => {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 z-40 border-t border-zinc-200/80 bg-zinc-100/80 dark:bg-zinc-900/80 backdrop-blur-sm">
+    <motion.footer 
+      className="border-t border-zinc-200/80 bg-zinc-100/80 dark:bg-zinc-900/80 backdrop-blur-sm"
+      initial={{ y: "100%" }}
+      animate={{ y: 0 }}
+      exit={{ y: "100%" }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+    >
       <Container className="py-4">
         <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4">
             <div className="flex items-center gap-3 text-center sm:text-left">
@@ -30,8 +37,8 @@ const Footer: React.FC<FooterProps> = ({ setView }) => {
             </div>
         </div>
       </Container>
-    </footer>
+    </motion.footer>
   );
 };
 
-export default React.memo(Footer);
+export default Footer;

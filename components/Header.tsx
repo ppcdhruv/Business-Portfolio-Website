@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-// FIX: Import Variants type from framer-motion to ensure animation props are correctly typed.
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import Button from './ui/Button';
 import { Theme } from '../App';

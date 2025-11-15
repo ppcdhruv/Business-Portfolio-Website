@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Button from './ui/Button';
 import ArrowRightIcon from './icons/ArrowRightIcon';
@@ -110,7 +110,7 @@ const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
     return () => clearTimeout(timeoutId);
   }, [typedText, isDeleting, phraseIndex]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith('#')) {
         e.preventDefault();
         const targetId = href.substring(1);
@@ -119,7 +119,7 @@ const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
             targetElement.scrollIntoView({ behavior: 'smooth' });
         }
     }
-  };
+  }, []);
 
   return (
     <section 
@@ -158,37 +158,38 @@ const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
             </div>
 
             {/* Stats Bar */}
-            <div ref={statsRef} className="w-full mt-8">
-                <div className="max-w-xl mx-auto">
-                    <div className="flex items-stretch justify-around divide-x divide-zinc-200/80 dark:divide-zinc-800/80 py-2">
-                        {stats.map((stat) => (
-                            <div key={stat.label} className="flex-1 text-center px-2">
-                                <p className="text-lg sm:text-xl font-bold tracking-tighter text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-1">
-                                    {statsInView && (
-                                        <motion.span
-                                            initial={{ opacity: 0, y: 5 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.5, delay: 0.5 }}
-                                        >
-                                            {stat.icon === 'plus' && <PlusIcon className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />}
-                                            {stat.icon === 'minus' && <MinusIcon className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />}
-                                        </motion.span>
-                                    )}
-                                    {statsInView ? (
-                                        <AnimatedNumber 
-                                            value={stat.value} 
-                                            suffix={stat.suffix}
-                                            decimals={stat.decimals}
-                                        />
-                                    ) : (
-                                        <span>0{stat.suffix || ''}</span>
-                                    )}
-                                </p>
-                                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">{stat.label}</p>
-                            </div>
-                        ))}
+            <div
+              ref={statsRef}
+              className="w-full max-w-xl mx-auto mt-8 py-4 border-y border-zinc-200/80 dark:border-zinc-800/80"
+            >
+              <div className="flex items-stretch justify-center gap-8 sm:gap-16">
+                  {stats.map((stat) => (
+                    <div key={stat.label} className="text-center px-2">
+                      <p className="text-lg sm:text-xl font-bold tracking-tighter text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-1">
+                        {statsInView && (
+                          <motion.span
+                            initial={{ opacity: 0, y: 5 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.5 }}
+                          >
+                            {stat.icon === 'plus' && <PlusIcon className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />}
+                            {stat.icon === 'minus' && <MinusIcon className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />}
+                          </motion.span>
+                        )}
+                        {statsInView ? (
+                          <AnimatedNumber
+                            value={stat.value}
+                            suffix={stat.suffix}
+                            decimals={stat.decimals}
+                          />
+                        ) : (
+                          <span>0{stat.suffix || ''}</span>
+                        )}
+                      </p>
+                      <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">{stat.label}</p>
                     </div>
-                </div>
+                  ))}
+              </div>
             </div>
             
             {/* CTAs - Directly Below */}

@@ -5,7 +5,6 @@ interface AnimatedNumberProps {
   prefix?: string;
   suffix?: string;
   decimals?: number;
-  // FIX: Add currency prop to handle currency formatting.
   currency?: boolean;
 }
 
@@ -45,7 +44,6 @@ const AnimatedNumber: React.FC<AnimatedNumberProps> = ({ value, prefix = '', suf
   }, [value]); // Rerun only when the target `value` changes
 
   const formatValue = (val: number) => {
-    // FIX: Add logic to format as currency if the currency prop is true.
     if (currency) {
       return new Intl.NumberFormat('en-US', {
         style: 'currency',

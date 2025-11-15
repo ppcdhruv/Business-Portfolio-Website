@@ -1,9 +1,7 @@
 import React from 'react';
-// FIX: Import Variants type from framer-motion to correctly type animation variants.
 import { motion, Variants } from 'framer-motion';
 
 const CheckCircleIcon: React.FC<{ className?: string, isInView?: boolean }> = ({ className = 'w-5 h-5', isInView = false }) => {
-  // FIX: Explicitly type animation variants with `Variants` to resolve type inference issues with the `ease` property.
   const circleVariants: Variants = {
     hidden: { pathLength: 0 },
     visible: { 
@@ -12,7 +10,6 @@ const CheckCircleIcon: React.FC<{ className?: string, isInView?: boolean }> = ({
     }
   };
   
-  // FIX: Explicitly type animation variants with `Variants` to resolve type inference issues with the `ease` property.
   const checkVariants: Variants = {
     hidden: { pathLength: 0 },
     visible: { 

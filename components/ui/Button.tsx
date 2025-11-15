@@ -3,8 +3,6 @@ import React from 'react';
 type ButtonVariant = 'primary' | 'secondary';
 type ButtonSize = 'md' | 'lg';
 
-// FIX: Refactored props to support both button and anchor attributes correctly using a discriminated union.
-// This ensures type safety for props like `href`, `type`, and event handlers, resolving all type errors.
 type BaseProps = {
   children: React.ReactNode;
   variant?: ButtonVariant;
@@ -22,7 +20,6 @@ type ButtonAsLink = BaseProps &
     href: string;
   };
 
-// FIX: Add support for rendering the button as a 'div' to allow for non-interactive button-styled elements.
 type ButtonAsDiv = BaseProps &
   Omit<React.HTMLAttributes<HTMLDivElement>, keyof BaseProps> & {
     href?: undefined;
@@ -32,9 +29,6 @@ type ButtonAsDiv = BaseProps &
 type ButtonProps = ButtonAsButton | ButtonAsLink | ButtonAsDiv;
 
 const Button: React.FC<ButtonProps> = (props) => {
-  // FIX: Destructuring `props` at the top level prevents TypeScript from correctly narrowing the type
-  // within the conditional `if (props.href)`. By accessing common properties directly, we
-  // preserve the full type information of `props` for the type guard to work.
   const variant = props.variant || 'primary';
   const size = props.size || 'md';
   const className = props.className || '';
@@ -54,20 +48,14 @@ const Button: React.FC<ButtonProps> = (props) => {
 
   const combinedClassName = `${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]} ${className}`;
   
-  // FIX: Using an explicit if/else block ensures TypeScript correctly narrows the `props` type in each branch.
-  // This resolves issues where the spread operator (`...`) would otherwise be applied to a union type, causing type conflicts.
   if (props.href) {
-    // FIX: Explicitly cast props to the correct type before destructuring with a rest parameter.
-    // This is a workaround for a TypeScript limitation where it fails to narrow the type of the rest parameter from a discriminated union.
     const { children: _children, className: _className, variant: _variant, size: _size, ...anchorProps } = props as ButtonAsLink;
     return (
       <a className={combinedClassName} {...anchorProps}>
         {children}
       </a>
     );
-  // FIX: Add a condition to handle rendering as a 'div' when the `as="div"` prop is provided.
   } else if ('as' in props && props.as === 'div') {
-    // This uses a type guard to correctly narrow the props for a div element.
     const { children: _children, className: _className, variant: _variant, size: _size, as: _as, ...divProps } = props as ButtonAsDiv;
     return (
       <div className={combinedClassName} {...divProps}>
@@ -75,7 +63,6 @@ const Button: React.FC<ButtonProps> = (props) => {
       </div>
     );
   } else {
-    // FIX: Explicitly cast props to the correct type before destructuring with a rest parameter.
     const { children: _children, className: _className, variant: _variant, size: _size, ...buttonProps } = props as ButtonAsButton;
     return (
       <button

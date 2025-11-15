@@ -73,14 +73,13 @@ This document serves as the primary input prompt for any AI agent tasked with bu
 Construct the main landing page by assembling the following sections in this precise order:
 
 1.  **Hero:** Rotating headlines to capture visitor pain points, a central visualization of the 'before vs. after' transformation, and clear calls-to-action.
-2.  **Page Wedge:** A transitional section bridging the hero's hook with a clear definition of the core problem: the "performance stack".
-3.  **Problem & Solution:** A detailed breakdown of the three pillars of performance (Experience, Targeting, Data) followed by a comparison of a static website versus a conversion funnel.
-4.  **Case Studies:** An interactive, filterable gallery showcasing real-world results and client success stories.
-5.  **Service Modules:** A horizontal carousel detailing the core capabilities: Traffic, Leads, Nurture, and AI.
-6.  **About:** An introduction to the founder, Dhruv, highlighting his experience and founder-to-founder approach.
-7.  **Fit Check:** A two-column layout clearly defining the ideal client profile ("Good Fit") and who the service is not for ("Bad Fit") to pre-qualify leads.
-8.  **Investment:** A three-column pricing section outlining the different engagement packages and their deliverables.
-9.  **Final CTA:** A prominent final section with a lead capture form and a reiteration of the founder promise.
+2.  **Problem & Solution:** A detailed breakdown of the three pillars of performance (Experience, Targeting, Data) followed by a comparison of a static website versus a conversion funnel.
+3.  **Case Studies:** An interactive, filterable gallery showcasing real-world results and client success stories.
+4.  **Service Modules:** A horizontal carousel detailing the core capabilities: Traffic, Leads, Nurture, and AI.
+5.  **About:** An introduction to the founder, Dhruv, highlighting his experience and founder-to-founder approach.
+6.  **Fit Check:** A two-column layout clearly defining the ideal client profile ("Good Fit") and who the service is not for ("Bad Fit") to pre-qualify leads.
+7.  **Investment:** A three-column pricing section outlining the different engagement packages and their deliverables.
+8.  **Final CTA:** A prominent final section with a lead capture form and a reiteration of the founder promise.
 
 ---
 
@@ -99,17 +98,15 @@ Construct the main landing page by assembling the following sections in this pre
 - **Social Proof:** Integrate social proof strategically through metrics, case studies, and testimonials.
 - **Risk Reversal:** Clearly feature the 30-day guarantee and refund policy to build trust.
 - **Lead Qualification:** Use the "Is this for you?" section to filter out unqualified leads and improve lead quality.
-- **Calculator:** Build an interactive ROI projection tool to demonstrate value tangibly.
 
 ---
 
 ## Section H: Technical Stack & Requirements
 
-- **Framework:** Next.js 14+ with the App Router.
+- **Framework:** React 18+ with TypeScript.
 - **Language/Library:** React 18+ with TypeScript.
 - **Styling:** Tailwind CSS.
 - **Animation:** Framer Motion.
-- **Component Base:** Use shadcn/ui components as a starting point where applicable, customized to fit the design system.
 - **Responsiveness:** Implement a mobile-first responsive design that works flawlessly on all screen sizes.
 - **Accessibility:** Adhere to WCAG 2.1 AA standards. Ensure proper use of ARIA labels, full keyboard navigation, and semantic HTML.
 
@@ -129,7 +126,7 @@ Construct the main landing page by assembling the following sections in this pre
 
 - **Layout:** The primary differentiator is the use of asymmetric bento grids, not standard equal-column layouts.
 - **Aesthetic:** The site must feel like a clean, well-designed text editor, not a typical, flashy SaaS landing page.
-- **Interactions:** Prefer inline elements (like the ROI calculator) over modals or pop-ups wherever possible to reduce friction.
+- **Interactions:** Prefer inline elements over modals or pop-ups wherever possible to reduce friction.
 - **Focus:** Keep data and key metrics front and center in the design.
 - **Simplicity:** The design must be characterized by minimal decoration and maximum clarity.
 

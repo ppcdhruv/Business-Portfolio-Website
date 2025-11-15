@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { caseStudies } from '../data/case-studies';
 import CaseStudyCard from './CaseStudyCard';
@@ -12,9 +12,9 @@ const CaseStudies: React.FC = () => {
 
   const industries = ['All', ...Array.from(new Set(caseStudies.map(study => study.industry)))];
 
-  const filteredStudies = activeIndustry === 'All' 
+  const filteredStudies = useMemo(() => activeIndustry === 'All' 
     ? caseStudies 
-    : caseStudies.filter(study => study.industry === activeIndustry);
+    : caseStudies.filter(study => study.industry === activeIndustry), [activeIndustry]);
 
   const checkScroll = useCallback(() => {
     const el = scrollContainerRef.current;

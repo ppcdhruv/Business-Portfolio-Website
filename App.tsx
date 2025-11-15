@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
+import React, { useState, useEffect, useCallback, Suspense, lazy, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
@@ -25,29 +26,52 @@ const Loader: React.FC = () => (
   </div>
 );
 
-const MainContent: React.FC<{ setHeroRect: (rect: DOMRect | null) => void; }> = ({ setHeroRect }) => (
-    <main className="h-screen overflow-y-auto no-scrollbar pb-16">
-      <Hero setHeroRect={setHeroRect} />
-      <Suspense fallback={<Loader />}>
-        <Container>
-          <ProblemSolution />
-          <CaseStudies />
-          <ServiceModules />
-        </Container>
-        <Container>
-          <About />
-          <FitCheck />
-          <Investment />
-          <FinalCTA />
-        </Container>
-      </Suspense>
-    </main>
-);
+const MainContent: React.FC<{ 
+  setHeroRect: (rect: DOMRect | null) => void;
+  setHasScrolled: (scrolled: boolean) => void; 
+}> = ({ setHeroRect, setHasScrolled }) => {
+    const mainRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const el = mainRef.current;
+        if (!el) return;
+        
+        const handleScroll = () => {
+            setHasScrolled(true);
+        };
+        
+        el.addEventListener('scroll', handleScroll, { once: true });
+        
+        return () => {
+            el.removeEventListener('scroll', handleScroll);
+        };
+    }, [setHasScrolled]);
+    
+    return (
+        <main ref={mainRef} className="h-screen overflow-y-auto no-scrollbar pb-16">
+            <Hero setHeroRect={setHeroRect} />
+            <Suspense fallback={<Loader />}>
+                <Container>
+                    <ProblemSolution />
+                    <CaseStudies />
+                    <ServiceModules />
+                </Container>
+                <Container>
+                    <About />
+                    <FitCheck />
+                    <Investment />
+                    <FinalCTA />
+                </Container>
+            </Suspense>
+        </main>
+    );
+};
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState<Theme>('light');
   const [view, setView] = useState<View>('main');
   const [heroRect, setHeroRect] = useState<DOMRect | null>(null);
+  const [hasScrolled, setHasScrolled] = useState(false);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme') as Theme | null;
@@ -79,11 +103,13 @@ const App: React.FC = () => {
       <InteractiveBackground theme={theme} heroRect={heroRect} />
       <Header theme={theme} toggleTheme={toggleTheme} />
       {view === 'main' ? (
-        <MainContent setHeroRect={setHeroRect} />
+        <MainContent setHeroRect={setHeroRect} setHasScrolled={setHasScrolled} />
       ) : (
         <PrivacyPolicy onBack={() => setView('main')} />
       )}
-      <Footer setView={setView} />
+      <AnimatePresence>
+        {hasScrolled && <Footer setView={setView} />}
+      </AnimatePresence>
       <Chatbot />
     </>
   );

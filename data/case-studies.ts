@@ -7,12 +7,9 @@ export interface CaseStudy {
   problem: string;
   solution: string;
   kpis: string;
-  screenshots: string[];
   outcome: string;
   quote: string;
 }
-
-const GITHUB_IMAGE_PATH = "https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/main/data/screenshots/";
 
 export const caseStudies: CaseStudy[] = [
   {
@@ -30,10 +27,6 @@ export const caseStudies: CaseStudy[] = [
 Meta CPL: Unstable → ₹322
 Conv. Rate: 0.22% → 1.92%
 CTR: 1.8% → 3.3%`,
-    screenshots: [
-      `${GITHUB_IMAGE_PATH}ed-tech-dashboard.png`,
-      `https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/b09da1d395b0a29c98c446f917adf885630db2ce/data/Time_series(2025.03.01-2025.06.30_compared_to_2022.03.01-2022.06.30).png`
-    ],
     outcome: "The same spend now delivers 5–7× more conversions. Search became the most efficient channel, Meta stabilized, and the full system moved from “chaotic scale” to predictable acquisition.",
     quote: "We were burning cash on fragmented campaigns. ViziGrowth's system gave us a playbook that flipped performance overnight.",
   },
@@ -51,10 +44,6 @@ CTR: 1.8% → 3.3%`,
 Avg. CPC: ₹250 → ₹107
 CPL: ₹47.7K → <₹10K
 Imp. Share: <10% → 45%`,
-    screenshots: [
-      `${GITHUB_IMAGE_PATH}b2b-search-cpc.png`,
-      `https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/b09da1d395b0a29c98c446f917adf885630db2ce/data/Time_series(2025.02.01-2025.08.30).png`
-    ],
     outcome: "Search stopped burning cash. The new structure exposed the real leak (impression share + keyword mismatch) and created a stable plan to rebuild profitable acquisition.",
     quote: "Our search campaigns were a black box of wasted spend until ViziGrowth pinpointed the exact leaks in our funnel.",
   },
@@ -71,10 +60,6 @@ Imp. Share: <10% → 45%`,
     kpis: `CPA: $120 → $23
 Scale: Impossible → Predictable
 Efficiency: Low → High`,
-    screenshots: [
-      `${GITHUB_IMAGE_PATH}d2c-ecommerce-roas.png`,
-      `${GITHUB_IMAGE_PATH}shopify-analytics.png`
-    ],
     outcome: "The brand moved from “testing hell” to predictable growth. A repeatable acquisition engine replaced guesswork.",
     quote: "We were stuck in 'testing hell' with a chaotic CPA; ViziGrowth cut the noise, scaled the winners, and made our growth predictable.",
   },
@@ -92,10 +77,6 @@ Efficiency: Low → High`,
 Leads: 0 → 331
 Lead CPL: >₹500 → ₹148
 Retargeting: 0 → 1,467`,
-    screenshots: [
-      `${GITHUB_IMAGE_PATH}tech-events-leads.png`,
-      `https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/b09da1d395b0a29c98c446f917adf885630db2ce/data/Time_series_chart(2024.01.26-2024.02.28).png`
-    ],
     outcome: "Mass awareness was turned into directly measurable leads with a clear ROI path.",
     quote: "We were great at getting eyeballs but terrible at converting them. ViziGrowth connected the entire funnel, finally giving us a clear ROI.",
   },
@@ -113,10 +94,6 @@ Retargeting: 0 → 1,467`,
 Leads: 0 → 140
 Lead CPL: N/A → ₹59
 CRM Sync: Manual → Auto`,
-    screenshots: [
-      `${GITHUB_IMAGE_PATH}automation-flowchart.png`,
-      `${GITHUB_IMAGE_PATH}martech-crm-qualified.png`
-    ],
     outcome: "A qualification bridge filtered noise into a prioritized pipeline.",
     quote: "Our messaging campaigns generated overwhelming noise, not qualified leads. The automated qualification engine built for us was game-changing.",
   },
@@ -134,10 +111,6 @@ CRM Sync: Manual → Auto`,
 Conv. Rate: 0.2% → 1.4%
 CPL: ₹1500 → ₹350
 Efficiency: 1x → 6x`,
-    screenshots: [
-        `${GITHUB_IMAGE_PATH}ed-tech-conversion-rate.png`,
-        `${GITHUB_IMAGE_PATH}google-ads-turnaround-ctr.png`
-    ],
     outcome: "Search performance flipped from loss-making to high-ROI with predictable growth.",
     quote: "Traffic wasn't the problem, conversions were. After the funnel rebuild, our CPL dropped from ₹1500 to ₹350.",
   },
@@ -154,10 +127,6 @@ Efficiency: 1x → 6x`,
 Avg. CPC: ₹200 → ₹107
 Lead Flow: Stagnant → Active
 Tracking: None → Clear`,
-    screenshots: [
-        `${GITHUB_IMAGE_PATH}b2b-pipeline-dashboard.png`,
-        `${GITHUB_IMAGE_PATH}b2b-search-rebuild-keywords.png`
-    ],
     outcome: "The campaign finally produced measurable pipeline and a path to profitable scale.",
     quote: "We went from guesswork to knowing exactly which keywords drove actual sales conversations. The clarity has been transformative.",
   },

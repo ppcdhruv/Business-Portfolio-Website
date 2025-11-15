@@ -95,4 +95,4 @@ const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
     );
 };
 
-export default CaseStudyCard;
+export default React.memo(CaseStudyCard);
