@@ -41,8 +41,8 @@ const FinalCTA: React.FC = () => {
   const isPromiseInView = useInView(promiseRef, { once: true, amount: 0.5 });
 
   return (
-    <section id="final-cta" className="py-24 sm:py-32">
-        <BentoCard className="relative overflow-hidden max-w-4xl mx-auto p-8 sm:p-12">
+    <section id="final-cta" className="py-20 sm:py-28">
+        <BentoCard className="relative overflow-hidden max-w-4xl mx-auto p-8">
             <motion.svg
                 className="absolute top-0 left-0 w-full h-full pointer-events-none"
                 fill="transparent"

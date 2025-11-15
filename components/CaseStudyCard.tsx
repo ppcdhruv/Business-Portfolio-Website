@@ -44,7 +44,7 @@ const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
 
     return (
         <>
-            <BentoCard className="!p-6 sm:!p-8 h-full flex flex-col group">
+            <BentoCard className="!p-6 h-full flex flex-col group">
                 <div className="flex justify-between items-start gap-2 flex-wrap">
                     <Badge>{study.industry}</Badge>
                     <Badge>{study.budgetContext}</Badge>
@@ -59,7 +59,7 @@ const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
                     </div>
                 </div>
 
-                <div className="flex-grow text-sm text-zinc-600 dark:text-zinc-400 relative min-h-[140px]">
+                <div className="flex-grow text-base text-zinc-600 dark:text-zinc-400 relative min-h-[140px]">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeTab}
@@ -67,7 +67,7 @@ const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
                             initial="hidden"
                             animate="visible"
                             exit="exit"
-                            className="absolute w-full prose prose-sm dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-p:my-2 prose-ul:my-2 prose-li:my-1 whitespace-pre-wrap"
+                            className="absolute w-full prose prose-base dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-p:my-2 prose-ul:my-2 prose-li:my-1 whitespace-pre-wrap"
                         >
                             {activeTab === 'Problem' && study.problem.split('\n\n').map(renderParagraph)}
                             {activeTab === 'Solution' && study.solution.split('\n\n').map(renderParagraph)}

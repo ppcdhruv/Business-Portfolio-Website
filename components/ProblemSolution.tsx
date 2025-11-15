@@ -86,7 +86,7 @@ const itemVariants: Variants = {
 
 const ProblemSolution: React.FC = () => {
   return (
-    <section id="problem" className="py-24 sm:py-32">
+    <section id="problem" className="py-20 sm:py-28">
        <SectionHeader
         title="The 3 Pillars That Decide Whether Your Marketing Works"
         description="If your acquisition is underperforming, it’s always one (or more) of these breaking."
@@ -128,15 +128,15 @@ const ProblemSolution: React.FC = () => {
         </motion.div>
       </div>
       
-      <div id="solution" className="mt-24 sm:mt-32">
+      <div id="solution" className="mt-20 sm:mt-28">
         <SectionHeader
             title={<>Most sites look fine. <span className="text-zinc-700 dark:text-zinc-300">Almost none perform.</span></>}
             description={<>Your problem isn’t the website — it’s the system behind it. A beautiful site is a starting point. A conversion funnel is an engine. <strong className="text-zinc-800 dark:text-zinc-200">Here's the difference.</strong></>}
         />
-        <BentoCard className="max-w-5xl mx-auto p-8 sm:p-10 mt-16">
+        <BentoCard className="max-w-5xl mx-auto p-8 mt-16">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Before */}
-                <div className="p-2 sm:p-6 rounded-lg">
+                <div className="p-6 rounded-lg">
                     <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">Your site today</h3>
                     <p className="text-zinc-500 dark:text-zinc-400 mt-2 text-base">
                         A collection of pages that informs visitors but <strong className="text-zinc-800 dark:text-zinc-200">fails to guide them</strong> toward a specific business outcome.
@@ -151,7 +151,7 @@ const ProblemSolution: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.6, ease: 'easeOut' }}
-                  className="p-2 sm:p-6 rounded-lg bg-zinc-50/80 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-700/80"
+                  className="p-6 rounded-lg bg-stone-100 dark:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700/80"
                 >
                      <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">What we build</h3>
                      <p className="text-zinc-500 dark:text-zinc-400 mt-2 text-base">

@@ -53,7 +53,7 @@ const services = [
 
 const ServiceModules: React.FC = () => {
   return (
-    <section id="services" className="py-24 sm:py-32">
+    <section id="services" className="py-20 sm:py-28">
       <SectionHeader
         title="Core Capabilities"
         description={<>Each project is a focused application of these disciplines.</>}

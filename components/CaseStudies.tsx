@@ -65,7 +65,7 @@ const CaseStudies: React.FC = () => {
   };
 
   return (
-    <section id="results" className="py-24 sm:py-32">
+    <section id="results" className="py-20 sm:py-28">
       <SectionHeader
         title="Real Results for Founders Like You"
         description={<>Real-world results. Each came from a <strong className="text-zinc-800 dark:text-zinc-200">better funnel, not more ad spend.</strong></>}

@@ -123,7 +123,7 @@ const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
 
   return (
     <section 
-      className="relative py-20 sm:py-28 overflow-hidden min-h-screen flex flex-col justify-center items-center"
+      className="relative py-16 sm:py-24 overflow-hidden min-h-screen flex flex-col justify-center items-center"
     >
        <div 
         className="absolute inset-0 top-0 left-0 w-full h-full bg-white/0 dark:bg-zinc-950/0 [mask-image:radial-gradient(ellipse_at_center,white_10%,transparent_80%)]"
@@ -133,7 +133,7 @@ const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
       {/* Main Content Area */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center">
             {/* Headline & Subheadline */}
-            <h1 className="text-[28px] leading-tight sm:text-5xl lg:text-6xl font-black tracking-tighter text-zinc-800 dark:text-zinc-200 flex items-center h-24 sm:h-auto">
+            <h1 className="text-[28px] leading-tight sm:text-5xl lg:text-6xl font-bold tracking-tighter text-zinc-800 dark:text-zinc-200 flex items-center h-24 sm:h-auto">
               <span>
                 <span>{phrases[phraseIndex].prefix}</span>
                 <span>{typedText}</span>
@@ -148,7 +148,7 @@ const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
               </span>
             </h1>
 
-            <p className="mt-4 text-[15px] sm:text-xl font-semibold text-zinc-600 dark:text-zinc-400 max-w-2xl">
+            <p className="mt-4 text-base sm:text-xl font-semibold text-zinc-600 dark:text-zinc-400 max-w-2xl">
                 Your marketing looks busy. Let's make it <strong className="text-zinc-800 dark:text-zinc-200">actually work for you.</strong>
             </p>
             

@@ -143,11 +143,11 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-lg border-b border-zinc-200/80 dark:border-zinc-800/80">
+    <header className="sticky top-0 z-50 bg-white dark:bg-zinc-950 border-b border-zinc-200/80 dark:border-zinc-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-black tracking-tighter text-zinc-900 dark:text-white flex items-center gap-2" aria-label="ViziGrowth home">
+            <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-bold tracking-tighter text-zinc-900 dark:text-white flex items-center gap-2" aria-label="ViziGrowth home">
               <Logo />
               ViziGrowth
             </a>
@@ -205,7 +205,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
             >
                 <div className="flex flex-col h-full">
                     <div className="flex items-center justify-between h-16 px-4 sm:px-6 border-b border-zinc-800 dark:border-zinc-200">
-                        <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-black tracking-tighter text-white dark:text-zinc-900 flex items-center gap-2" aria-label="ViziGrowth home">
+                        <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-bold tracking-tighter text-white dark:text-zinc-900 flex items-center gap-2" aria-label="ViziGrowth home">
                             <Logo />
                             ViziGrowth
                         </a>

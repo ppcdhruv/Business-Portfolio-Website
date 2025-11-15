@@ -5,8 +5,8 @@ import AnimatedNumber from './ui/AnimatedNumber';
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-24 sm:py-32">
-      <BentoCard className="max-w-5xl mx-auto p-4 sm:p-6">
+    <section id="about" className="py-20 sm:py-28">
+      <BentoCard className="max-w-5xl mx-auto p-6">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 items-stretch md:h-96">
             <div className="md:col-span-2 h-full w-full min-h-[300px]">
                  <img 
@@ -14,11 +14,11 @@ const About: React.FC = () => {
                     alt="Dhruv, Founder of ViziGrowth"
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover rounded-xl grayscale-0 transition-all duration-500 ease-in-out hover:grayscale"
+                    className="w-full h-full object-cover rounded-xl grayscale transition-all duration-500 ease-in-out hover:grayscale-0"
                     style={{ objectPosition: 'center 45%' }}
                 />
             </div>
-            <div className="md:col-span-3 p-2 sm:p-4 flex flex-col justify-between">
+            <div className="md:col-span-3 flex flex-col justify-between">
                 <div>
                   <a 
                       href="https://www.linkedin.com" 
@@ -45,19 +45,19 @@ const About: React.FC = () => {
                     <div className="pt-8">
                         <div className="flex items-baseline gap-x-6 gap-y-2 flex-wrap border-t border-zinc-200/80 dark:border-zinc-800/80 pt-6">
                             <div className="text-center flex-1 group">
-                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors duration-300">
+                                <p className="text-3xl font-bold tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors duration-300">
                                     <AnimatedNumber value={47} suffix="+" />
                                 </p>
                                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">Funnels Built</p>
                             </div>
                             <div className="text-center flex-1 group">
-                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors duration-300">
+                                <p className="text-3xl font-bold tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors duration-300">
                                     <AnimatedNumber value={2.3} decimals={1} prefix="$" suffix="M" />
                                 </p>
                                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">Tracked Revenue</p>
                             </div>
                             <div className="text-center flex-1 group">
-                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors duration-300">
+                                <p className="text-3xl font-bold tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors duration-300">
                                     <AnimatedNumber value={4.2} decimals={1} suffix="x" />
                                 </p>
                                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">Avg. Lead Lift</p>
