@@ -14,7 +14,7 @@ const About: React.FC = () => {
                     alt="Dhruv, Founder of ViziGrowth"
                     loading="lazy"
                     decoding="async"
-                    className="w-full h-full object-cover rounded-xl grayscale transition-all duration-500 ease-in-out hover:grayscale-0"
+                    className="w-full h-full object-cover rounded-xl grayscale-0 transition-all duration-500 ease-in-out hover:grayscale"
                     style={{ objectPosition: 'center 45%' }}
                 />
             </div>
@@ -45,19 +45,19 @@ const About: React.FC = () => {
                     <div className="pt-8">
                         <div className="flex items-baseline gap-x-6 gap-y-2 flex-wrap border-t border-zinc-200/80 dark:border-zinc-800/80 pt-6">
                             <div className="text-center flex-1 group">
-                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors duration-300">
+                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors duration-300">
                                     <AnimatedNumber value={47} suffix="+" />
                                 </p>
                                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">Funnels Built</p>
                             </div>
                             <div className="text-center flex-1 group">
-                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors duration-300">
+                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors duration-300">
                                     <AnimatedNumber value={2.3} decimals={1} prefix="$" suffix="M" />
                                 </p>
                                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">Tracked Revenue</p>
                             </div>
                             <div className="text-center flex-1 group">
-                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors duration-300">
+                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors duration-300">
                                     <AnimatedNumber value={4.2} decimals={1} suffix="x" />
                                 </p>
                                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">Avg. Lead Lift</p>

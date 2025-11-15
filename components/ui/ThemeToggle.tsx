@@ -14,7 +14,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ theme, toggleTheme }) => {
     <button
       onClick={toggleTheme}
       aria-label={theme === 'light' ? 'Activate dark mode' : 'Activate light mode'}
-      className="relative w-9 h-9 flex items-center justify-center rounded-full text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 focus:outline-none transition-colors"
+      className="relative w-9 h-9 flex items-center justify-center rounded-full text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 dark:focus:ring-offset-zinc-950 transition-colors"
     >
       <AnimatePresence mode="wait" initial={false}>
         {theme === 'light' ? (

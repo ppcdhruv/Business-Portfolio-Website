@@ -184,7 +184,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle navigation menu"
-              className="p-2 rounded-md text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-zinc-500"
+              className="p-2 rounded-md text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-500"
             >
               <HamburgerIcon className="w-6 h-6" />
             </button>
@@ -244,7 +244,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 0.4 } }}
                     >
-                        <Button href="#final-cta" size="lg" className="w-full max-w-xs mx-auto !bg-white !text-zinc-900 dark:!bg-zinc-900 dark:!text-white" onClick={(e) => handleNavClick(e, '#final-cta')}>Get Free Audit</Button>
+                        <Button href="#final-cta" size="lg" className="w-full max-w-xs mx-auto" onClick={(e) => handleNavClick(e, '#final-cta')}>Get Free Audit</Button>
                         <motion.div 
                             className="mt-8 flex justify-center items-center gap-8"
                             variants={socialContainerVariants}

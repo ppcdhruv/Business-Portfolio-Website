@@ -19,14 +19,14 @@ const Label: React.FC<{ htmlFor: string; children: React.ReactNode }> = ({ htmlF
 const Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (props) => (
   <input
     {...props}
-    className={`block w-full rounded-lg border border-zinc-300/80 bg-white dark:bg-zinc-900 dark:border-zinc-700/80 px-4 py-3 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-500/50 transition-colors ${props.className}`}
+    className={`block w-full rounded-lg border border-zinc-300/80 bg-white dark:bg-zinc-900 dark:border-zinc-700/80 px-4 py-3 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 dark:focus:ring-amber-500/50 transition-colors ${props.className}`}
   />
 );
 
 const Textarea: React.FC<React.TextareaHTMLAttributes<HTMLTextAreaElement>> = (props) => (
   <textarea
     {...props}
-    className="block w-full rounded-lg border border-zinc-300/80 bg-white dark:bg-zinc-900 dark:border-zinc-700/80 pl-10 pr-4 py-3 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-500/50 transition-colors"
+    className="block w-full rounded-lg border border-zinc-300/80 bg-white dark:bg-zinc-900 dark:border-zinc-700/80 pl-10 pr-4 py-3 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 dark:focus:ring-amber-500/50 transition-colors"
   />
 );
 
@@ -70,10 +70,10 @@ const FinalCTA: React.FC = () => {
                         <ShieldIcon className="w-12 h-12" animate={isPromiseInView} />
                     </div>
                     <h3 className="mt-6 text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
-                        The ViziGrowth Promise
+                        Ready to stop leaking revenue?
                     </h3>
                      <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400">
-                        Ready to stop leaking revenue? Let's have a 15-minute chat. No pressure, no sales pitch—just a <strong className="text-zinc-800 dark:text-zinc-200">frank conversation</strong> about your <strong className="text-zinc-800 dark:text-zinc-200">growth potential.</strong>
+                        Let's have a 15-minute chat. No pressure, no sales pitch—just a <strong className="text-zinc-800 dark:text-zinc-200">frank conversation</strong> about your <strong className="text-zinc-800 dark:text-zinc-200">growth potential.</strong>
                      </p>
                 </div>
 
@@ -121,7 +121,7 @@ const FinalCTA: React.FC = () => {
                          <div className="pt-2">
                             <div className="flex items-start">
                                 <div className="flex-shrink-0">
-                                    <input id="consent" name="consent" type="checkbox" className="h-4 w-4 rounded border-zinc-300/80 bg-zinc-100 dark:bg-zinc-800 text-blue-600 focus:ring-blue-500 focus:ring-offset-white dark:focus:ring-offset-zinc-950 dark:border-zinc-700/80" required />
+                                    <input id="consent" name="consent" type="checkbox" className="h-4 w-4 rounded border-zinc-300/80 bg-zinc-100 dark:bg-zinc-800 text-amber-600 focus:ring-amber-500 focus:ring-offset-white dark:focus:ring-offset-zinc-950 dark:border-zinc-700/80" required />
                                 </div>
                                 <div className="ml-3 text-sm">
                                     <label htmlFor="consent" className="text-zinc-500 dark:text-zinc-400">

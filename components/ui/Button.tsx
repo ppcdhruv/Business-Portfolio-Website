@@ -34,10 +34,10 @@ const Button: React.FC<ButtonProps> = (props) => {
   const className = props.className || '';
   const children = props.children;
 
-  const baseStyles = 'inline-flex items-center justify-center gap-2 font-semibold tracking-tight rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-white dark:focus:ring-offset-zinc-950';
+  const baseStyles = 'inline-flex items-center justify-center gap-2 font-semibold tracking-tight rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 focus:ring-offset-white dark:focus:ring-offset-zinc-950';
 
   const variantStyles = {
-    primary: 'bg-zinc-900 text-white hover:bg-zinc-800 hover:-translate-y-0.5 shadow-md hover:shadow-lg dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200',
+    primary: 'bg-amber-500 text-white hover:bg-amber-600 hover:-translate-y-0.5 shadow-md hover:shadow-lg dark:bg-amber-400 dark:text-zinc-900 dark:hover:bg-amber-300',
     secondary: 'bg-white text-zinc-800 border border-zinc-300/80 hover:bg-zinc-100 hover:border-zinc-400/80 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 dark:hover:bg-zinc-700',
   };
 
