@@ -8,9 +8,9 @@ interface PrivacyPolicyProps {
 
 const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
   return (
-    <div className="h-screen overflow-y-auto no-scrollbar pb-16 pt-24 bg-white dark:bg-zinc-950">
+    <div className="h-screen overflow-y-auto no-scrollbar pb-16 pt-24 bg-white dark:bg-stone-950">
         <Container>
-            <div className="max-w-4xl mx-auto prose prose-zinc dark:prose-invert">
+            <div className="max-w-4xl mx-auto prose prose-stone dark:prose-invert">
                 <h1>Privacy Policy for ViziGrowth</h1>
 
                 <p><strong>Last Updated:</strong> August 2, 2024</p>

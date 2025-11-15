@@ -74,6 +74,7 @@ interface HeaderProps {
 const navLinks = [
     { href: '#problem', label: 'Problem' },
     { href: '#solution', label: 'Solution' },
+    { href: '#about', label: 'About' },
     { href: '#services', label: 'Services' },
     { href: '#pricing', label: 'Pricing' },
     { href: '#fit-check', label: 'Is It For You?' },
@@ -143,11 +144,11 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white dark:bg-zinc-950 border-b border-zinc-200/80 dark:border-zinc-800/80">
+    <header className="sticky top-0 z-50 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-sm border-b border-stone-200/80 dark:border-stone-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-bold tracking-tighter text-zinc-900 dark:text-white flex items-center gap-2" aria-label="ViziGrowth home">
+            <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-bold tracking-tighter text-stone-900 dark:text-white flex items-center gap-2" aria-label="ViziGrowth home">
               <Logo />
               ViziGrowth
             </a>
@@ -160,7 +161,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                     key={link.href} 
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className={`relative text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white text-sm font-medium hover:font-semibold transition-all duration-200 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-full after:bg-zinc-900 dark:after:bg-white after:transition-transform after:duration-300 after:origin-center ${activeSection === link.href.substring(1) ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`}
+                    className={`relative text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white text-sm font-medium hover:font-semibold transition-all duration-200 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-full after:bg-stone-900 dark:after:bg-white after:transition-transform after:duration-300 after:origin-center ${activeSection === link.href.substring(1) ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`}
                 >
                     <motion.span
                         className="inline-block"
@@ -184,7 +185,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle navigation menu"
-              className="p-2 rounded-md text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-500"
+              className="p-2 rounded-md text-stone-600 dark:text-stone-400 hover:text-stone-900 dark:hover:text-white hover:bg-stone-200 dark:hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-amber-500"
             >
               <HamburgerIcon className="w-6 h-6" />
             </button>
@@ -199,20 +200,20 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                 animate={{ y: 0 }}
                 exit={{ y: '-100%' }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="fixed inset-0 z-[100] bg-zinc-950 dark:bg-zinc-50 md:hidden"
+                className="fixed inset-0 z-[100] bg-stone-950 dark:bg-stone-50 md:hidden"
                 role="dialog"
                 aria-modal="true"
             >
                 <div className="flex flex-col h-full">
-                    <div className="flex items-center justify-between h-16 px-4 sm:px-6 border-b border-zinc-800 dark:border-zinc-200">
-                        <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-bold tracking-tighter text-white dark:text-zinc-900 flex items-center gap-2" aria-label="ViziGrowth home">
+                    <div className="flex items-center justify-between h-16 px-4 sm:px-6 border-b border-stone-800 dark:border-stone-200">
+                        <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-bold tracking-tighter text-white dark:text-stone-900 flex items-center gap-2" aria-label="ViziGrowth home">
                             <Logo />
                             ViziGrowth
                         </a>
                         <button
                             onClick={() => setIsOpen(false)}
                             aria-label="Close navigation menu"
-                            className="p-2 rounded-md text-zinc-400 dark:text-zinc-600 hover:text-white dark:hover:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200"
+                            className="p-2 rounded-md text-stone-400 dark:text-stone-600 hover:text-white dark:hover:text-stone-900 hover:bg-stone-800 dark:hover:bg-stone-200"
                         >
                             <XIcon className="w-6 h-6" />
                         </button>
@@ -230,7 +231,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                                     <a 
                                         href={link.href} 
                                         onClick={(e) => handleNavClick(e, link.href)} 
-                                        className={`relative text-3xl font-bold tracking-tight text-zinc-200 dark:text-zinc-800 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-full after:bg-white dark:after:bg-zinc-900 after:transition-transform after:duration-300 ${activeSection === link.href.substring(1) ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`}
+                                        className={`relative text-3xl font-bold tracking-tight text-stone-200 dark:text-stone-800 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-full after:bg-white dark:after:bg-stone-900 after:transition-transform after:duration-300 ${activeSection === link.href.substring(1) ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`}
                                     >
                                         {link.label}
                                     </a>
@@ -240,7 +241,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                     </nav>
                     
                     <motion.div 
-                        className="p-6 border-t border-zinc-800 dark:border-zinc-200 text-center"
+                        className="p-6 border-t border-stone-800 dark:border-stone-200 text-center"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 0.4 } }}
                     >
@@ -258,7 +259,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                                     target="_blank" 
                                     rel="noopener noreferrer" 
                                     aria-label={`ViziGrowth on ${link.label}`}
-                                    className={`text-zinc-400 dark:text-zinc-500 transition-colors ${link.hoverColor}`}
+                                    className={`text-stone-400 dark:text-stone-500 transition-colors ${link.hoverColor}`}
                                     variants={socialItemVariants}
                                     whileHover={{ scale: 1.15, transition: { type: 'spring', stiffness: 300 } }}
                                     whileTap={{ scale: 0.9 }}

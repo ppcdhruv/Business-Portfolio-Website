@@ -68,34 +68,34 @@ const Investment: React.FC = () => {
     <section id="pricing" className="py-20 sm:py-28">
         <SectionHeader
             title="Investment & Deliverables"
-            description={<>Transparent, fixed-scope projects designed to install a <strong className="text-zinc-800 dark:text-zinc-200">durable conversion asset</strong> into your business. <strong className="text-zinc-800 dark:text-zinc-200">No retainers, no surprises.</strong></>}
+            description={<>Transparent, fixed-scope projects designed to install a <strong className="text-stone-800 dark:text-stone-200">durable conversion asset</strong> into your business. <strong className="text-stone-800 dark:text-stone-200">No retainers, no surprises.</strong></>}
         />
       <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-7xl mx-auto">
         {plans.map(plan => (
             <BentoCard 
                 key={plan.name} 
-                className={`flex flex-col h-full p-8 hover:!scale-[1.01] ${plan.popular ? 'bg-white dark:bg-zinc-800' : ''}`}
+                className={`flex flex-col h-full p-8 hover:!scale-[1.01] ${plan.popular ? 'bg-white dark:bg-stone-800' : ''}`}
             >
                 {plan.popular && (
                     <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
-                        <div className="px-3 py-1 text-xs font-semibold tracking-wider text-zinc-900 bg-white dark:text-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-full whitespace-nowrap">
+                        <div className="px-3 py-1 text-xs font-semibold tracking-wider text-stone-900 bg-white dark:text-white dark:bg-stone-950 border border-stone-200 dark:border-stone-800 rounded-full whitespace-nowrap">
                             Most Popular
                         </div>
                     </div>
                 )}
                 <div className="flex justify-between items-start gap-4">
-                    <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">{plan.name}</h3>
-                    <div className="px-3 py-1 text-xs font-semibold tracking-wider text-zinc-600 bg-zinc-100 dark:text-zinc-300 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-800/80 rounded-full whitespace-nowrap">
+                    <h3 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-white">{plan.name}</h3>
+                    <div className="px-3 py-1 text-xs font-semibold tracking-wider text-stone-600 bg-stone-100 dark:text-stone-300 dark:bg-stone-800/50 border border-stone-200/80 dark:border-stone-800/80 rounded-full whitespace-nowrap">
                         {plan.price}
                     </div>
                 </div>
 
-                <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2">{plan.whoFor}</p>
+                <p className="text-sm text-stone-600 dark:text-stone-400 mt-2">{plan.whoFor}</p>
                 
-                <ul className="space-y-3 flex-grow my-8 border-t border-zinc-200/80 dark:border-zinc-800/80 pt-8">
+                <ul className="space-y-3 flex-grow my-8 border-t border-stone-200/80 dark:border-stone-800/80 pt-8">
                     {plan.deliverables.map((feature) => (
-                        <li key={feature} className="flex items-start text-sm text-zinc-600 dark:text-zinc-400">
-                           <CheckIcon className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0 text-zinc-500 dark:text-zinc-400" />
+                        <li key={feature} className="flex items-start text-sm text-stone-600 dark:text-stone-400">
+                           <CheckIcon className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0 text-stone-500 dark:text-stone-400" />
                            <span>{feature}</span>
                         </li>
                     ))}
@@ -111,7 +111,7 @@ const Investment: React.FC = () => {
                     >
                         {plan.cta}
                     </Button>
-                     <p className="text-center text-xs font-semibold text-zinc-500 dark:text-zinc-400 mt-4">
+                     <p className="text-center text-xs font-semibold text-stone-500 dark:text-stone-400 mt-4">
                         Includes: {plan.guarantee}
                     </p>
                 </div>

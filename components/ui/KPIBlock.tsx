@@ -38,19 +38,19 @@ const KPIBlock: React.FC<KPIBlockProps> = ({ kpis }) => {
                 
                 return (
                     <div key={label} className="text-center">
-                        <p className="text-[11px] font-medium text-zinc-500 dark:text-zinc-400 whitespace-nowrap">{label}</p>
+                        <p className="text-[11px] font-medium text-stone-500 dark:text-stone-400 whitespace-nowrap">{label}</p>
                         <div className="mt-0.5 flex items-baseline justify-center gap-1.5">
                             {isNumeric ? (
                                 <>
                                     <span className={`text-base font-semibold ${isPositiveChange ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
                                         {after}
                                     </span>
-                                    <span className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 line-through">{before}</span>
+                                    <span className="text-[10px] font-medium text-stone-400 dark:text-stone-500 line-through">{before}</span>
                                 </>
                             ) : (
                                 <>
-                                    <span className="text-base font-semibold text-zinc-800 dark:text-zinc-100">{after}</span>
-                                    <span className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 line-through">{before}</span>
+                                    <span className="text-base font-semibold text-stone-800 dark:text-stone-100">{after}</span>
+                                    <span className="text-[10px] font-medium text-stone-400 dark:text-stone-500 line-through">{before}</span>
                                 </>
                             )}
                         </div>

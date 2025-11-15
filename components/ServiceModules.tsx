@@ -40,110 +40,88 @@ const services = [
     ]
   },
   {
-    title: "AI Stuff",
-    description: "Custom AI agents and internal tools to automate qualification, support, and sales tasks.",
-     keyActivities: [
-      { name: "LLM Prompt Engineering", tooltip: "Crafting precise instructions for Large Language Models to ensure reliable and accurate outputs for your business tasks." },
-      { name: "Internal Knowledge Base Setup", tooltip: "Structuring your company's internal data so AI agents can access it to provide accurate, context-aware responses." },
-      { name: "API Integration with Existing Tools", tooltip: "Connecting AI models to your current software stack (CRM, Slack, etc.) to create seamless workflows." },
-      { name: "Automated Lead Scoring", tooltip: "Using AI to analyze lead data and automatically prioritize the highest-value prospects for your sales team." },
+    title: "AI",
+    description: "Custom AI-powered chatbots and agents that engage visitors, qualify leads, and book meetings 24/7.",
+    keyActivities: [
+      { name: "Conversational Flow Design", tooltip: "Scripting natural, non-robotic conversations that guide users to a desired outcome." },
+      { name: "Knowledge Base Integration", tooltip: "Training the AI on your documentation, website, and support data for accurate answers." },
+      { name: "Lead Handoff Automation", tooltip: "Setting up rules to automatically escalate high-intent conversations to your sales team." },
+      { name: "API & Tool Integration", tooltip: "Connecting the AI to your existing tools (e.g., calendar, CRM) to perform actions on behalf of the user." },
     ]
-  },
+  }
 ];
+
+const ActivityTooltip: React.FC<{ content: string; children: React.ReactNode }> = ({ content, children }) => (
+  <div className="relative group flex items-center">
+    {children}
+    <div className="absolute bottom-full mb-2 w-60 bg-stone-900 text-white text-xs font-medium rounded-md p-2 shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 left-1/2 -translate-x-1/2">
+      {content}
+      <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-stone-900"></div>
+    </div>
+  </div>
+);
+
 
 const ServiceModules: React.FC = () => {
   return (
     <section id="services" className="py-20 sm:py-28">
       <SectionHeader
-        title="Core Capabilities"
-        description={<>Each project is a focused application of these disciplines.</>}
+        title="The Four Core Systems of Growth"
+        description="We install a complete, end-to-end conversion engine. Each system works together to turn clicks into predictable revenue."
       />
-      <div className="relative mt-16 -mx-4 sm:-mx-6 lg:-mx-8 after:content-[''] after:absolute after:inset-y-0 after:right-0 after:w-16 after:bg-gradient-to-r after:from-transparent after:to-white dark:after:to-zinc-950 after:pointer-events-none">
-        <div
-          className="flex overflow-x-auto space-x-8 px-4 sm:px-6 lg:px-8 pb-8 no-scrollbar"
-        >
-          {services.map((service, index) => (
-            <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
-              className="flex-shrink-0 w-[calc(100vw-48px)] sm:w-[400px] md:w-[450px] max-w-full"
-            >
-              <BentoCard className="group text-left flex flex-col items-start p-8 h-full">
-                  <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">{service.title}</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 mt-2 flex-grow text-base">{service.description}</p>
-                  
-                  <hr className="my-6 w-full border-zinc-200/80 dark:border-zinc-800/80" />
-
-                  <div>
-                    <p className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-4">Key Activities</p>
-                    <ul className="space-y-3">
-                      {service.keyActivities.map(activity => (
-                        <li
-                          key={activity.name}
-                          className="group flex items-center justify-between text-base"
-                        >
-                          <div className="flex items-center">
-                            <CheckIcon className="w-5 h-5 mr-3 flex-shrink-0 text-zinc-400 dark:text-zinc-500" />
-                            <span className="font-medium text-zinc-800 dark:text-zinc-200">
-                              {activity.name}
-                            </span>
-                          </div>
-                          <div className="relative flex items-center">
-                            <div className="peer opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                <InfoIcon className="w-5 h-5 text-zinc-400 dark:text-zinc-500 cursor-help" />
-                            </div>
-                            <div className="absolute bottom-full mb-2 w-64 bg-zinc-900 dark:bg-zinc-800 text-white dark:text-zinc-200 text-xs font-medium rounded-md p-3 shadow-lg opacity-0 peer-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 left-1/2 -translate-x-1/2">
-                              {activity.tooltip}
-                              <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-zinc-900 dark:border-t-zinc-800"></div>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-              </BentoCard>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-      <div className="mt-12 text-center">
-        <a 
-          href="#final-cta" 
-          className="group block max-w-4xl mx-auto rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-4 focus:ring-zinc-400 dark:focus:ring-offset-zinc-950"
-        >
-          <motion.div whileHover="hover">
-            <BentoCard className="p-8 hover:scale-[1.01]">
-                <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-                    <div className="flex items-center gap-4">
-                        <motion.div
-                          variants={{
-                            hover: { 
-                              y: -8, 
-                              rotate: -3,
-                              transition: { type: 'spring', stiffness: 300, damping: 10 }
-                            }
-                          }}
-                        >
-                          <Rocket3D className="w-12 h-12 sm:w-16 sm:h-16 text-zinc-900 dark:text-white" />
-                        </motion.div>
-                        <div className="text-left">
-                            <h3 className="text-xl font-bold text-zinc-900 dark:text-white">Ready to Build Your System?</h3>
-                            <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-                                These are the building blocks. Let's combine them into a custom system that solves your specific revenue leak.
-                            </p>
-                        </div>
-                    </div>
-                    <Button as="div" variant="primary" size="lg" className="flex-shrink-0 w-full sm:w-auto">
-                        Get Your Free Funnel Audit
-                        <ArrowRightIcon />
-                    </Button>
-                </div>
+      
+      <motion.div 
+        className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={{
+          visible: { transition: { staggerChildren: 0.1 } }
+        }}
+      >
+        {services.map((service) => (
+          <motion.div
+            key={service.title}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}
+          >
+            <BentoCard className="h-full flex flex-col p-8">
+              <h3 className="text-xl font-bold tracking-tight text-stone-900 dark:text-white">{service.title}</h3>
+              <p className="mt-2 text-sm text-stone-600 dark:text-stone-400 flex-grow">{service.description}</p>
+              <div className="mt-6 pt-6 border-t border-stone-200/80 dark:border-stone-800/80">
+                <p className="text-xs font-semibold text-stone-500 dark:text-stone-400 uppercase tracking-wider mb-3">Key Activities</p>
+                <ul className="space-y-2.5">
+                  {service.keyActivities.map(activity => (
+                    <li key={activity.name} className="flex items-center gap-2 text-sm text-stone-700 dark:text-stone-300">
+                      <CheckIcon className="w-4 h-4 text-green-500 flex-shrink-0" />
+                      <span>{activity.name}</span>
+                      <ActivityTooltip content={activity.tooltip}>
+                        <InfoIcon className="w-4 h-4 text-stone-400 dark:text-stone-500 cursor-help" />
+                      </ActivityTooltip>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </BentoCard>
           </motion.div>
-        </a>
+        ))}
+      </motion.div>
+
+      <div className="mt-16 text-center">
+        <BentoCard className="max-w-4xl mx-auto p-8 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="text-left">
+                <h3 className="text-2xl font-bold tracking-tight text-stone-900 dark:text-white">Ready to Install Your Growth Engine?</h3>
+                <p className="mt-2 text-stone-600 dark:text-stone-400">Get a free, no-obligation audit of your current funnel. We'll show you exactly where you're leaking revenue and how we can fix it.</p>
+            </div>
+            <div className="flex-shrink-0">
+                <Button href="#final-cta" size="lg" variant="primary">
+                    Get Free Funnel Audit
+                    <ArrowRightIcon />
+                </Button>
+            </div>
+        </BentoCard>
       </div>
     </section>
   );

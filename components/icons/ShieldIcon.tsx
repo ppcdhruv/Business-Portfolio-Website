@@ -15,7 +15,7 @@ const ShieldIcon: React.FC<{ className?: string; animate?: boolean }> = ({ class
     >
       <motion.path 
         d={shieldPath}
-        className="stroke-zinc-600 dark:stroke-zinc-400"
+        className="stroke-stone-600 dark:stroke-stone-400"
         initial={{ fill: 'rgba(245, 158, 11, 0)' }}
         animate={animate ? { fill: 'rgba(245, 158, 11, 1)' } : {}}
         transition={{ duration: 0.8, ease: 'easeOut' }}

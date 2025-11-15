@@ -17,7 +17,7 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ setView }) => {
   return (
     <motion.footer 
-      className="border-t border-zinc-200/80 bg-stone-50 dark:bg-zinc-900"
+      className="border-t border-stone-200/80 bg-stone-50 dark:bg-stone-900"
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       exit={{ y: "100%" }}
@@ -27,13 +27,13 @@ const Footer: React.FC<FooterProps> = ({ setView }) => {
         <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4">
             <div className="flex items-center gap-3 text-center sm:text-left">
               <Logo />
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">
+              <p className="text-sm text-stone-500 dark:text-stone-400">
                 &copy; {new Date().getFullYear()} ViziGrowth. A system, not a tactic.
               </p>
             </div>
             <div className="flex items-center gap-4 text-sm font-medium">
-                <button onClick={() => setView('privacy')} className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors">Privacy Policy</button>
-                <button onClick={() => setView('privacy')} className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors">GDPR</button>
+                <button onClick={() => setView('privacy')} className="text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors">Privacy Policy</button>
+                <button onClick={() => setView('privacy')} className="text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 transition-colors">GDPR</button>
             </div>
         </div>
       </Container>
