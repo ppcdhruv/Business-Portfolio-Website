@@ -42,7 +42,7 @@ const FinalCTA: React.FC = () => {
 
   return (
     <section id="final-cta" className="py-24 sm:py-32">
-        <BentoCard className="relative overflow-hidden max-w-6xl mx-auto p-8 sm:p-12">
+        <BentoCard className="relative overflow-hidden max-w-4xl mx-auto p-8 sm:p-12">
             <motion.svg
                 className="absolute top-0 left-0 w-full h-full pointer-events-none"
                 fill="transparent"
@@ -63,41 +63,23 @@ const FinalCTA: React.FC = () => {
                 />
             </motion.svg>
 
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-10 gap-8 md:gap-x-16 gap-y-12 items-center">
-                {/* --- Left Column: The Promise --- */}
-                <div ref={promiseRef} className="md:col-span-3 flex flex-col justify-center text-center">
+            <div className="relative z-10 max-w-2xl mx-auto text-center">
+                {/* --- Merged Header --- */}
+                <div ref={promiseRef} className="flex flex-col items-center">
                     <div className="inline-block bg-zinc-100 dark:bg-zinc-800/50 p-3 rounded-xl border border-zinc-200/80 dark:border-zinc-700/80 mx-auto">
                         <ShieldIcon className="w-12 h-12" animate={isPromiseInView} />
                     </div>
-                    <h3 className="mt-6 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                    <h3 className="mt-6 text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
                         The ViziGrowth Promise
                     </h3>
-                    <p className="mt-3 text-zinc-600 dark:text-zinc-400 max-w-sm mx-auto leading-relaxed">
-                        A direct partnership built on transparency and a shared commitment to your growth.
-                    </p>
-                    <ul className="mt-8 space-y-3 max-w-sm mx-auto">
-                        {promiseTakeaways.map((item, index) => (
-                            <motion.li 
-                                key={item} 
-                                className="flex items-center gap-3 text-left"
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={isPromiseInView ? { opacity: 1, y: 0 } : {}}
-                                transition={{ duration: 0.5, delay: index * 0.15 }}
-                            >
-                                <AnimatedCheckCircleIcon className="w-5 h-5 text-zinc-500 dark:text-zinc-400 flex-shrink-0" isInView={isPromiseInView} />
-                                <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{item}</p>
-                            </motion.li>
-                        ))}
-                    </ul>
+                     <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400">
+                        Ready to stop leaking revenue? Let's have a 15-minute chat. No pressure, no sales pitch—just a <strong className="text-zinc-800 dark:text-zinc-200">frank conversation</strong> about your <strong className="text-zinc-800 dark:text-zinc-200">growth potential.</strong>
+                     </p>
                 </div>
 
-                {/* --- Right Column: The Form --- */}
-                <div className="md:col-span-7 md:border-l border-zinc-200/80 dark:border-zinc-700/80 md:pl-16">
-                     <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">Ready to stop leaking revenue?</h3>
-                     <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400">
-                        Let's have a 15-minute chat. No pressure, no sales pitch—just a frank conversation about your growth potential.
-                     </p>
-                    <form action="https://example.com/submit" method="POST" className="space-y-5 mt-8">
+                {/* --- The Form --- */}
+                <div className="mt-8">
+                    <form action="https://example.com/submit" method="POST" className="space-y-5 mt-8 text-left">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-5">
                             <div>
                                 <Label htmlFor="full-name">Full Name</Label>
@@ -156,6 +138,21 @@ const FinalCTA: React.FC = () => {
                         </div>
                     </form>
                 </div>
+                
+                 <ul className="mt-8 flex flex-col sm:flex-row justify-center items-center gap-x-6 gap-y-3">
+                    {promiseTakeaways.map((item, index) => (
+                        <motion.li 
+                            key={item} 
+                            className="flex items-center gap-2"
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={isPromiseInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.5, delay: index * 0.15 + 0.5 }}
+                        >
+                            <AnimatedCheckCircleIcon className="w-4 h-4 text-zinc-500 dark:text-zinc-400 flex-shrink-0" isInView={isPromiseInView} />
+                            <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">{item}</p>
+                        </motion.li>
+                    ))}
+                </ul>
             </div>
         </BentoCard>
     </section>

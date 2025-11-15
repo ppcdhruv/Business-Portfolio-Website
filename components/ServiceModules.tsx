@@ -56,7 +56,7 @@ const ServiceModules: React.FC = () => {
     <section id="services" className="py-24 sm:py-32">
       <SectionHeader
         title="Core Capabilities"
-        description="These are the four core disciplines I use to build growth systems. Each project is a focused application of these disciplines."
+        description={<>Each project is a focused application of these disciplines.</>}
       />
       <div className="relative mt-16 -mx-4 sm:-mx-6 lg:-mx-8 after:content-[''] after:absolute after:inset-y-0 after:right-0 after:w-16 after:bg-gradient-to-r after:from-transparent after:to-white dark:after:to-zinc-950 after:pointer-events-none">
         <div
@@ -65,7 +65,7 @@ const ServiceModules: React.FC = () => {
           {services.map((service, index) => (
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
@@ -115,7 +115,7 @@ const ServiceModules: React.FC = () => {
           className="group block max-w-4xl mx-auto rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-4 focus:ring-zinc-400 dark:focus:ring-offset-zinc-950"
         >
           <motion.div whileHover="hover">
-            <BentoCard className="p-8">
+            <BentoCard className="p-8 hover:scale-[1.01]">
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
                     <div className="flex items-center gap-4">
                         <motion.div

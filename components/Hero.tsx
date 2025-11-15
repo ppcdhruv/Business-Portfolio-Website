@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Button from './ui/Button';
 import ArrowRightIcon from './icons/ArrowRightIcon';
@@ -25,8 +25,7 @@ const DELETING_SPEED = 40;
 const PAUSE_DURATION = 1500;
 
 interface HeroProps {
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
+  setHeroRect: (rect: DOMRect | null) => void;
 }
 
 const useInView = (options?: IntersectionObserverInit) => {
@@ -56,11 +55,30 @@ const useInView = (options?: IntersectionObserverInit) => {
   return [ref, isInView] as const;
 };
 
-const Hero: React.FC<HeroProps> = ({ onMouseEnter, onMouseLeave }) => {
+const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [typedText, setTypedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
-  const [statsRef, statsInView] = useInView({ threshold: 0.5 });
+  const inViewOptions = useMemo(() => ({ threshold: 0.5 }), []);
+  const [statsRef, statsInView] = useInView(inViewOptions);
+  const vizRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const element = vizRef.current;
+    if (!element) return;
+
+    const observer = new ResizeObserver(() => {
+        setHeroRect(element.getBoundingClientRect());
+    });
+
+    observer.observe(element);
+    setHeroRect(element.getBoundingClientRect());
+
+    return () => {
+        observer.disconnect();
+        setHeroRect(null); 
+    };
+  }, [setHeroRect]);
 
   useEffect(() => {
     const currentPhrase = phrases[phraseIndex];
@@ -105,12 +123,10 @@ const Hero: React.FC<HeroProps> = ({ onMouseEnter, onMouseLeave }) => {
 
   return (
     <section 
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
       className="relative py-20 sm:py-28 overflow-hidden min-h-screen flex flex-col justify-center items-center"
     >
        <div 
-        className="absolute inset-0 top-0 left-0 w-full h-full bg-white dark:bg-zinc-950 [mask-image:radial-gradient(ellipse_at_center,white_10%,transparent_80%)]"
+        className="absolute inset-0 top-0 left-0 w-full h-full bg-white/0 dark:bg-zinc-950/0 [mask-image:radial-gradient(ellipse_at_center,white_10%,transparent_80%)]"
         aria-hidden="true"
       ></div>
       
@@ -133,11 +149,11 @@ const Hero: React.FC<HeroProps> = ({ onMouseEnter, onMouseLeave }) => {
             </h1>
 
             <p className="mt-4 text-[15px] sm:text-xl font-semibold text-zinc-600 dark:text-zinc-400 max-w-2xl">
-                Your marketing looks busy. Let's make it actually work for you.
+                Your marketing looks busy. Let's make it <strong className="text-zinc-800 dark:text-zinc-200">actually work for you.</strong>
             </p>
             
             {/* Visualization - Central Element */}
-            <div className="my-8 w-full">
+            <div ref={vizRef} className="my-8 w-full">
               <WebsitePerformanceViz />
             </div>
 

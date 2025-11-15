@@ -35,7 +35,7 @@ CTR: 1.8% → 3.3%`,
       `https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/b09da1d395b0a29c98c446f917adf885630db2ce/data/Time_series(2025.03.01-2025.06.30_compared_to_2022.03.01-2022.06.30).png`
     ],
     outcome: "The same spend now delivers 5–7× more conversions. Search became the most efficient channel, Meta stabilized, and the full system moved from “chaotic scale” to predictable acquisition.",
-    quote: "We were burning money on fragmented campaigns. Dhruv gave us a clear playbook to scale efficiently on both Meta and Google — performance flipped overnight.",
+    quote: "We were burning cash on fragmented campaigns. ViziGrowth's system gave us a playbook that flipped performance overnight.",
   },
   {
     company: "Search Overhaul",
@@ -56,7 +56,7 @@ Imp. Share: <10% → 45%`,
       `https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/b09da1d395b0a29c98c446f917adf885630db2ce/data/Time_series(2025.02.01-2025.08.30).png`
     ],
     outcome: "Search stopped burning cash. The new structure exposed the real leak (impression share + keyword mismatch) and created a stable plan to rebuild profitable acquisition.",
-    quote: "Our search campaigns were a black box of wasted spend. Dhruv identified the exact leakage points — we finally have a path to dominate our niche.",
+    quote: "Our search campaigns were a black box of wasted spend until ViziGrowth pinpointed the exact leaks in our funnel.",
   },
   {
     company: "CPA Stabilization",
@@ -76,7 +76,7 @@ Efficiency: Low → High`,
       `${GITHUB_IMAGE_PATH}shopify-analytics.png`
     ],
     outcome: "The brand moved from “testing hell” to predictable growth. A repeatable acquisition engine replaced guesswork.",
-    quote: "We were stuck testing endlessly. Dhruv cut the noise and scaled the winners. Our CPA is finally stable and predictable.",
+    quote: "We were stuck in 'testing hell' with a chaotic CPA; ViziGrowth cut the noise, scaled the winners, and made our growth predictable.",
   },
     {
     company: "Full-Funnel Acquisition",
@@ -97,7 +97,7 @@ Retargeting: 0 → 1,467`,
       `https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/b09da1d395b0a29c98c446f917adf885630db2ce/data/Time_series_chart(2024.01.26-2024.02.28).png`
     ],
     outcome: "Mass awareness was turned into directly measurable leads with a clear ROI path.",
-    quote: "We were great at getting eyeballs but terrible at converting them. Dhruv connected the entire funnel — finally a clear ROI.",
+    quote: "We were great at getting eyeballs but terrible at converting them. ViziGrowth connected the entire funnel, finally giving us a clear ROI.",
   },
   {
     company: "Automated Qualification Engine",
@@ -118,7 +118,7 @@ CRM Sync: Manual → Auto`,
       `${GITHUB_IMAGE_PATH}martech-crm-qualified.png`
     ],
     outcome: "A qualification bridge filtered noise into a prioritized pipeline.",
-    quote: "Our messaging campaigns generated noise, not leads. Dhruv’s system filtered everything. Game-changing.",
+    quote: "Our messaging campaigns generated overwhelming noise, not qualified leads. The automated qualification engine built for us was game-changing.",
   },
   {
     company: "Google Ads Turnaround",
@@ -139,7 +139,7 @@ Efficiency: 1x → 6x`,
         `${GITHUB_IMAGE_PATH}google-ads-turnaround-ctr.png`
     ],
     outcome: "Search performance flipped from loss-making to high-ROI with predictable growth.",
-    quote: "Traffic wasn’t the problem — conversions were. After Dhruv rebuilt our funnel, costs collapsed and results skyrocketed.",
+    quote: "Traffic wasn't the problem, conversions were. After the funnel rebuild, our CPL dropped from ₹1500 to ₹350.",
   },
   {
     company: "B2B Search Rebuild",
@@ -159,6 +159,6 @@ Tracking: None → Clear`,
         `${GITHUB_IMAGE_PATH}b2b-search-rebuild-keywords.png`
     ],
     outcome: "The campaign finally produced measurable pipeline and a path to profitable scale.",
-    quote: "We finally understood which keywords brought real sales conversations. Before this, it was guesswork.",
+    quote: "We went from guesswork to knowing exactly which keywords drove actual sales conversations. The clarity has been transformative.",
   },
 ];

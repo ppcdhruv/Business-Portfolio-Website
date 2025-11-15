@@ -8,9 +8,9 @@ import LinkedInIcon from './icons/LinkedInIcon';
 import InstagramIcon from './icons/InstagramIcon';
 import YoutubeIcon from './icons/YoutubeIcon';
 
-const Logo = ({ isScrolled }: { isScrolled: boolean }) => (
+const Logo = () => (
   <svg 
-    className={`w-8 h-8 transition-transform duration-500 ease-in-out ${isScrolled ? 'rotate-180' : ''}`}
+    className="w-8 h-8 transition-transform duration-500 ease-in-out"
     viewBox="0 0 24 24" 
     fill="none" 
     xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@ const navContainerVariants: Variants = {
 };
 
 const navItemVariants: Variants = {
-  hidden: { opacity: 0, y: -15 },
+  hidden: { opacity: 0, y: -10 },
   visible: {
     opacity: 1,
     y: 0,
@@ -74,7 +74,7 @@ interface HeaderProps {
 
 const navLinks = [
     { href: '#problem', label: 'Problem' },
-    { href: '#wedge', label: 'Solution' },
+    { href: '#solution', label: 'Solution' },
     { href: '#services', label: 'Services' },
     { href: '#pricing', label: 'Pricing' },
     { href: '#fit-check', label: 'Is It For You?' },
@@ -89,21 +89,7 @@ const socialLinks = [
 const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
-  const [isScrolled, setIsScrolled] = useState(false);
   const observer = useRef<IntersectionObserver | null>(null);
-
-  useEffect(() => {
-    const mainElement = document.querySelector('main');
-    if (!mainElement) return;
-
-    const handleScroll = () => {
-      setIsScrolled(mainElement.scrollTop > 20);
-    };
-    mainElement.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      mainElement.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     // Logic for IntersectionObserver to detect active section
@@ -163,7 +149,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
             <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-black tracking-tighter text-zinc-900 dark:text-white flex items-center gap-2" aria-label="ViziGrowth home">
-              <Logo isScrolled={isScrolled} />
+              <Logo />
               ViziGrowth
             </a>
           </div>
@@ -221,7 +207,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                 <div className="flex flex-col h-full">
                     <div className="flex items-center justify-between h-16 px-4 sm:px-6 border-b border-zinc-800 dark:border-zinc-200">
                         <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-black tracking-tighter text-white dark:text-zinc-900 flex items-center gap-2" aria-label="ViziGrowth home">
-                            <Logo isScrolled={isScrolled} />
+                            <Logo />
                             ViziGrowth
                         </a>
                         <button
@@ -256,7 +242,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                     
                     <motion.div 
                         className="p-6 border-t border-zinc-800 dark:border-zinc-200 text-center"
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 0.4 } }}
                     >
                         <Button href="#final-cta" size="lg" className="w-full max-w-xs mx-auto !bg-white !text-zinc-900 dark:!bg-zinc-900 dark:!text-white" onClick={(e) => handleNavClick(e, '#final-cta')}>Get Free Audit</Button>

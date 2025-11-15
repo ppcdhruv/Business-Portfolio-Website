@@ -9,7 +9,6 @@ const CaseStudies: React.FC = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [showRightFade, setShowRightFade] = useState(false);
-  const [isClientMobile, setIsClientMobile] = useState(false);
 
   const industries = ['All', ...Array.from(new Set(caseStudies.map(study => study.industry)))];
 
@@ -24,11 +23,6 @@ const CaseStudies: React.FC = () => {
       setShowLeftFade(el.scrollLeft > 5); // Use a small buffer to avoid showing on minor scrolls
       setShowRightFade(isScrollable && el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
     }
-  }, []);
-
-  useEffect(() => {
-    // This effect runs only on the client side to check for mobile viewport
-    setIsClientMobile(window.innerWidth < 768);
   }, []);
 
   useEffect(() => {
@@ -55,7 +49,7 @@ const CaseStudies: React.FC = () => {
     <section id="results" className="py-24 sm:py-32">
       <SectionHeader
         title="Real Results for Founders Like You"
-        description="An interactive library of real-world results. Each came from a better funnel, not more ad spend."
+        description={<>Real-world results. Each came from a <strong className="text-zinc-800 dark:text-zinc-200">better funnel, not more ad spend.</strong></>}
       />
 
       <div className="mt-12 mb-8 flex justify-center flex-wrap gap-2 px-4">
@@ -80,11 +74,9 @@ const CaseStudies: React.FC = () => {
         ))}
       </div>
       
-      {isClientMobile && (
-        <div className="text-center text-xs text-zinc-500 dark:text-zinc-400 font-semibold tracking-wider mb-4 animate-pulse">
-            ‹ SCROLL FOR MORE ›
-        </div>
-      )}
+      <div className="text-center text-xs text-zinc-500 dark:text-zinc-400 font-semibold tracking-wider mb-4 md:hidden">
+          ‹ SCROLL FOR MORE ›
+      </div>
 
       <div className="relative mt-8 -mx-4 sm:-mx-6 lg:-mx-8">
         {/* Left fade */}
@@ -94,7 +86,7 @@ const CaseStudies: React.FC = () => {
           {filteredStudies.map((study, index) => (
             <motion.div
               key={`${study.company}-${activeIndustry}`}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
               className="flex-shrink-0 w-[calc(100vw-48px)] sm:w-[400px] md:w-[450px] max-w-full"

@@ -68,13 +68,13 @@ const Investment: React.FC = () => {
     <section id="pricing" className="py-24 sm:py-32">
         <SectionHeader
             title="Investment & Deliverables"
-            description="Transparent, fixed-scope projects designed to install a durable conversion asset into your business. No retainers, no surprises."
+            description={<>Transparent, fixed-scope projects designed to install a <strong className="text-zinc-800 dark:text-zinc-200">durable conversion asset</strong> into your business. <strong className="text-zinc-800 dark:text-zinc-200">No retainers, no surprises.</strong></>}
         />
       <div className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-7xl mx-auto">
         {plans.map(plan => (
             <BentoCard 
                 key={plan.name} 
-                className={`flex flex-col h-full p-8 !scale-100 hover:!scale-[1.02] ${plan.popular ? 'bg-zinc-50 dark:bg-zinc-900' : ''}`}
+                className={`flex flex-col h-full p-8 hover:!scale-[1.01] ${plan.popular ? 'bg-zinc-50 dark:bg-zinc-900' : ''}`}
             >
                 {plan.popular && (
                     <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">

@@ -35,10 +35,10 @@ const About: React.FC = () => {
                     <div>
                         <h3 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">Founder → founder</h3>
                         <p className="mt-4 text-base text-zinc-600 dark:text-zinc-400">
-                           I’m Dhruv — 8 years in growth, ex-Google Ads, building conversion systems for founder-led businesses.
+                           I’m Dhruv — 8 years in growth, ex-Google Ads, <strong className="text-zinc-800 dark:text-zinc-200">building conversion systems</strong> for founder-led businesses.
                         </p>
                         <p className="mt-4 text-zinc-600 dark:text-zinc-400">
-                            I personally build every system. This isn't an agency hand-off; it's a direct partnership focused on a single goal: building a predictable revenue system for your business.
+                            I personally build every system. This isn't an agency hand-off; it's a <strong className="text-zinc-800 dark:text-zinc-200">direct partnership</strong> focused on a single goal: building a <strong className="text-zinc-800 dark:text-zinc-200">predictable revenue system</strong> for your business.
                         </p>
                     </div>
 

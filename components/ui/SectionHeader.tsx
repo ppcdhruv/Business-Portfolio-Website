@@ -1,8 +1,9 @@
 import React from 'react';
 
 interface SectionHeaderProps {
-  title: string;
-  description: string;
+  // FIX: Changed type from `string` to `React.ReactNode` to support JSX elements in the title.
+  title: React.ReactNode;
+  description: React.ReactNode;
   className?: string;
 }
 

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import PageWedge from './components/PageWedge';
 import Footer from './components/Footer';
 import Container from './components/ui/Container';
 import Chatbot from './components/Chatbot';
+import InteractiveBackground from './components/InteractiveBackground';
+import PrivacyPolicy from './components/PrivacyPolicy';
 
 // Lazy load components for better initial page load performance
 const ProblemSolution = lazy(() => import('./components/ProblemSolution'));
@@ -16,6 +17,7 @@ const Investment = lazy(() => import('./components/Investment'));
 const FinalCTA = lazy(() => import('./components/FinalCTA'));
 
 export type Theme = 'light' | 'dark';
+export type View = 'main' | 'privacy';
 
 const Loader: React.FC = () => (
   <div className="w-full h-screen flex items-center justify-center">
@@ -23,10 +25,29 @@ const Loader: React.FC = () => (
   </div>
 );
 
+const MainContent: React.FC<{ setHeroRect: (rect: DOMRect | null) => void; }> = ({ setHeroRect }) => (
+    <main className="h-screen overflow-y-auto no-scrollbar pb-16">
+      <Hero setHeroRect={setHeroRect} />
+      <Suspense fallback={<Loader />}>
+        <Container>
+          <ProblemSolution />
+          <CaseStudies />
+          <ServiceModules />
+        </Container>
+        <Container>
+          <About />
+          <FitCheck />
+          <Investment />
+          <FinalCTA />
+        </Container>
+      </Suspense>
+    </main>
+);
+
 const App: React.FC = () => {
   const [theme, setTheme] = useState<Theme>('light');
-  const [isHeroHovered, setIsHeroHovered] = useState(false);
-  const [isFooterVisible, setIsFooterVisible] = useState(false);
+  const [view, setView] = useState<View>('main');
+  const [heroRect, setHeroRect] = useState<DOMRect | null>(null);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme') as Theme | null;
@@ -36,20 +57,6 @@ const App: React.FC = () => {
     } else if (prefersDark) {
       setTheme('dark');
     }
-
-    const mainElement = document.querySelector('main');
-    if (!mainElement) return;
-  
-    const handleScroll = () => {
-      // Show footer when user has scrolled down a bit
-      setIsFooterVisible(mainElement.scrollTop > 200);
-    };
-    
-    mainElement.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => {
-      mainElement.removeEventListener('scroll', handleScroll);
-    };
   }, []);
 
   useEffect(() => {
@@ -67,39 +74,16 @@ const App: React.FC = () => {
     setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
   }, []);
 
-  const handleHeroMouseEnter = useCallback(() => setIsHeroHovered(true), []);
-  const handleHeroMouseLeave = useCallback(() => setIsHeroHovered(false), []);
-
   return (
     <>
-      <div 
-        className="fixed inset-0 -z-50 h-full w-full bg-white dark:bg-zinc-950"
-        aria-hidden="true"
-      >
-        <div className={`fixed inset-0 -z-40 h-full w-full bg-[linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#27272a_1px,transparent_1px),linear-gradient(to_bottom,#27272a_1px,transparent_1px)] bg-[size:4rem_4rem] ${isHeroHovered ? 'opacity-40 dark:opacity-50' : 'opacity-10 dark:opacity-10'} transition-opacity duration-500`}></div>
-      </div>
+      <InteractiveBackground theme={theme} heroRect={heroRect} />
       <Header theme={theme} toggleTheme={toggleTheme} />
-      <main className="h-screen overflow-y-auto no-scrollbar pb-16">
-        <Hero 
-          onMouseEnter={handleHeroMouseEnter}
-          onMouseLeave={handleHeroMouseLeave}
-        />
-        <PageWedge />
-        <Suspense fallback={<Loader />}>
-          <Container>
-            <ProblemSolution />
-            <CaseStudies />
-            <ServiceModules />
-          </Container>
-          <Container>
-            <About />
-            <FitCheck />
-            <Investment />
-            <FinalCTA />
-          </Container>
-        </Suspense>
-      </main>
-      <Footer isVisible={isFooterVisible} />
+      {view === 'main' ? (
+        <MainContent setHeroRect={setHeroRect} />
+      ) : (
+        <PrivacyPolicy onBack={() => setView('main')} />
+      )}
+      <Footer setView={setView} />
       <Chatbot />
     </>
   );

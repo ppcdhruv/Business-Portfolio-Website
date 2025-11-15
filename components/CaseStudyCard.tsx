@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { CaseStudy } from '../data/case-studies';
 import BentoCard from './ui/BentoCard';
 import Badge from './ui/Badge';
-import ImageCarousel from './ImageCarousel';
 import { motion, AnimatePresence } from 'framer-motion';
 import KPIBlock from './ui/KPIBlock';
-import Lightbox from './ui/Lightbox';
 
 const TabButton: React.FC<{ active: boolean; onClick: () => void; children: React.ReactNode }> = ({ active, onClick, children }) => (
     <button
@@ -22,13 +20,6 @@ const TabButton: React.FC<{ active: boolean; onClick: () => void; children: Reac
 
 const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
     const [activeTab, setActiveTab] = useState<'Problem' | 'Solution' | 'Outcome'>('Problem');
-    const [lightboxOpen, setLightboxOpen] = useState(false);
-    const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-    const handleImageClick = (imageUrl: string) => {
-        setSelectedImage(imageUrl);
-        setLightboxOpen(true);
-    };
 
     const contentVariants = {
         hidden: { opacity: 0, y: 10 },
@@ -60,10 +51,6 @@ const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
                 </div>
                 <h3 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white mt-4">{study.company}</h3>
                 
-                <div className="mt-6">
-                    <ImageCarousel images={study.screenshots} onImageClick={handleImageClick} />
-                </div>
-
                 <div className="my-6 border-b border-zinc-200/80 dark:border-zinc-800/80 flex-shrink-0">
                     <div className="flex items-center gap-2">
                         <TabButton active={activeTab === 'Problem'} onClick={() => setActiveTab('Problem')}>Problem</TabButton>
@@ -104,12 +91,6 @@ const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
                     </blockquote>
                 </div>
             </BentoCard>
-
-            <Lightbox
-                isOpen={lightboxOpen}
-                onClose={() => setLightboxOpen(false)}
-                imageUrl={selectedImage}
-            />
         </>
     );
 };

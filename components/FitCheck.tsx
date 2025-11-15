@@ -23,7 +23,7 @@ const FitCheck: React.FC = () => {
     <section id="fit-check" className="py-24 sm:py-32">
       <SectionHeader
         title="Who gets the best results"
-        description="This system is built for a specific type of founder. Maximum results are achieved when there's a strong alignment on goals, process, and mindset from day one."
+        description={<>This system is built for a specific type of founder. Maximum results are achieved when there's a <strong className="text-zinc-800 dark:text-zinc-200">strong alignment</strong> on goals, process, and mindset from day one.</>}
       />
       <BentoCard className="mt-16 max-w-4xl mx-auto p-8 sm:p-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">

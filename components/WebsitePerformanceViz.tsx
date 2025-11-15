@@ -86,7 +86,7 @@ const WebsitePerformanceViz: React.FC = () => {
         <motion.div 
             ref={scope}
             whileHover={{ scale: 1.02 }}
-            className="relative w-full max-w-4xl mx-auto aspect-[1.6/1] sm:aspect-[2.2/1] bg-white/10 dark:bg-zinc-900/10 backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-800/50 rounded-xl flex flex-col shadow-2xl shadow-zinc-900/10 dark:shadow-black/20"
+            className="relative w-full max-w-4xl mx-auto aspect-[1.6/1] sm:aspect-[2.2/1] bg-white/10 dark:bg-zinc-900/10 backdrop-blur-sm border border-zinc-300 dark:border-zinc-700 rounded-xl flex flex-col"
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         >
              <motion.div id="cursor" className="absolute z-20 pointer-events-none" style={{ opacity: 0, x: 150, y: -30 }}>
