@@ -72,16 +72,15 @@ This document serves as the primary input prompt for any AI agent tasked with bu
 
 Construct the main landing page by assembling the following sections in this precise order:
 
-1.  **Hero:** Left-aligned text with rotating headlines for dynamic messaging.
-2.  **Trust Bar:** A borderless component displaying key metrics (e.g., avg. conversion lift, turnaround time).
-3.  **Problem Section:** An asymmetric bento grid layout (e.g., one 4-col card + two 3-col cards).
-4.  **Wedge Comparison:** A comparison table housed within a single, wide bento card.
-5.  **Case Studies:** A 3-column, equal-width grid of case study cards.
-6.  **Guarantee Section:** A centered-text section with a 3-column feature list below it.
-7.  **Fit Comparison:** A 2-column layout comparing "Good Fit" vs. "Bad Fit" criteria.
-8.  **Pricing:** A 2-column layout for pricing plans.
-9.  **Process:** A vertical timeline component illustrating the workflow.
-10. **Final CTA:** A final, highlighted call-to-action card to capture conversions.
+1.  **Hero:** Rotating headlines to capture visitor pain points, a central visualization of the 'before vs. after' transformation, and clear calls-to-action.
+2.  **Page Wedge:** A transitional section bridging the hero's hook with a clear definition of the core problem: the "performance stack".
+3.  **Problem & Solution:** A detailed breakdown of the three pillars of performance (Experience, Targeting, Data) followed by a comparison of a static website versus a conversion funnel.
+4.  **Case Studies:** An interactive, filterable gallery showcasing real-world results and client success stories.
+5.  **Service Modules:** A horizontal carousel detailing the core capabilities: Traffic, Leads, Nurture, and AI.
+6.  **About:** An introduction to the founder, Dhruv, highlighting his experience and founder-to-founder approach.
+7.  **Fit Check:** A two-column layout clearly defining the ideal client profile ("Good Fit") and who the service is not for ("Bad Fit") to pre-qualify leads.
+8.  **Investment:** A three-column pricing section outlining the different engagement packages and their deliverables.
+9.  **Final CTA:** A prominent final section with a lead capture form and a reiteration of the founder promise.
 
 ---
 

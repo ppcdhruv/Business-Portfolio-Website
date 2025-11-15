@@ -133,7 +133,7 @@ const Hero: React.FC<HeroProps> = ({ onMouseEnter, onMouseLeave }) => {
             </h1>
 
             <p className="mt-4 text-[15px] sm:text-xl font-semibold text-zinc-600 dark:text-zinc-400 max-w-2xl">
-                Your marketing looks busy. I make it actually work for you.
+                Your marketing looks busy. Let's make it actually work for you.
             </p>
             
             {/* Visualization - Central Element */}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
+import PageWedge from './components/PageWedge';
 import Footer from './components/Footer';
 import Container from './components/ui/Container';
 import Chatbot from './components/Chatbot';
@@ -83,6 +84,7 @@ const App: React.FC = () => {
           onMouseEnter={handleHeroMouseEnter}
           onMouseLeave={handleHeroMouseLeave}
         />
+        <PageWedge />
         <Suspense fallback={<Loader />}>
           <Container>
             <ProblemSolution />

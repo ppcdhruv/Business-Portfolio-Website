@@ -123,19 +123,6 @@ const ProblemSolution: React.FC = () => {
             ))}
         </motion.div>
       </div>
-
-      <div className="mt-20">
-        <div className="max-w-3xl mx-auto text-center">
-            <h3 className="text-4xl sm:text-5xl font-black tracking-tighter text-zinc-900 dark:text-white">
-                Most sites look <span className="line-through text-zinc-400">fine.</span>
-                <br />
-                Very few <span className="text-red-600 dark:text-red-500 underline decoration-wavy decoration-2 underline-offset-4">perform.</span>
-            </h3>
-            <p className="mt-6 text-lg text-zinc-600 dark:text-zinc-400">
-                Founders think they have a “website problem.” They actually have a <strong className="text-zinc-800 dark:text-zinc-200 underline decoration-wavy decoration-from-font underline-offset-2">performance stack problem</strong>: tracking → traffic → landing experience must work together.
-            </p>
-        </div>
-      </div>
       
       <div id="wedge" className="mt-20">
          <BentoCard className="max-w-5xl mx-auto p-8 sm:p-10">

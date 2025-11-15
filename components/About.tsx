@@ -45,19 +45,19 @@ const About: React.FC = () => {
                     <div className="pt-8">
                         <div className="flex items-baseline gap-x-6 gap-y-2 flex-wrap border-t border-zinc-200/80 dark:border-zinc-800/80 pt-6">
                             <div className="text-center flex-1 group">
-                                <p className="text-3xl font-black tracking-tighter text-blue-600 dark:text-blue-500">
+                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors duration-300">
                                     <AnimatedNumber value={47} suffix="+" />
                                 </p>
                                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">Funnels Built</p>
                             </div>
                             <div className="text-center flex-1 group">
-                                <p className="text-3xl font-black tracking-tighter text-blue-600 dark:text-blue-500">
+                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors duration-300">
                                     <AnimatedNumber value={2.3} decimals={1} prefix="$" suffix="M" />
                                 </p>
                                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">Tracked Revenue</p>
                             </div>
                             <div className="text-center flex-1 group">
-                                <p className="text-3xl font-black tracking-tighter text-blue-600 dark:text-blue-500">
+                                <p className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-500 transition-colors duration-300">
                                     <AnimatedNumber value={4.2} decimals={1} suffix="x" />
                                 </p>
                                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">Avg. Lead Lift</p>

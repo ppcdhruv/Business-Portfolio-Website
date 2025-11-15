@@ -31,9 +31,9 @@ const Textarea: React.FC<React.TextareaHTMLAttributes<HTMLTextAreaElement>> = (p
 );
 
 const promiseTakeaways = [
-    { text: "Single Point of Contact", description: "You work directly with the founder. No account managers, no handoffs." },
-    { text: "Focus on Signal KPIs", description: "We track metrics that matter (MQLs, CAC) instead of vanity metrics (likes, impressions)." },
-    { text: "A Clear Path to ROI", description: "Success is defined by measurable outcomes that directly impact your revenue." }
+    "Single Point of Contact",
+    "Focus on Signal KPIs",
+    "A Clear Path to ROI",
 ];
 
 const FinalCTA: React.FC = () => {
@@ -63,39 +63,36 @@ const FinalCTA: React.FC = () => {
                 />
             </motion.svg>
 
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-5 gap-x-12 gap-y-12">
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-10 gap-8 md:gap-x-16 gap-y-12 items-center">
                 {/* --- Left Column: The Promise --- */}
-                <div ref={promiseRef} className="md:col-span-2 flex flex-col justify-center items-center text-center">
-                    <div className="inline-block bg-zinc-100 dark:bg-zinc-800/50 p-3 rounded-xl border border-zinc-200/80 dark:border-zinc-700/80">
+                <div ref={promiseRef} className="md:col-span-3 flex flex-col justify-center text-center">
+                    <div className="inline-block bg-zinc-100 dark:bg-zinc-800/50 p-3 rounded-xl border border-zinc-200/80 dark:border-zinc-700/80 mx-auto">
                         <ShieldIcon className="w-12 h-12" animate={isPromiseInView} />
                     </div>
                     <h3 className="mt-6 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
-                        Our Founder-to-Founder Promise
+                        The ViziGrowth Promise
                     </h3>
-                    <p className="mt-3 text-zinc-600 dark:text-zinc-400 max-w-sm">
-                        This isn't an agency hand-off; it's a direct partnership. Our entire process is built on transparency, focus, and a shared commitment to your growth.
+                    <p className="mt-3 text-zinc-600 dark:text-zinc-400 max-w-sm mx-auto leading-relaxed">
+                        A direct partnership built on transparency and a shared commitment to your growth.
                     </p>
-                    <ul className="mt-8 space-y-4">
+                    <ul className="mt-8 space-y-3 max-w-sm mx-auto">
                         {promiseTakeaways.map((item, index) => (
                             <motion.li 
-                                key={item.text} 
-                                className="flex items-start gap-3 text-left"
+                                key={item} 
+                                className="flex items-center gap-3 text-left"
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={isPromiseInView ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 0.5, delay: index * 0.15 }}
                             >
-                                <AnimatedCheckCircleIcon className="w-5 h-5 text-zinc-500 dark:text-zinc-400 mt-0.5 flex-shrink-0" isInView={isPromiseInView} />
-                                <div>
-                                    <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{item.text}</p>
-                                    <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{item.description}</p>
-                                </div>
+                                <AnimatedCheckCircleIcon className="w-5 h-5 text-zinc-500 dark:text-zinc-400 flex-shrink-0" isInView={isPromiseInView} />
+                                <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{item}</p>
                             </motion.li>
                         ))}
                     </ul>
                 </div>
 
                 {/* --- Right Column: The Form --- */}
-                <div className="md:col-span-3 md:border-l border-zinc-200/80 dark:border-zinc-700/80 md:pl-12">
+                <div className="md:col-span-7 md:border-l border-zinc-200/80 dark:border-zinc-700/80 md:pl-16">
                      <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">Ready to stop leaking revenue?</h3>
                      <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400">
                         Let's have a 15-minute chat. No pressure, no sales pitch—just a frank conversation about your growth potential.

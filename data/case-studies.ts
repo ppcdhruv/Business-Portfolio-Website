@@ -114,8 +114,8 @@ Leads: 0 → 140
 Lead CPL: N/A → ₹59
 CRM Sync: Manual → Auto`,
     screenshots: [
-      `${GITHUB_IMAGE_PATH}martech-crm-qualified.png`,
-      `${GITHUB_IMAGE_PATH}automation-flowchart.png`
+      `${GITHUB_IMAGE_PATH}automation-flowchart.png`,
+      `${GITHUB_IMAGE_PATH}martech-crm-qualified.png`
     ],
     outcome: "A qualification bridge filtered noise into a prioritized pipeline.",
     quote: "Our messaging campaigns generated noise, not leads. Dhruv’s system filtered everything. Game-changing.",
@@ -135,8 +135,8 @@ Conv. Rate: 0.2% → 1.4%
 CPL: ₹1500 → ₹350
 Efficiency: 1x → 6x`,
     screenshots: [
-        `${GITHUB_IMAGE_PATH}google-ads-turnaround-ctr.png`,
-        `${GITHUB_IMAGE_PATH}ed-tech-conversion-rate.png`
+        `${GITHUB_IMAGE_PATH}ed-tech-conversion-rate.png`,
+        `${GITHUB_IMAGE_PATH}google-ads-turnaround-ctr.png`
     ],
     outcome: "Search performance flipped from loss-making to high-ROI with predictable growth.",
     quote: "Traffic wasn’t the problem — conversions were. After Dhruv rebuilt our funnel, costs collapsed and results skyrocketed.",
@@ -155,8 +155,8 @@ Avg. CPC: ₹200 → ₹107
 Lead Flow: Stagnant → Active
 Tracking: None → Clear`,
     screenshots: [
-        `${GITHUB_IMAGE_PATH}b2b-search-rebuild-keywords.png`,
-        `${GITHUB_IMAGE_PATH}b2b-pipeline-dashboard.png`
+        `${GITHUB_IMAGE_PATH}b2b-pipeline-dashboard.png`,
+        `${GITHUB_IMAGE_PATH}b2b-search-rebuild-keywords.png`
     ],
     outcome: "The campaign finally produced measurable pipeline and a path to profitable scale.",
     quote: "We finally understood which keywords brought real sales conversations. Before this, it was guesswork.",
