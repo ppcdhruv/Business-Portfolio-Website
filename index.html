@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ViziGrowth | Stop Leaking Revenue</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="ViziGrowth is a conversion funnel optimization service for B2B/SaaS founders. We build data-driven systems to turn your website visitors into revenue.">
+    <meta name="keywords" content="conversion rate optimization, CRO, SaaS marketing, B2B marketing, funnel optimization, lead generation">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vizigrowth.com/">
+    <meta property="og:title" content="ViziGrowth | Stop Leaking Revenue">
+    <meta property="og:description" content="We build data-driven systems to turn your website visitors into revenue.">
+    <meta property="og:image" content="https://storage.googleapis.com/aistudio-hosting/2024-08-01/og_image_vizigrowth.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://vizigrowth.com/">
+    <meta property="twitter:title" content="ViziGrowth | Stop Leaking Revenue">
+    <meta property="twitter:description" content="We build data-driven systems to turn your website visitors into revenue.">
+    <meta property="twitter:image" content="https://storage.googleapis.com/aistudio-hosting/2024-08-01/og_image_vizigrowth.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Configure Tailwind CSS to use the 'class' strategy for dark mode.
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;990&display=swap" rel="stylesheet">
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: 'Inter', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      ::selection {
+        background-color: #18181b; /* zinc-900 */
+        color: white;
+      }
+      .dark ::selection {
+        background-color: #d4d4d8; /* zinc-300 */
+        color: #18181b; /* zinc-900 */
+      }
+      @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+      }
+      .animate-fade-in-up {
+          opacity: 0;
+          animation: fade-in-up 0.5s ease-out forwards;
+      }
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      .no-scrollbar::-webkit-scrollbar {
+          display: none;
+      }
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .no-scrollbar {
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;  /* Firefox */
+      }
+      :root {
+        --chatbot-primary: #18181b; /* zinc-900 */
+        --chatbot-primary-fg: #ffffff;
+        --chatbot-bg: #ffffff;
+        --chatbot-border: #e4e4e7; /* zinc-200 */
+      }
+      html.dark {
+        --chatbot-primary: #f4f4f5; /* zinc-100 */
+        --chatbot-primary-fg: #18181b; /* zinc-900 */
+        --chatbot-bg: #09090b; /* zinc-950 */
+        --chatbot-border: #27272a; /* zinc-800 */
+      }
+      @keyframes slide-in-up {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+    </style>
+    <script>
+      // Apply theme from local storage or system preference before page load to prevent FOUC
+      if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24"
+  }
+}
+</script>
+<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "ViziGrowth",
+      "url": "https://vizigrowth.com/",
+      "logo": "https://vizigrowth.com/logo.png",
+      "description": "A conversion funnel optimization service for B2B/SaaS founders, focusing on building data-driven systems to turn visitors into revenue.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "US"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Sales",
+        "email": "hello@vizigrowth.com"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Dhruv"
+      },
+      "serviceType": "Conversion Rate Optimization"
+    }
+    </script>
+</head>
+  <body class="bg-white text-zinc-800 dark:bg-zinc-950 dark:text-zinc-300 transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
