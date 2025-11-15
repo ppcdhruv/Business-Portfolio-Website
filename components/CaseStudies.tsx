@@ -1,47 +1,22 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { CaseStudy } from '../data/case-studies';
+import { CaseStudy, caseStudies } from '../data/case-studies';
 import CaseStudyCard from './CaseStudyCard';
 import SectionHeader from './ui/SectionHeader';
-import { client } from '../sanity/client';
 
 const CaseStudies: React.FC = () => {
   const [activeIndustry, setActiveIndustry] = useState('All');
-  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showLeftFade, setShowLeftFade] = useState(false);
   const [showRightFade, setShowRightFade] = useState(false);
 
-  useEffect(() => {
-    const fetchCaseStudies = async () => {
-      setIsLoading(true);
-      setError(null);
-      try {
-        if (client.config().projectId === 'your-project-id') {
-          throw new Error("Sanity projectId is not configured. Please update sanity/client.ts");
-        }
-        const data = await client.fetch<CaseStudy[]>(`*[_type == "caseStudy"]`);
-        setCaseStudies(data);
-      } catch (err: any) {
-        console.error('Failed to fetch case studies:', err);
-        setError(`Failed to load case studies. Please ensure your Sanity Project ID is configured correctly in sanity/client.ts.`);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchCaseStudies();
-  }, []);
-
   const industries = useMemo(() => {
-    if (caseStudies.length === 0) return ['All'];
     return ['All', ...Array.from(new Set(caseStudies.map(study => study.industry)))];
-  }, [caseStudies]);
+  }, []);
 
   const filteredStudies = useMemo(() => activeIndustry === 'All' 
     ? caseStudies 
-    : caseStudies.filter(study => study.industry === activeIndustry), [activeIndustry, caseStudies]);
+    : caseStudies.filter(study => study.industry === activeIndustry), [activeIndustry]);
 
   const checkScroll = useCallback(() => {
     const el = scrollContainerRef.current;
@@ -68,23 +43,7 @@ const CaseStudies: React.FC = () => {
   }, [checkScroll, filteredStudies]);
 
   const renderContent = () => {
-    if (isLoading) {
-      return (
-        <div className="w-full flex items-center justify-center">
-            <div className="w-8 h-8 border-2 border-zinc-200 dark:border-zinc-700 border-t-zinc-900 dark:border-t-zinc-300 rounded-full animate-spin"></div>
-        </div>
-      );
-    }
-    
-    if (error) {
-        return (
-            <div className="w-full flex items-center justify-center p-8 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/50 rounded-lg text-red-700 dark:text-red-300 text-sm">
-                <p className="text-center">{error}</p>
-            </div>
-        );
-    }
-
-    if (filteredStudies.length === 0 && !isLoading) {
+    if (filteredStudies.length === 0) {
         return (
             <div className="w-full flex items-center justify-center p-8 text-zinc-500 dark:text-zinc-400">
                 <p>No case studies found for this category.</p>
@@ -94,7 +53,7 @@ const CaseStudies: React.FC = () => {
 
     return filteredStudies.map((study, index) => (
       <motion.div
-        key={study._id || `${study.company}-${activeIndustry}`}
+        key={study.company}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}

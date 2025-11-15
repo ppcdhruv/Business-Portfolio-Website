@@ -1,8 +1,4 @@
-// This file is now primarily for defining the TypeScript type.
-// The data is fetched from Sanity CMS.
-
 export interface CaseStudy {
-  _id: string; // Sanity's unique document ID
   company: string;
   industry: string;
   budgetContext: string;
@@ -13,7 +9,6 @@ export interface CaseStudy {
   quote: string;
 }
 
-/*
 export const caseStudies: CaseStudy[] = [
   {
     company: "Large-Scale Acquisition System",
@@ -134,4 +129,3 @@ Tracking: None → Clear`,
     quote: "We went from guesswork to knowing exactly which keywords drove actual sales conversations. The clarity has been transformative.",
   },
 ];
-*/
