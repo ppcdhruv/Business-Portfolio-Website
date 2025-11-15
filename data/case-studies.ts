@@ -32,7 +32,7 @@ Conv. Rate: 0.22% → 1.92%
 CTR: 1.8% → 3.3%`,
     screenshots: [
       `${GITHUB_IMAGE_PATH}ed-tech-dashboard.png`,
-      `${GITHUB_IMAGE_PATH}meta-ads-cpl.png`
+      `https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/b09da1d395b0a29c98c446f917adf885630db2ce/data/Time_series(2025.03.01-2025.06.30_compared_to_2022.03.01-2022.06.30).png`
     ],
     outcome: "The same spend now delivers 5–7× more conversions. Search became the most efficient channel, Meta stabilized, and the full system moved from “chaotic scale” to predictable acquisition.",
     quote: "We were burning money on fragmented campaigns. Dhruv gave us a clear playbook to scale efficiently on both Meta and Google — performance flipped overnight.",
@@ -53,7 +53,7 @@ CPL: ₹47.7K → <₹10K
 Imp. Share: <10% → 45%`,
     screenshots: [
       `${GITHUB_IMAGE_PATH}b2b-search-cpc.png`,
-      `${GITHUB_IMAGE_PATH}saas-funnel-chart.png`
+      `https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/b09da1d395b0a29c98c446f917adf885630db2ce/data/Time_series(2025.02.01-2025.08.30).png`
     ],
     outcome: "Search stopped burning cash. The new structure exposed the real leak (impression share + keyword mismatch) and created a stable plan to rebuild profitable acquisition.",
     quote: "Our search campaigns were a black box of wasted spend. Dhruv identified the exact leakage points — we finally have a path to dominate our niche.",
@@ -94,7 +94,7 @@ Lead CPL: >₹500 → ₹148
 Retargeting: 0 → 1,467`,
     screenshots: [
       `${GITHUB_IMAGE_PATH}tech-events-leads.png`,
-      `${GITHUB_IMAGE_PATH}linkedin-ads-dashboard.png`
+      `https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/b09da1d395b0a29c98c446f917adf885630db2ce/data/Time_series_chart(2024.01.26-2024.02.28).png`
     ],
     outcome: "Mass awareness was turned into directly measurable leads with a clear ROI path.",
     quote: "We were great at getting eyeballs but terrible at converting them. Dhruv connected the entire funnel — finally a clear ROI.",
