@@ -1,105 +1,111 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
 import { caseStudies } from '../data/case-studies';
 import CaseStudyCard from './CaseStudyCard';
 import SectionHeader from './ui/SectionHeader';
-import Button from './ui/Button';
-
-const ChevronLeftIcon = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-    </svg>
-);
-
-const ChevronRightIcon = (props: React.SVGProps<SVGSVGElement>) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-    </svg>
-);
 
 const CaseStudies: React.FC = () => {
-  const [[page, direction], setPage] = useState([0, 0]);
+  const [activeIndustry, setActiveIndustry] = useState('All');
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showLeftFade, setShowLeftFade] = useState(false);
+  const [showRightFade, setShowRightFade] = useState(false);
+  const [isClientMobile, setIsClientMobile] = useState(false);
 
-  const caseStudyIndex = ((page % caseStudies.length) + caseStudies.length) % caseStudies.length;
+  const industries = ['All', ...Array.from(new Set(caseStudies.map(study => study.industry)))];
 
-  const paginate = (newDirection: number) => {
-    setPage([page + newDirection, newDirection]);
-  };
-  
-  const variants = {
-    enter: (direction: number) => {
-      return {
-        x: direction > 0 ? 100 : -100,
-        opacity: 0,
+  const filteredStudies = activeIndustry === 'All' 
+    ? caseStudies 
+    : caseStudies.filter(study => study.industry === activeIndustry);
+
+  const checkScroll = useCallback(() => {
+    const el = scrollContainerRef.current;
+    if (el) {
+      const isScrollable = el.scrollWidth > el.clientWidth;
+      setShowLeftFade(el.scrollLeft > 5); // Use a small buffer to avoid showing on minor scrolls
+      setShowRightFade(isScrollable && el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
+    }
+  }, []);
+
+  useEffect(() => {
+    // This effect runs only on the client side to check for mobile viewport
+    setIsClientMobile(window.innerWidth < 768);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (el) {
+      // Initial check
+      checkScroll();
+      
+      el.addEventListener('scroll', checkScroll, { passive: true });
+      window.addEventListener('resize', checkScroll);
+      
+      // Re-check after a delay to handle content/image loading that might change scrollWidth
+      const timeoutId = setTimeout(checkScroll, 300);
+
+      return () => {
+        el.removeEventListener('scroll', checkScroll);
+        window.removeEventListener('resize', checkScroll);
+        clearTimeout(timeoutId);
       };
-    },
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => {
-      return {
-        zIndex: 0,
-        x: direction < 0 ? 100 : -100,
-        opacity: 0,
-      };
-    },
-  };
+    }
+  }, [checkScroll, filteredStudies]);
 
   return (
-    <section id="results" className="py-24 sm:py-32 overflow-x-hidden">
+    <section id="results" className="py-24 sm:py-32">
       <SectionHeader
         title="Real Results for Founders Like You"
         description="An interactive library of real-world results. Each came from a better funnel, not more ad spend."
       />
-      
-      <div className="mt-16 max-w-4xl mx-auto relative h-[880px] sm:h-[750px] md:h-[600px]">
-        <AnimatePresence initial={false} custom={direction} mode="wait">
-          <motion.div
-            key={page}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{
-              x: { type: 'spring', stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 },
-            }}
-            className="absolute w-full h-full"
-          >
-            <CaseStudyCard study={caseStudies[caseStudyIndex]} />
-          </motion.div>
-        </AnimatePresence>
-      </div>
 
-      <div className="mt-8 flex items-center justify-center gap-4">
-        <Button variant="secondary" onClick={() => paginate(-1)} aria-label="Previous case study">
-          <ChevronLeftIcon className="w-5 h-5" />
-        </Button>
-        <div className="flex items-center gap-3">
-            {caseStudies.map((study, index) => (
-                <button 
-                    key={study.company}
-                    onClick={() => setPage([index, index > caseStudyIndex ? 1 : -1])}
-                    className={`h-12 w-12 flex items-center justify-center rounded-lg transition-all duration-300
-                        ${index === caseStudyIndex 
-                            ? 'bg-white dark:bg-zinc-800 scale-110 shadow-lg' 
-                            : 'bg-zinc-100/70 dark:bg-zinc-900 scale-90 opacity-60 hover:opacity-100 hover:scale-100'}
-                    `}
-                    aria-label={`Go to case study for ${study.company}`}
-                >
-                   <div className="grayscale contrast-[0] brightness-200 dark:grayscale-0 dark:contrast-100 dark:brightness-100">
-                     {/* FIX: Cast study.logo to React.ReactElement<any> to resolve a type inference issue with React.cloneElement, allowing the 'className' prop to be passed correctly. */}
-                     {React.cloneElement(study.logo as React.ReactElement<any>, { className: 'h-6' })}
-                   </div>
-                </button>
-            ))}
+      <div className="mt-12 mb-8 flex justify-center flex-wrap gap-2 px-4">
+        {industries.map(industry => (
+            <button
+                key={industry}
+                onClick={() => {
+                  setActiveIndustry(industry);
+                  // Reset scroll position to the start when a new filter is applied
+                  if (scrollContainerRef.current) {
+                    scrollContainerRef.current.scrollLeft = 0;
+                  }
+                }}
+                className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-400 dark:focus:ring-offset-zinc-950 ${
+                    activeIndustry === industry
+                        ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+                        : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700'
+                }`}
+            >
+                {industry}
+            </button>
+        ))}
+      </div>
+      
+      {isClientMobile && (
+        <div className="text-center text-xs text-zinc-500 dark:text-zinc-400 font-semibold tracking-wider mb-4 animate-pulse">
+            ‹ SCROLL FOR MORE ›
         </div>
-        <Button variant="secondary" onClick={() => paginate(1)} aria-label="Next case study">
-           <ChevronRightIcon className="w-5 h-5" />
-        </Button>
+      )}
+
+      <div className="relative mt-8 -mx-4 sm:-mx-6 lg:-mx-8">
+        {/* Left fade */}
+        <div className={`absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent dark:from-zinc-950 pointer-events-none transition-opacity duration-300 ${showLeftFade ? 'opacity-100' : 'opacity-0'}`}></div>
+
+        <div ref={scrollContainerRef} className="flex overflow-x-auto space-x-8 px-4 sm:px-6 lg:px-8 pb-8 no-scrollbar">
+          {filteredStudies.map((study, index) => (
+            <motion.div
+              key={`${study.company}-${activeIndustry}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
+              className="flex-shrink-0 w-[calc(100vw-48px)] sm:w-[400px] md:w-[450px] max-w-full"
+            >
+              <CaseStudyCard study={study} />
+            </motion.div>
+          ))}
+        </div>
+        
+        {/* Right fade */}
+        <div className={`absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent dark:from-zinc-950 pointer-events-none transition-opacity duration-300 ${showRightFade ? 'opacity-100' : 'opacity-0'}`}></div>
       </div>
     </section>
   );

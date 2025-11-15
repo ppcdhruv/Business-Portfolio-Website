@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+// FIX: Import Variants type from framer-motion to ensure animation props are correctly typed.
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import Button from './ui/Button';
 import { Theme } from '../App';
 import ThemeToggle from './ui/ThemeToggle';
+import LinkedInIcon from './icons/LinkedInIcon';
+import InstagramIcon from './icons/InstagramIcon';
+import YoutubeIcon from './icons/YoutubeIcon';
 
 const Logo = ({ isScrolled }: { isScrolled: boolean }) => (
   <svg 
@@ -27,6 +32,41 @@ const XIcon = ({ className }: { className?: string }) => (
     </svg>
 );
 
+// Animation variants for the mobile menu
+const navContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.25,
+    },
+  },
+};
+
+const navItemVariants: Variants = {
+  hidden: { opacity: 0, y: -15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 120, damping: 15 },
+  },
+};
+
+const socialContainerVariants: Variants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+  
+const socialItemVariants: Variants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 },
+};
+
 interface HeaderProps {
   theme: Theme;
   toggleTheme: () => void;
@@ -35,9 +75,15 @@ interface HeaderProps {
 const navLinks = [
     { href: '#problem', label: 'Problem' },
     { href: '#wedge', label: 'Solution' },
-    { href: '#system', label: 'System' },
+    { href: '#services', label: 'Services' },
     { href: '#pricing', label: 'Pricing' },
     { href: '#fit-check', label: 'Is It For You?' },
+];
+
+const socialLinks = [
+    { href: 'https://instagram.com', label: 'Instagram', icon: InstagramIcon, hoverColor: 'hover:text-pink-600' },
+    { href: 'https://linkedin.com', label: 'LinkedIn', icon: LinkedInIcon, hoverColor: 'hover:text-blue-600' },
+    { href: 'https://youtube.com', label: 'YouTube', icon: YoutubeIcon, hoverColor: 'hover:text-red-600' }
 ];
 
 const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
@@ -69,7 +115,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
       });
     }, { rootMargin: '-40% 0px -60% 0px' });
 
-    const sections = document.querySelectorAll('main section[id]');
+    const sections = document.querySelectorAll('main [id]');
     sections.forEach(section => observer.current?.observe(section));
 
     return () => {
@@ -92,9 +138,18 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
     if (href.startsWith('#')) {
       e.preventDefault();
       const targetId = href.substring(1);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-          targetElement.scrollIntoView({ behavior: 'smooth' });
+      
+      // Special case for scrolling to top
+      if (targetId === 'root') {
+          const mainElement = document.querySelector('main');
+          if (mainElement) {
+              mainElement.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+      } else {
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+              targetElement.scrollIntoView({ behavior: 'smooth' });
+          }
       }
     }
     if (isOpen) {
@@ -120,9 +175,15 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                     key={link.href} 
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className={`relative text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white text-sm font-medium transition-colors after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-full after:bg-zinc-900 dark:after:bg-white after:transition-transform after:duration-300 ${activeSection === link.href.substring(1) ? 'after:scale-x-100' : 'after:scale-x-0'}`}
+                    className={`relative text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white text-sm font-medium hover:font-semibold transition-all duration-200 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-full after:bg-zinc-900 dark:after:bg-white after:transition-transform after:duration-300 after:origin-center ${activeSection === link.href.substring(1) ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`}
                 >
-                    {link.label}
+                    <motion.span
+                        className="inline-block"
+                        whileHover={{ y: -2 }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                    >
+                        {link.label}
+                    </motion.span>
                 </a>
               ))}
             </nav>
@@ -140,25 +201,94 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
               aria-label="Toggle navigation menu"
               className="p-2 rounded-md text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-zinc-500"
             >
-              {isOpen ? <XIcon className="w-6 h-6" /> : <HamburgerIcon className="w-6 h-6" />}
+              <HamburgerIcon className="w-6 h-6" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div className={`fixed inset-0 z-[100] bg-white dark:bg-zinc-950 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-300 ease-in-out md:hidden`}>
-        <div className="pt-24 pb-12 px-6 h-full flex flex-col">
-            <nav className="flex flex-col items-center justify-center flex-grow space-y-8">
-                {navLinks.map(link => (
-                    <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="text-2xl font-bold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition-colors">{link.label}</a>
-                ))}
-            </nav>
-            <Button href="#final-cta" size="lg" className="w-full mt-8" onClick={(e) => handleNavClick(e, '#final-cta')}>Get Free Audit</Button>
-        </div>
-      </div>
+      <AnimatePresence>
+        {isOpen && (
+            <motion.div
+                initial={{ y: '-100%' }}
+                animate={{ y: 0 }}
+                exit={{ y: '-100%' }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="fixed inset-0 z-[100] bg-zinc-950 dark:bg-zinc-50 md:hidden"
+                role="dialog"
+                aria-modal="true"
+            >
+                <div className="flex flex-col h-full">
+                    <div className="flex items-center justify-between h-16 px-4 sm:px-6 border-b border-zinc-800 dark:border-zinc-200">
+                        <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-black tracking-tighter text-white dark:text-zinc-900 flex items-center gap-2" aria-label="ViziGrowth home">
+                            <Logo isScrolled={isScrolled} />
+                            ViziGrowth
+                        </a>
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            aria-label="Close navigation menu"
+                            className="p-2 rounded-md text-zinc-400 dark:text-zinc-600 hover:text-white dark:hover:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200"
+                        >
+                            <XIcon className="w-6 h-6" />
+                        </button>
+                    </div>
+                    
+                    <nav className="flex-grow flex items-center justify-center">
+                        <motion.ul 
+                            className="flex flex-col items-center space-y-8"
+                            variants={navContainerVariants}
+                            initial="hidden"
+                            animate="visible"
+                        >
+                            {navLinks.map(link => (
+                                <motion.li key={link.href} variants={navItemVariants}>
+                                    <a 
+                                        href={link.href} 
+                                        onClick={(e) => handleNavClick(e, link.href)} 
+                                        className={`relative text-3xl font-bold tracking-tight text-zinc-200 dark:text-zinc-800 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-full after:bg-white dark:after:bg-zinc-900 after:transition-transform after:duration-300 ${activeSection === link.href.substring(1) ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`}
+                                    >
+                                        {link.label}
+                                    </a>
+                                </motion.li>
+                            ))}
+                        </motion.ul>
+                    </nav>
+                    
+                    <motion.div 
+                        className="p-6 border-t border-zinc-800 dark:border-zinc-200 text-center"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 0.4 } }}
+                    >
+                        <Button href="#final-cta" size="lg" className="w-full max-w-xs mx-auto !bg-white !text-zinc-900 dark:!bg-zinc-900 dark:!text-white" onClick={(e) => handleNavClick(e, '#final-cta')}>Get Free Audit</Button>
+                        <motion.div 
+                            className="mt-8 flex justify-center items-center gap-8"
+                            variants={socialContainerVariants}
+                            initial="hidden"
+                            animate="visible"
+                        >
+                           {socialLinks.map(link => (
+                                <motion.a 
+                                    key={link.label}
+                                    href={link.href} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    aria-label={`ViziGrowth on ${link.label}`}
+                                    className={`text-zinc-400 dark:text-zinc-500 transition-colors ${link.hoverColor}`}
+                                    variants={socialItemVariants}
+                                    whileHover={{ scale: 1.15, transition: { type: 'spring', stiffness: 300 } }}
+                                    whileTap={{ scale: 0.9 }}
+                                >
+                                    <link.icon className="w-6 h-6" />
+                                </motion.a>
+                           ))}
+                        </motion.div>
+                    </motion.div>
+                </div>
+            </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };
 
-export default Header;
+export default React.memo(Header);

@@ -102,7 +102,7 @@ const Chatbot: React.FC = () => {
                  setStage('collecting_url');
                 break;
             case 'collecting_url':
-                 addBotMessage("Got it! Thanks for the info. Alex will personally review your application and get back to you within 24 hours. Is there anything else I can help with?");
+                 addBotMessage("Got it! Thanks for the info. Dhruv will personally review your application and get back to you within 24 hours. Is there anything else I can help with?");
                  setStage('initial');
                  setTimeout(showInitialOptions, 1500);
                 break;
@@ -222,4 +222,4 @@ const Chatbot: React.FC = () => {
     );
 };
 
-export default Chatbot;
+export default React.memo(Chatbot);

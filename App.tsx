@@ -1,23 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import CaseStudies from './components/CaseStudies';
 import Footer from './components/Footer';
 import Container from './components/ui/Container';
-import FitCheck from './components/FitCheck';
 import Chatbot from './components/Chatbot';
-import ServiceModules from './components/ServiceModules';
-import About from './components/About';
-import Investment from './components/Investment';
-import FinalCTA from './components/FinalCTA';
-import ProblemSolution from './components/ProblemSolution';
-import WedgeComparison from './components/WedgeComparison';
+
+// Lazy load components for better initial page load performance
+const ProblemSolution = lazy(() => import('./components/ProblemSolution'));
+const ServiceModules = lazy(() => import('./components/ServiceModules'));
+const CaseStudies = lazy(() => import('./components/CaseStudies'));
+const About = lazy(() => import('./components/About'));
+const FitCheck = lazy(() => import('./components/FitCheck'));
+const Investment = lazy(() => import('./components/Investment'));
+const FinalCTA = lazy(() => import('./components/FinalCTA'));
 
 export type Theme = 'light' | 'dark';
+
+const Loader: React.FC = () => (
+  <div className="w-full h-screen flex items-center justify-center">
+    <div className="w-16 h-16 border-4 border-zinc-200 dark:border-zinc-700 border-t-zinc-900 dark:border-t-zinc-300 rounded-full animate-spin"></div>
+  </div>
+);
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState<Theme>('light');
   const [isHeroHovered, setIsHeroHovered] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
 
   useEffect(() => {
     const storedTheme = localStorage.getItem('theme') as Theme | null;
@@ -27,6 +35,20 @@ const App: React.FC = () => {
     } else if (prefersDark) {
       setTheme('dark');
     }
+
+    const mainElement = document.querySelector('main');
+    if (!mainElement) return;
+  
+    const handleScroll = () => {
+      // Show footer when user has scrolled down a bit
+      setIsFooterVisible(mainElement.scrollTop > 200);
+    };
+    
+    mainElement.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      mainElement.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -38,9 +60,14 @@ const App: React.FC = () => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggleTheme = () => {
+  // Use useCallback to prevent re-creating functions on every render,
+  // which optimizes child components that depend on them (e.g., Header).
+  const toggleTheme = useCallback(() => {
     setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
-  };
+  }, []);
+
+  const handleHeroMouseEnter = useCallback(() => setIsHeroHovered(true), []);
+  const handleHeroMouseLeave = useCallback(() => setIsHeroHovered(false), []);
 
   return (
     <>
@@ -51,25 +78,26 @@ const App: React.FC = () => {
         <div className={`fixed inset-0 -z-40 h-full w-full bg-[linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#27272a_1px,transparent_1px),linear-gradient(to_bottom,#27272a_1px,transparent_1px)] bg-[size:4rem_4rem] ${isHeroHovered ? 'opacity-40 dark:opacity-50' : 'opacity-10 dark:opacity-10'} transition-opacity duration-500`}></div>
       </div>
       <Header theme={theme} toggleTheme={toggleTheme} />
-      <main className="h-screen overflow-y-auto snap-y snap-mandatory no-scrollbar">
+      <main className="h-screen overflow-y-auto no-scrollbar pb-16">
         <Hero 
-          onMouseEnter={() => setIsHeroHovered(true)}
-          onMouseLeave={() => setIsHeroHovered(false)}
+          onMouseEnter={handleHeroMouseEnter}
+          onMouseLeave={handleHeroMouseLeave}
         />
-        <Container>
-          <ProblemSolution />
-          <WedgeComparison />
-          <ServiceModules />
-          <CaseStudies />
-        </Container>
-        <Container>
-          <About />
-          <FitCheck />
-          <Investment />
-          <FinalCTA />
-        </Container>
+        <Suspense fallback={<Loader />}>
+          <Container>
+            <ProblemSolution />
+            <CaseStudies />
+            <ServiceModules />
+          </Container>
+          <Container>
+            <About />
+            <FitCheck />
+            <Investment />
+            <FinalCTA />
+          </Container>
+        </Suspense>
       </main>
-      <Footer />
+      <Footer isVisible={isFooterVisible} />
       <Chatbot />
     </>
   );

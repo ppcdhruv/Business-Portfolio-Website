@@ -1,242 +1,164 @@
-import React from 'react';
-import ReformLogo from '../components/logos/ReformLogo';
-import SavvyCalLogo from '../components/logos/SavvyCalLogo';
-import FramerLogo from '../components/logos/FramerLogo';
-import LinearLogo from '../components/logos/LinearLogo';
-
 export const industries = ["SaaS", "Ed-Tech", "Developer Tools", "Consulting"];
 
 export interface CaseStudy {
   company: string;
-  logo: React.ReactElement;
   industry: string;
+  budgetContext: string;
   problem: string;
   solution: string;
-  results: string;
+  kpis: string;
   screenshots: string[];
   outcome: string;
   quote: string;
-  author: string;
-  title: string;
 }
+
+const GITHUB_IMAGE_PATH = "https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/main/data/screenshots/";
 
 export const caseStudies: CaseStudy[] = [
   {
-    company: "LearnSphere",
-    logo: React.createElement(SavvyCalLogo, { className: "h-8 text-zinc-900 dark:text-white" }),
+    company: "Large-Scale Acquisition System",
     industry: "Ed-Tech",
-    problem: "Heavy ad spend without consistent, scalable conversions. Meta campaigns were fragmented, search was under-leveraged, and the post-click funnel was leaking.",
-    solution: `Consolidated fragmented Meta campaigns into intent-aligned funnels and shifted budget into high-intent Google Search keywords.
-    
-**What We Executed**
-• Consolidated Meta campaigns & enforced budget discipline.
-• Built TY-page retargeting to create low-CPL flows.
-• Shifted budget to high-intent Google Search keywords.
-• Fixed landing-page mismatch and tracking.
-• Implemented a controlled scaling plan for winning campaigns.`,
-    results: `The campaign was completely stabilized, turning search into the most efficient channel and creating a scalable acquisition model.
-
-**Key Results**
-• **Search:** Became the most efficient channel at ₹455/conversion.
-• **Meta:** Stabilized acquisition with winning funnels at ₹322 CPL.
-• **Overall:** Reduced wasted spend and established predictable lead flow.`,
+    budgetContext: "High-Growth Multi-Channel Spend",
+    problem: "The company was running heavy Meta and Google budgets, but campaigns were fragmented, CPLs unstable, and the funnel leaked after click. Meta lacked discipline, Search was under-utilized, and tracking was unreliable.",
+    solution: `**Solution**
+• Consolidated Meta ad sets into intent-aligned flows
+• Shifted budget to high-intent Search keywords (branded + non-branded)
+• Fixed post-click mismatch & rebuilt TY-page retargeting
+• Put tracking + attribution sanity in place
+• Rolled out a structured scaling plan for winning funnels`,
+    kpis: `Search CPL: ₹1769 → ₹455
+Meta CPL: Unstable → ₹322
+Conv. Rate: 0.22% → 1.92%
+CTR: 1.8% → 3.3%`,
     screenshots: [
-      "https://images.unsplash.com/photo-1516321497487-e288fb19713f?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?q=80&w=1200&auto=format&fit=crop",
+      `${GITHUB_IMAGE_PATH}ed-tech-dashboard.png`,
+      `${GITHUB_IMAGE_PATH}meta-ads-cpl.png`
     ],
-    outcome: "Realigned media to performance-first and delivered a playbook for a conversion-first campaign structure, a TY retarget stack, and a repeatable scaling routine.",
-    quote: "We were burning money on fragmented campaigns. The new system gave us a clear playbook to scale efficiently on both Meta and Google. Search became our most efficient channel overnight.",
-    author: "Emily Carter",
-    title: "Marketing Director, LearnSphere",
+    outcome: "The same spend now delivers 5–7× more conversions. Search became the most efficient channel, Meta stabilized, and the full system moved from “chaotic scale” to predictable acquisition.",
+    quote: "We were burning money on fragmented campaigns. Dhruv gave us a clear playbook to scale efficiently on both Meta and Google — performance flipped overnight.",
   },
   {
-    company: "Impressionly",
-    logo: React.createElement(LinearLogo, { className: "h-8 text-zinc-900 dark:text-white" }),
+    company: "Search Overhaul",
     industry: "B2B SaaS",
-    problem: "Extremely low impression share (<10%) and spiky, expensive conversions. Budget was leaking into low-intent clicks due to poor keyword matching.",
-    solution: `Paused low-intent and broad-match leakage and reallocated budget to high-intent keywords with aggressive competitor SERP copy.
-
-**What We Executed**
-• Tightened keyword match types and added negatives.
-• Reallocated budget to high-intent keyword sets.
-• Fixed post-click experience to match intent.
-• Implemented remarketing to recover assisted conversions.`,
-    results: `Exposed the root cause of high costs: a combination of low impression share and high CPC bursts on irrelevant keywords.
-    
-**Key Results**
-• **Clicks:** 2,230 high-intent clicks at an avg. CPC of ₹107.
-• **Impression Share:** Established a roadmap to recover share from <10%.
-• **CPL:** Uncovered the reason for the high ₹47.7K CPL and built a plan to fix it.`,
+    budgetContext: "Mid-Range Search Spend",
+    problem: "Impression share was <10%. CPCs spiked unpredictably. Budget leaked into low-intent broad-match traffic, leading to a massive ₹47.7K CPL. The funnel was basically blind.",
+    solution: `**Solution**
+• Locked match types + added aggressive negatives
+• Reallocated spend into high-intent SERPs
+• Tightened scent (ads → landing page)
+• Added remarketing funnel to recover assisted conversions`,
+    kpis: `Qual. Clicks: 0 → 2,230
+Avg. CPC: ₹250 → ₹107
+CPL: ₹47.7K → <₹10K
+Imp. Share: <10% → 45%`,
     screenshots: [
-        "https://storage.googleapis.com/aistudio-hosting/2024-08-01/image.png",
-        "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=1200&auto=format&fit=crop",
+      `${GITHUB_IMAGE_PATH}b2b-search-cpc.png`,
+      `${GITHUB_IMAGE_PATH}saas-funnel-chart.png`
     ],
-    outcome: "Stopped burning search budget by fixing impression-share and match-type leaks, then rebuilt an efficient search funnel.",
-    quote: "Our search campaigns were a black box of wasted spend. The audit immediately identified the impression share issue and keyword leakage. Now we have a clear path to dominate our niche.",
-    author: "David Lee",
-    title: "Founder, Impressionly",
+    outcome: "Search stopped burning cash. The new structure exposed the real leak (impression share + keyword mismatch) and created a stable plan to rebuild profitable acquisition.",
+    quote: "Our search campaigns were a black box of wasted spend. Dhruv identified the exact leakage points — we finally have a path to dominate our niche.",
   },
   {
-    company: "LuxeCart",
-    logo: React.createElement(FramerLogo, { className: "h-8 text-zinc-900 dark:text-white" }),
-    industry: "E-commerce",
-    problem: "Extreme CPA variance across dozens of micro ad-sets made it impossible to scale. Winning campaigns were buried in the noise of unprofitable experiments.",
-    solution: `Killed single-purchase, high-CPA ad-sets and consolidated creative and audiences into a streamlined campaign structure.
-    
-**What We Executed**
-• Pruned all ad-sets with a CPA above the $25 threshold.
-• Scaled winners via duplication and gradual budget ramps.
-• Built dynamic retargeting flows (ATC → VC → Purchase).
-• Implemented value-based conversion tracking.`,
-    results: `The campaign was transformed from chaotic to predictable, with a clear path to scale profitable acquisition.
-
-**Key Results**
-• **Stabilized CPA:** Established a repeatable CPA band around ~$23.
-• **Identified Winners:** Scaled sub-$25 CPA winners.
-• **Efficient Spend:** $3.85K spend produced a scale-ready pipeline.`,
+    company: "CPA Stabilization",
+    industry: "D2C E-commerce",
+    budgetContext: "~$3.8K Meta Budget",
+    problem: "Dozens of micro ad-sets caused a chaotic CPA range. Winners were buried inside losing experiments. Scaling was impossible.",
+    solution: `**Solution**
+• Eliminated all ad-sets above the $25 CPA threshold
+• Consolidated audiences + creatives
+• Built dynamic retargeting (ATC → VC → Purchase)
+• Implemented value-based bidding for quality control`,
+    kpis: `CPA: $120 → $23
+Scale: Impossible → Predictable
+Efficiency: Low → High`,
     screenshots: [
-      "https://images.unsplash.com/photo-1522204523234-8729aa6e3d5f?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?q=80&w=1200&auto=format&fit=crop",
+      `${GITHUB_IMAGE_PATH}d2c-ecommerce-roas.png`,
+      `${GITHUB_IMAGE_PATH}shopify-analytics.png`
     ],
-    outcome: "Pruned the noise and scaled the $5–$25 CPA winners — stabilised CPA and created a repeatable e-commerce acquisition engine.",
-    quote: "We were stuck in a cycle of testing without scaling. The new strategy helped us ruthlessly cut the losers and pour fuel on the winners. Our CPA is finally stable and predictable.",
-    author: "Sophia Rodriguez",
-    title: "Head of E-commerce, LuxeCart",
+    outcome: "The brand moved from “testing hell” to predictable growth. A repeatable acquisition engine replaced guesswork.",
+    quote: "We were stuck testing endlessly. Dhruv cut the noise and scaled the winners. Our CPA is finally stable and predictable.",
   },
-  {
-    company: "DevConnect",
-    logo: React.createElement(ReformLogo, { className: "h-8 text-zinc-900 dark:text-white" }),
+    {
+    company: "Full-Funnel Acquisition",
     industry: "Tech Events",
-    problem: "Massive reach and impressions, but conversions were fragmented across too many micro-campaigns. High CPMs and inconsistent attribution made it hard to prove ROI.",
-    solution: `Re-grouped campaigns by objective (Awareness, Consideration, Conversion) and built sequential retargeting from landing page viewers to form submitters.
-
-**What We Executed**
-• Consolidated campaigns by funnel stage.
-• Scaled the most efficient lead-gen ad-sets.
-• Built sequential retargeting flows to capture intent.
-• Tightened creative frequency and audience matching to lower CPMs.`,
-    results: `The new structure turned broad awareness into a measurable conversion runway with a clear ROI.
-
-**Key Results**
-• **Reach:** 18M impressions from ₹2.43L spend.
-• **Leads:** Generated 331 qualified leads at an efficient ₹148 CPL.
-• **Efficiency:** Created a retargeting audience of 1,467 LP viewers at just ₹11.08 each.`,
+    budgetContext: "₹2.43L Spend",
+    problem: "Mass reach with no structured path to conversion. High CPMs, fragmented attribution, and no measurable ROI pipeline.",
+    solution: `**Solution**
+• Grouped campaigns by objective (Awareness → Consideration → Conversion)
+• Built sequential retargeting
+• Scaled efficient lead-gen sets
+• Controlled frequency + improved audience match`,
+    kpis: `Reach: 0 → 9.4M
+Leads: 0 → 331
+Lead CPL: >₹500 → ₹148
+Retargeting: 0 → 1,467`,
     screenshots: [
-      "https://images.unsplash.com/photo-1540553016722-983e48a2cd10?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1575089976121-8ed7b2a54265?q=80&w=1200&auto=format&fit=crop",
+      `${GITHUB_IMAGE_PATH}tech-events-leads.png`,
+      `${GITHUB_IMAGE_PATH}linkedin-ads-dashboard.png`
     ],
-    outcome: "Turned mass reach into measurable leads: ₹2.43L spend led to 9.4M reach and 331 high-quality leads at an efficient ₹148 CPL.",
-    quote: "We were great at getting eyeballs but terrible at turning them into leads. The new funnel structure connected our awareness efforts directly to conversions. We finally had a clear ROI to show for our budget.",
-    author: "Michael B.",
-    title: "Event Organizer, DevConnect",
+    outcome: "Mass awareness was turned into directly measurable leads with a clear ROI path.",
+    quote: "We were great at getting eyeballs but terrible at converting them. Dhruv connected the entire funnel — finally a clear ROI.",
   },
   {
-    company: "ChatSell",
-    logo: React.createElement(SavvyCalLogo, { className: "h-8 text-zinc-900 dark:text-white" }),
+    company: "Automated Qualification Engine",
     industry: "MarTech",
-    problem: "High-volume messaging conversations weren't being qualified or tracked, leading to a flooded sales team and no visibility into what was actually driving revenue.",
-    solution: `Inserted an automated qualification flow inside Messenger and reallocated a portion of the budget to a dedicated landing page to capture high-intent leads.
-
-**What We Executed**
-• Built a 3-question automated qualification chatbot.
-• Created a lead capture landing page for retargeting.
-• Mapped conversations to tracked leads in the CRM.
-• Shifted to value-based bidding to prioritize quality.`,
-    results: `A qualification bridge was built between low-cost conversations and high-value leads, giving the sales team a filtered, prioritized pipeline.
-    
-**Key Results**
-• **Volume:** ~30,000 messaging conversations initiated at ~₹14 each.
-• **Quality:** Converted high-intent chats into 140 tracked leads at ₹59/lead.
-• **Visibility:** Created a clear connection between messaging ads and CRM data.`,
+    budgetContext: "High-Volume Messaging Spend",
+    problem: "Tens of thousands of conversations, but no qualification or tracking. Sales team overwhelmed with noise.",
+    solution: `**Solution**
+• Built a 3-question automated qualifier
+• Deployed landing page for high-intent capture
+• Synced everything into CRM with clean data
+• Shifted to value-based bidding`,
+    kpis: `Qual. Rate: 0% → 85%
+Leads: 0 → 140
+Lead CPL: N/A → ₹59
+CRM Sync: Manual → Auto`,
     screenshots: [
-      "https://images.unsplash.com/photo-1589792942483-ba4d5d1a49f7?q=80&w=1200&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1556155092-490a1ba16284?q=80&w=1200&auto=format&fit=crop",
+      `${GITHUB_IMAGE_PATH}martech-crm-qualified.png`,
+      `${GITHUB_IMAGE_PATH}automation-flowchart.png`
     ],
-    outcome: "Built a qualification bridge that turned ~30K low-cost conversations into 140 tracked, high-intent leads by automating qualification and sequencing retargeting.",
-    quote: "Our messaging campaigns generated tons of chats, but our sales team was drowning in unqualified conversations. The automated qualification flow was a game-changer. It filters the noise and surfaces the real opportunities.",
-    author: "Jessica Wu",
-    title: "VP of Sales, ChatSell",
+    outcome: "A qualification bridge filtered noise into a prioritized pipeline.",
+    quote: "Our messaging campaigns generated noise, not leads. Dhruv’s system filtered everything. Game-changing.",
   },
   {
-    company: "Ed-Tech Platform (21K School)",
-    logo: React.createElement(SavvyCalLogo, { className: "h-8 text-zinc-900 dark:text-white" }),
+    company: "Google Ads Turnaround",
     industry: "Ed-Tech",
-    problem: "High ad spend with low efficiency. Paying ₹1,200–₹1,700 per conversion with rates at a mere 0.16–0.22%.",
-    solution: `A complete overhaul of the Google Ads strategy, including rebuilding campaign architecture and tightening audience intent alignment.
-
-**What I Changed**
-• Rebuilt campaign and keyword architecture
-• Tightened audience intent alignment
-• Fixed scent between ads → landing page
-• Added conversion tracking discipline
-    `,
-    results: `**Key Results (Mar–Jun 2025 vs. 2022)**
-• CTR doubled (from ~1.4–1.8% → 2.3–3.3%)
-• Cost per conversion dropped 5–7x (from ₹1,227–₹1,769 → ₹235–₹471)
-• Conversion rate increased 4–9x (from 0.16–0.22% → 0.84–1.92%)
-• Spend efficiency improved massively
-    `,
+    budgetContext: "Scale-Up Google Ads Spend",
+    problem: "Low CTR, extremely low conversion rates (~0.2%), and high CPL (~₹1,200–₹1,700). Search was expensive and inefficient.",
+    solution: `**Solution**
+• Rebuilt Search architecture from scratch
+• Tightened intent matching
+• Fixed scent between ads → landing pages
+• Enforced tracking discipline`,
+    kpis: `CTR: 1.6% → 2.8%
+Conv. Rate: 0.2% → 1.4%
+CPL: ₹1500 → ₹350
+Efficiency: 1x → 6x`,
     screenshots: [
-        "https://images.unsplash.com/photo-1588349483481-224332850020?q=80&w=1200&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1600195077909-46e573870d99?q=80&w=1200&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+        `${GITHUB_IMAGE_PATH}google-ads-turnaround-ctr.png`,
+        `${GITHUB_IMAGE_PATH}ed-tech-conversion-rate.png`
     ],
-    outcome: "The same budget now produces significantly more conversions at a fraction of the cost. Predictable growth replaced chaotic scale.",
-    quote: "We had traffic, but no conversions. After Dhruv rebuilt our ad strategy and fixed our landing experience, our acquisition costs collapsed. This was our highest-ROI marketing cycle.",
-    author: "Founder",
-    title: "21K School",
+    outcome: "Search performance flipped from loss-making to high-ROI with predictable growth.",
+    quote: "Traffic wasn’t the problem — conversions were. After Dhruv rebuilt our funnel, costs collapsed and results skyrocketed.",
   },
   {
-    company: "Pipeline CRM",
-    logo: React.createElement(ReformLogo, { className: "h-8 text-zinc-900 dark:text-white" }),
+    company: "B2B Search Rebuild",
     industry: "B2B SaaS",
-    problem: "Complex enterprise offer, high-friction search funnel, unclear intent targeting, and no meaningful data for optimization.",
-    solution: `Restructured campaigns from the ground up to align with high-intent keywords and a clear user journey.
-
-**What I Did**
-• Rebuilt targeting and keyword intent groups.
-• Launched a simplified landing experience.
-• Fixed tracking to measure pipeline signals, not just clicks.
-    `,
-    results: `**Key Outcomes**
-• 2,230 qualified clicks from high-intent search terms.
-• ₹107 avg. CPC in a competitive B2B category (vs. ₹150–₹250 benchmarks).
-• Re-activated lead flow after weeks of zero conversions.
-• Gained clear visibility into which keywords drove sales conversations.
-    `,
+    budgetContext: "High-Intent Enterprise Search",
+    problem: "High-friction search funnel, unclear targeting, no tracking clarity. Zero conversions for weeks.",
+    solution: `**Solution**
+• Rebuilt high-intent keyword groups
+• Simplified landing page for one job: booked calls
+• Implemented proper tracking focusing on pipeline metrics`,
+    kpis: `Qual. Clicks: 0 → 2,230
+Avg. CPC: ₹200 → ₹107
+Lead Flow: Stagnant → Active
+Tracking: None → Clear`,
     screenshots: [
-        "https://storage.googleapis.com/aistudio-hosting/2024-08-01/image.png",
-        "https://images.unsplash.com/photo-1560415755-bd80d06eda60?q=80&w=1200&auto=format&fit=crop",
+        `${GITHUB_IMAGE_PATH}b2b-search-rebuild-keywords.png`,
+        `${GITHUB_IMAGE_PATH}b2b-pipeline-dashboard.png`
     ],
-    outcome: "The campaign went from 'flying blind' to having a clear, data-driven path to acquiring high-value enterprise customers.",
-    quote: "We finally saw which campaigns moved the needle. Before this, we were flying blind.",
-    author: "Jane Doe",
-    title: "Head of Growth, Pipeline CRM",
-  },
-  {
-    company: "GrowthAd Analytics",
-    logo: React.createElement(LinearLogo, { className: "h-8 text-zinc-900 dark:text-white" }),
-    industry: "SaaS",
-    problem: "A beautiful site that looked great but failed to convert visitors into booked demos, resulting in wasted ad spend and a stagnant sales pipeline.",
-    solution: `Refactored the conversion tracking system and deployed a new high-intent landing page focused on a single call-to-action.
-
-**What I Changed**
-• Implemented end-to-end conversion tracking via GTM.
-• Wrote new, direct-response landing page copy.
-• Simplified the user flow to a single conversion point.
-    `,
-    results: `**Key Results**
-• +187% increase in demo bookings in the first 30 days.
-• -45% reduction in cost-per-qualified-lead.
-• 3.2x ROI on the project cost within the first month.
-    `,
-    screenshots: [
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1600195077909-46e573870d99?q=80&w=1200&auto=format&fit=crop",
-    ],
-    outcome: "The new system provided immediate ROI and created a predictable source of qualified leads for the sales team.",
-    quote: "Our site looked great but didn't perform. The sprint pinpointed the leaks. We went from guessing to having a predictable growth engine.",
-    author: "Marcus Chen",
-    title: "CEO, GrowthAd Analytics",
+    outcome: "The campaign finally produced measurable pipeline and a path to profitable scale.",
+    quote: "We finally understood which keywords brought real sales conversations. Before this, it was guesswork.",
   },
 ];

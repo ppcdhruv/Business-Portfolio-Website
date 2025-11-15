@@ -14,10 +14,11 @@ const plans = [
             "3-part email nurture sequence",
             "Tracking & performance dashboard"
         ],
-        guarantee: "Performance Guarantee",
+        guarantee: "Performance Promise",
         whoFor: "For fixing a single, high-impact conversion point.",
         cta: "Get A Quote",
         variant: 'secondary',
+        popular: false,
     },
     {
         name: "Full Engine Build",
@@ -28,9 +29,11 @@ const plans = [
             "CRM integration & setup",
             "Post-launch performance validation"
         ],
-        guarantee: "System-Wide Lift Guarantee",
+        guarantee: "System-Wide Lift Promise",
         whoFor: "For launching or relaunching your core web presence.",
+        cta: "Get Your Free Audit",
         variant: 'primary',
+        popular: true,
     },
     {
         name: "Growth Partnership",
@@ -45,10 +48,22 @@ const plans = [
         whoFor: "For compounding gains after a successful project (clients only).",
         cta: "Discuss Partnership",
         variant: 'secondary',
+        popular: false,
     }
 ]
 
 const Investment: React.FC = () => {
+    const handleCTAClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    };
+
   return (
     <section id="pricing" className="py-24 sm:py-32">
         <SectionHeader
@@ -59,8 +74,15 @@ const Investment: React.FC = () => {
         {plans.map(plan => (
             <BentoCard 
                 key={plan.name} 
-                className={`flex flex-col h-full p-8 ${plan.variant === 'primary' ? 'border-zinc-900 dark:border-blue-500 border-2' : 'border-zinc-200/80 dark:border-zinc-800/80'}`}
+                className={`flex flex-col h-full p-8 !scale-100 hover:!scale-[1.02] ${plan.popular ? 'bg-zinc-50 dark:bg-zinc-900' : ''}`}
             >
+                {plan.popular && (
+                    <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2">
+                        <div className="px-3 py-1 text-xs font-semibold tracking-wider text-zinc-900 bg-white dark:text-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-full whitespace-nowrap">
+                            Most Popular
+                        </div>
+                    </div>
+                )}
                 <div className="flex justify-between items-start gap-4">
                     <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">{plan.name}</h3>
                     <div className="px-3 py-1 text-xs font-semibold tracking-wider text-zinc-600 bg-zinc-100 dark:text-zinc-300 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-800/80 rounded-full whitespace-nowrap">
@@ -85,6 +107,7 @@ const Investment: React.FC = () => {
                         href="#final-cta"
                         className="w-full"
                         variant={plan.variant as 'primary' | 'secondary'}
+                        onClick={(e) => handleCTAClick(e as any, '#final-cta')}
                     >
                         {plan.cta}
                     </Button>

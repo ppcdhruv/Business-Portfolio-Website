@@ -3,12 +3,15 @@ import { motion, useInView } from 'framer-motion';
 import BentoCard from './ui/BentoCard';
 import Button from './ui/Button';
 import ArrowRightIcon from './icons/ArrowRightIcon';
-import CheckIcon from './icons/CheckIcon';
-import Tooltip from './ui/Tooltip';
+import UserIcon from './icons/UserIcon';
+import AtSymbolIcon from './icons/AtSymbolIcon';
+import LinkIcon from './icons/LinkIcon';
+import QuestionMarkCircleIcon from './icons/QuestionMarkCircleIcon';
 import ShieldIcon from './icons/ShieldIcon';
+import AnimatedCheckCircleIcon from './icons/AnimatedCheckCircleIcon';
 
 const Label: React.FC<{ htmlFor: string; children: React.ReactNode }> = ({ htmlFor, children }) => (
-  <label htmlFor={htmlFor} className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300 mb-2">
+  <label htmlFor={htmlFor} className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
     {children}
   </label>
 );
@@ -16,39 +19,30 @@ const Label: React.FC<{ htmlFor: string; children: React.ReactNode }> = ({ htmlF
 const Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (props) => (
   <input
     {...props}
-    className="block w-full rounded-lg border border-zinc-300/80 bg-white dark:bg-zinc-900 dark:border-zinc-700/80 px-4 py-3 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-500/50 transition-colors"
+    className={`block w-full rounded-lg border border-zinc-300/80 bg-white dark:bg-zinc-900 dark:border-zinc-700/80 px-4 py-3 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-500/50 transition-colors ${props.className}`}
   />
 );
 
-const Select: React.FC<React.SelectHTMLAttributes<HTMLSelectElement>> = (props) => (
-    <div className="relative">
-        <select
-            {...props}
-            className="appearance-none block w-full rounded-lg border border-zinc-300/80 bg-white dark:bg-zinc-900 dark:border-zinc-700/80 px-4 py-3 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-500/50 transition-colors"
-        >
-            {props.children}
-        </select>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-zinc-400">
-            <svg className="h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-            </svg>
-        </div>
-    </div>
+const Textarea: React.FC<React.TextareaHTMLAttributes<HTMLTextAreaElement>> = (props) => (
+  <textarea
+    {...props}
+    className="block w-full rounded-lg border border-zinc-300/80 bg-white dark:bg-zinc-900 dark:border-zinc-700/80 pl-10 pr-4 py-3 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:focus:ring-blue-500/50 transition-colors"
+  />
 );
 
-const takeaways = [
-    { text: "Single Expert", tooltip: "You deal with one founder — no account managers, no handoffs." },
-    { text: "Signal KPIs", tooltip: "MQLs, session quality, CAC — the metrics that matter, not vanity." },
-    { text: "Clear Guarantee", tooltip: "Measurable uplift or I keep working until we hit it." }
+const promiseTakeaways = [
+    { text: "Single Point of Contact", description: "You work directly with the founder. No account managers, no handoffs." },
+    { text: "Focus on Signal KPIs", description: "We track metrics that matter (MQLs, CAC) instead of vanity metrics (likes, impressions)." },
+    { text: "A Clear Path to ROI", description: "Success is defined by measurable outcomes that directly impact your revenue." }
 ];
 
 const FinalCTA: React.FC = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const promiseRef = useRef(null);
+  const isPromiseInView = useInView(promiseRef, { once: true, amount: 0.5 });
 
   return (
     <section id="final-cta" className="py-24 sm:py-32">
-        <BentoCard className="relative overflow-hidden max-w-4xl mx-auto p-8 sm:p-12">
+        <BentoCard className="relative overflow-hidden max-w-6xl mx-auto p-8 sm:p-12">
             <motion.svg
                 className="absolute top-0 left-0 w-full h-full pointer-events-none"
                 fill="transparent"
@@ -69,79 +63,104 @@ const FinalCTA: React.FC = () => {
                 />
             </motion.svg>
 
-            <div className="relative z-10 text-center">
-                 <h3 className="text-3xl md:text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">Ready to build a system that works?</h3>
-                 <p className="mt-3 text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                    Let's have a 15-minute chat. No pressure, no sales pitch—just a frank conversation about your growth potential.
-                 </p>
-            </div>
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-5 gap-x-12 gap-y-12">
+                {/* --- Left Column: The Promise --- */}
+                <div ref={promiseRef} className="md:col-span-2 flex flex-col justify-center items-center text-center">
+                    <div className="inline-block bg-zinc-100 dark:bg-zinc-800/50 p-3 rounded-xl border border-zinc-200/80 dark:border-zinc-700/80">
+                        <ShieldIcon className="w-12 h-12" animate={isPromiseInView} />
+                    </div>
+                    <h3 className="mt-6 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+                        Our Founder-to-Founder Promise
+                    </h3>
+                    <p className="mt-3 text-zinc-600 dark:text-zinc-400 max-w-sm">
+                        This isn't an agency hand-off; it's a direct partnership. Our entire process is built on transparency, focus, and a shared commitment to your growth.
+                    </p>
+                    <ul className="mt-8 space-y-4">
+                        {promiseTakeaways.map((item, index) => (
+                            <motion.li 
+                                key={item.text} 
+                                className="flex items-start gap-3 text-left"
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={isPromiseInView ? { opacity: 1, y: 0 } : {}}
+                                transition={{ duration: 0.5, delay: index * 0.15 }}
+                            >
+                                <AnimatedCheckCircleIcon className="w-5 h-5 text-zinc-500 dark:text-zinc-400 mt-0.5 flex-shrink-0" isInView={isPromiseInView} />
+                                <div>
+                                    <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{item.text}</p>
+                                    <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{item.description}</p>
+                                </div>
+                            </motion.li>
+                        ))}
+                    </ul>
+                </div>
 
-            <form action="https://example.com/submit" method="POST" className="relative z-10 mt-10 space-y-6 max-w-2xl mx-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <Label htmlFor="full-name">Full Name</Label>
-                        <Input type="text" name="full-name" id="full-name" placeholder="Jane Doe" required autoComplete="name" />
-                    </div>
-                    <div>
-                        <Label htmlFor="email">Work Email</Label>
-                        <Input type="email" name="email" id="email" placeholder="jane@company.com" required autoComplete="email" />
-                    </div>
-                </div>
-                <div>
-                    <Label htmlFor="website-url">Website URL</Label>
-                    <Input type="url" name="website-url" id="website-url" placeholder="https://company.com" required autoComplete="url" />
-                </div>
-                <div>
-                    <Label htmlFor="biggest-problem">What's the #1 revenue leak you're trying to fix?</Label>
-                    <Input type="text" name="biggest-problem" id="biggest-problem" placeholder="e.g., Low demo bookings from our pricing page" required />
-                </div>
-                 <div className="pt-2">
-                    <div className="flex items-start">
-                        <div className="flex-shrink-0">
-                            <input id="consent" name="consent" type="checkbox" className="h-4 w-4 rounded border-zinc-300/80 dark:border-zinc-700 text-blue-600 focus:ring-blue-500 dark:bg-zinc-800" required />
+                {/* --- Right Column: The Form --- */}
+                <div className="md:col-span-3 md:border-l border-zinc-200/80 dark:border-zinc-700/80 md:pl-12">
+                     <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">Ready to stop leaking revenue?</h3>
+                     <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400">
+                        Let's have a 15-minute chat. No pressure, no sales pitch—just a frank conversation about your growth potential.
+                     </p>
+                    <form action="https://example.com/submit" method="POST" className="space-y-5 mt-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-5">
+                            <div>
+                                <Label htmlFor="full-name">Full Name</Label>
+                                <div className="relative mt-2">
+                                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <UserIcon className="h-5 w-5 text-zinc-400" />
+                                    </div>
+                                    <Input type="text" name="full-name" id="full-name" placeholder="Jane Doe" required autoComplete="name" className="!pl-10" />
+                                </div>
+                            </div>
+                            <div>
+                                <Label htmlFor="email">Work Email</Label>
+                                <div className="relative mt-2">
+                                    <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                        <AtSymbolIcon className="h-5 w-5 text-zinc-400" />
+                                    </div>
+                                    <Input type="email" name="email" id="email" placeholder="jane@company.com" required autoComplete="email" className="!pl-10" />
+                                </div>
+                            </div>
                         </div>
-                        <div className="ml-3 text-sm">
-                            <label htmlFor="consent" className="text-zinc-500 dark:text-zinc-400">
-                                You agree to receive a one-time response to your application. No spam, ever.
-                            </label>
+                        <div>
+                            <Label htmlFor="website-url">Website URL</Label>
+                            <div className="relative mt-2">
+                                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <LinkIcon className="h-5 w-5 text-zinc-400" />
+                                </div>
+                                <Input type="url" name="website-url" id="website-url" placeholder="https://company.com" required autoComplete="url" className="!pl-10" />
+                            </div>
                         </div>
-                    </div>
+                        <div>
+                            <Label htmlFor="biggest-problem">What's the #1 revenue leak you're trying to fix?</Label>
+                             <div className="relative mt-2">
+                                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <QuestionMarkCircleIcon className="h-5 w-5 text-zinc-400" />
+                                </div>
+                                <Input type="text" name="biggest-problem" id="biggest-problem" placeholder="e.g., Low demo bookings from pricing page" required className="!pl-10" />
+                            </div>
+                        </div>
+                         <div className="pt-2">
+                            <div className="flex items-start">
+                                <div className="flex-shrink-0">
+                                    <input id="consent" name="consent" type="checkbox" className="h-4 w-4 rounded border-zinc-300/80 bg-zinc-100 dark:bg-zinc-800 text-blue-600 focus:ring-blue-500 focus:ring-offset-white dark:focus:ring-offset-zinc-950 dark:border-zinc-700/80" required />
+                                </div>
+                                <div className="ml-3 text-sm">
+                                    <label htmlFor="consent" className="text-zinc-500 dark:text-zinc-400">
+                                        You agree to receive a one-time response to your application. No spam, ever.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <Button type="submit" size="lg" variant="primary" className="w-full">
+                                Get Your Free Funnel Audit
+                                <ArrowRightIcon />
+                            </Button>
+                        </div>
+                    </form>
                 </div>
-                <div>
-                    <Button type="submit" size="lg" variant="primary" className="w-full">
-                        Let's Chat
-                        <ArrowRightIcon />
-                    </Button>
-                </div>
-            </form>
+            </div>
         </BentoCard>
-        <div className="mt-12 flex items-center justify-center gap-4 sm:gap-6 flex-wrap px-4">
-            {takeaways.map((item) => (
-            <Tooltip key={item.text} content={item.tooltip}>
-                <div className="flex items-center gap-2 text-xs font-semibold text-zinc-600 dark:text-zinc-400 uppercase tracking-wider cursor-help">
-                <CheckIcon className="w-4 h-4 text-green-500" />
-                <span>{item.text}</span>
-                </div>
-            </Tooltip>
-            ))}
-        </div>
-        
-        <div id="guarantee" ref={ref} className="max-w-4xl mx-auto mt-16">
-            <BentoCard className="p-8 sm:p-12 text-center">
-                <div className="inline-block bg-zinc-100 dark:bg-zinc-800/50 p-4 rounded-xl border border-zinc-200/80 dark:border-zinc-700/80">
-                    <ShieldIcon className="w-10 h-10" animate={isInView} />
-                </div>
-                <h3 className="mt-6 text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
-                    A Simple Guarantee
-                </h3>
-                <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                    Before we start, we establish a clear performance baseline. The project is successful only when we beat it. Simple as that.
-                </p>
-                <p className="mt-6 text-sm text-zinc-500 dark:text-zinc-500 max-w-2xl mx-auto">
-                    This isn't an agency retainer where you hope for the best. It's a clear, deliverable-focused project with a simple guarantee.
-                </p>
-            </BentoCard>
-        </div>
     </section>
   );
 };

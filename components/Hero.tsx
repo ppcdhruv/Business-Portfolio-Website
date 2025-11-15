@@ -4,24 +4,25 @@ import Button from './ui/Button';
 import ArrowRightIcon from './icons/ArrowRightIcon';
 import AnimatedNumber from './ui/AnimatedNumber';
 import WebsitePerformanceViz from './WebsitePerformanceViz';
-import ChevronDownIcon from './icons/ChevronDownIcon';
+import PlusIcon from './icons/PlusIcon';
+import MinusIcon from './icons/MinusIcon';
 
 const phrases = [
-  { prefix: "Site looks good, but ", suffix: "no leads." },
-  { prefix: "Site looks good, but ", suffix: "no traffic." },
-  { prefix: "Site looks good, but ", suffix: "no sales." },
-  { prefix: "Site looks good, but ", suffix: "no bookings." },
+  { prefix: "Site looks good but,\u00A0", suffix: "no leads." },
+  { prefix: "Site looks good but,\u00A0", suffix: "no traffic." },
+  { prefix: "Site looks good but,\u00A0", suffix: "no sales." },
+  { prefix: "Site looks good but,\u00A0", suffix: "no bookings." },
 ];
 
 const stats = [
-    { value: 187, label: "Avg. Conversion Lift", suffix: "%", prefix: "+" },
-    { value: 45, label: "CPL Reduction", suffix: "%", prefix: "-" },
-    { value: 3.2, label: "First-Month ROI", suffix: "x", decimals: 1 },
+    { value: 187, label: "Avg. Conversion Lift", suffix: "%", icon: "plus" as const },
+    { value: 45, label: "CPL Reduction", suffix: "%", icon: "minus" as const },
+    { value: 3.2, label: "First-Month ROI", suffix: "x", decimals: 1, icon: "plus" as const },
 ];
 
-const TYPING_SPEED = 120;
-const DELETING_SPEED = 50;
-const PAUSE_DURATION = 2000;
+const TYPING_SPEED = 80;
+const DELETING_SPEED = 40;
+const PAUSE_DURATION = 1500;
 
 interface HeroProps {
   onMouseEnter: () => void;
@@ -91,11 +92,22 @@ const Hero: React.FC<HeroProps> = ({ onMouseEnter, onMouseLeave }) => {
     return () => clearTimeout(timeoutId);
   }, [typedText, isDeleting, phraseIndex]);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+        e.preventDefault();
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+  };
+
   return (
     <section 
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className="relative pt-24 sm:pt-32 pb-20 overflow-hidden min-h-screen flex flex-col justify-center items-center snap-start"
+      className="relative py-20 sm:py-28 overflow-hidden min-h-screen flex flex-col justify-center items-center"
     >
        <div 
         className="absolute inset-0 top-0 left-0 w-full h-full bg-white dark:bg-zinc-950 [mask-image:radial-gradient(ellipse_at_center,white_10%,transparent_80%)]"
@@ -105,15 +117,22 @@ const Hero: React.FC<HeroProps> = ({ onMouseEnter, onMouseLeave }) => {
       {/* Main Content Area */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 flex flex-col items-center text-center">
             {/* Headline & Subheadline */}
-            <div className="h-20 sm:h-24 flex items-center justify-center pt-8">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tighter text-zinc-800 dark:text-zinc-200">
+            <h1 className="text-[28px] leading-tight sm:text-5xl lg:text-6xl font-black tracking-tighter text-zinc-800 dark:text-zinc-200 flex items-center h-24 sm:h-auto">
+              <span>
                 <span>{phrases[phraseIndex].prefix}</span>
                 <span>{typedText}</span>
-                <span className="animate-pulse ml-1 text-zinc-400 dark:text-zinc-600">|</span>
-              </h1>
-            </div>
+                <motion.span 
+                  initial={{ opacity: 1 }}
+                  animate={{ opacity: [1, 0, 1] }}
+                  transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                  className="ml-1 text-zinc-800 dark:text-zinc-200"
+                >
+                  |
+                </motion.span>
+              </span>
+            </h1>
 
-            <p className="mt-4 text-lg font-semibold text-zinc-600 dark:text-zinc-400 max-w-2xl">
+            <p className="mt-4 text-[15px] sm:text-xl font-semibold text-zinc-600 dark:text-zinc-400 max-w-2xl">
                 Your marketing looks busy. I make it actually work for you.
             </p>
             
@@ -121,15 +140,49 @@ const Hero: React.FC<HeroProps> = ({ onMouseEnter, onMouseLeave }) => {
             <div className="my-8 w-full">
               <WebsitePerformanceViz />
             </div>
+
+            {/* Stats Bar */}
+            <div ref={statsRef} className="w-full mt-8">
+                <div className="max-w-xl mx-auto">
+                    <div className="flex items-stretch justify-around divide-x divide-zinc-200/80 dark:divide-zinc-800/80 py-2">
+                        {stats.map((stat) => (
+                            <div key={stat.label} className="flex-1 text-center px-2">
+                                <p className="text-lg sm:text-xl font-bold tracking-tighter text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-1">
+                                    {statsInView && (
+                                        <motion.span
+                                            initial={{ opacity: 0, y: 5 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.5, delay: 0.5 }}
+                                        >
+                                            {stat.icon === 'plus' && <PlusIcon className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />}
+                                            {stat.icon === 'minus' && <MinusIcon className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />}
+                                        </motion.span>
+                                    )}
+                                    {statsInView ? (
+                                        <AnimatedNumber 
+                                            value={stat.value} 
+                                            suffix={stat.suffix}
+                                            decimals={stat.decimals}
+                                        />
+                                    ) : (
+                                        <span>0{stat.suffix || ''}</span>
+                                    )}
+                                </p>
+                                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">{stat.label}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </div>
             
             {/* CTAs - Directly Below */}
-            <div className="mt-8 flex items-center justify-center gap-4">
+            <div className="mt-10 w-full sm:w-auto flex flex-col sm:flex-row items-center justify-center gap-4">
               <motion.div
                 whileHover="hover"
                 whileTap={{ scale: 0.95 }}
-                className="relative"
+                className="relative w-full sm:w-auto"
               >
-                <Button href="#final-cta" size="lg" variant="primary">
+                <Button href="#final-cta" size="lg" variant="primary" className="w-full sm:w-auto" onClick={(e) => handleNavClick(e as any, '#final-cta')}>
                   Get Your Free Funnel Audit
                   <motion.span
                     variants={{ hover: { x: 4 } }}
@@ -143,52 +196,13 @@ const Hero: React.FC<HeroProps> = ({ onMouseEnter, onMouseLeave }) => {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative"
+                className="relative w-full sm:w-auto"
               >
-                <Button href="#results" variant="secondary" size="lg">
+                <Button href="#results" variant="secondary" size="lg" className="w-full sm:w-auto" onClick={(e) => handleNavClick(e as any, '#results')}>
                   See The Results
                 </Button>
               </motion.div>
             </div>
-            
-            {/* Stats Bar */}
-            <div ref={statsRef} className="w-full mt-8">
-                <div className="max-w-xl mx-auto">
-                    <div className="flex items-stretch justify-around divide-x divide-zinc-200/80 dark:divide-zinc-800/80 py-2">
-                        {stats.map((stat) => (
-                            <div key={stat.label} className="flex-1 text-center px-2">
-                                <p className="text-lg sm:text-xl font-bold tracking-tighter text-zinc-800 dark:text-zinc-200">
-                                    {statsInView ? (
-                                        <AnimatedNumber 
-                                            value={stat.value} 
-                                            prefix={stat.prefix}
-                                            suffix={stat.suffix}
-                                            decimals={stat.decimals}
-                                        />
-                                    ) : (
-                                        <span>{stat.prefix || ''}0{stat.suffix || ''}</span>
-                                    )}
-                                </p>
-                                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">{stat.label}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-      </div>
-      
-      <div className="relative z-10 w-full mt-auto">
-           <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-              <motion.a
-                  href="#problem"
-                  aria-label="Scroll to next section"
-                  animate={{ y: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                  className="opacity-60 hover:opacity-100"
-              >
-                  <ChevronDownIcon className="w-6 h-6 text-zinc-400 dark:text-zinc-600" />
-              </motion.a>
-          </div>
       </div>
     </section>
   );

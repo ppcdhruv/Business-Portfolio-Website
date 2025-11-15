@@ -8,14 +8,18 @@ const Logo = () => (
   </svg>
 );
 
-const Footer: React.FC = () => {
+interface FooterProps {
+    isVisible: boolean;
+}
+
+const Footer: React.FC<FooterProps> = ({ isVisible }) => {
     useEffect(() => {
         console.log("Hey developer! 👋 You found the easter egg. Looking for a high-performance marketing system? You're in the right place.");
     }, []);
 
   return (
-    <footer className="border-t border-zinc-200/80 bg-zinc-100/80 dark:bg-zinc-900/80">
-      <Container className="py-8">
+    <footer className={`fixed bottom-0 left-0 right-0 z-40 border-t border-zinc-200/80 bg-zinc-100/80 dark:bg-zinc-900/80 backdrop-blur-sm transition-transform duration-500 ease-in-out ${isVisible ? 'translate-y-0' : 'translate-y-full'}`}>
+      <Container className="py-4">
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <div className="flex items-center gap-3 text-center sm:text-left">
               <Logo />
@@ -29,4 +33,4 @@ const Footer: React.FC = () => {
   );
 };
 
-export default Footer;
+export default React.memo(Footer);

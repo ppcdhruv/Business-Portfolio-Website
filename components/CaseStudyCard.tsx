@@ -1,105 +1,116 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { CaseStudy } from '../data/case-studies';
 import BentoCard from './ui/BentoCard';
 import Badge from './ui/Badge';
 import ImageCarousel from './ImageCarousel';
+import { motion, AnimatePresence } from 'framer-motion';
+import KPIBlock from './ui/KPIBlock';
+import Lightbox from './ui/Lightbox';
 
-const TabContent: React.FC<{ content: string }> = ({ content }) => {
-    const lines = content.trim().split('\n');
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="prose prose-sm prose-zinc dark:prose-invert max-w-none text-zinc-600 dark:text-zinc-400"
-        >
-            {lines.map((line, index) => {
-                if (line.startsWith('•')) {
-                    return <p key={index} className="!mt-1 !mb-1 ml-4">{line}</p>;
-                }
-                if (line.startsWith('**')) {
-                    return <h4 key={index} className="!text-sm !font-bold !text-zinc-800 dark:!text-zinc-200 !mt-4 !mb-1">{line.replace(/\*\*/g, '')}</h4>;
-                }
-                return <p key={index} className="!my-1">{line}</p>;
-            })}
-        </motion.div>
-    );
-};
-
+const TabButton: React.FC<{ active: boolean; onClick: () => void; children: React.ReactNode }> = ({ active, onClick, children }) => (
+    <button
+        onClick={onClick}
+        className={`px-4 py-2 text-sm font-semibold rounded-md transition-colors ${
+            active
+                ? 'bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-900 dark:text-white'
+                : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50'
+        }`}
+    >
+        {children}
+    </button>
+);
 
 const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
-    const [activeTab, setActiveTab] = useState('Problem');
-    const tabs = ['Problem', 'Solution', 'Results'];
+    const [activeTab, setActiveTab] = useState<'Problem' | 'Solution' | 'Outcome'>('Problem');
+    const [lightboxOpen, setLightboxOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-    const tabContentMap: { [key: string]: string } = {
-        'Problem': study.problem,
-        'Solution': study.solution,
-        'Results': study.results,
+    const handleImageClick = (imageUrl: string) => {
+        setSelectedImage(imageUrl);
+        setLightboxOpen(true);
+    };
+
+    const contentVariants = {
+        hidden: { opacity: 0, y: 10 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+        exit: { opacity: 0, y: -10, transition: { duration: 0.2 } },
+    };
+
+    const renderParagraph = (paragraph: string, index: number) => {
+        if (paragraph.startsWith('**')) {
+            const [title, ...list] = paragraph.split('\n• ');
+            return (
+                <div key={index}>
+                    <h4 className="font-bold text-zinc-800 dark:text-zinc-200 mt-3">{title.replace(/\*\*/g, '')}</h4>
+                    <ul className="list-disc pl-5 mt-1 space-y-1">
+                        {list.map((item, i) => <li key={i}>{item.trim()}</li>)}
+                    </ul>
+                </div>
+            );
+        }
+        return <p key={index}>{paragraph}</p>;
     };
 
     return (
-        <BentoCard className="flex flex-col p-6 sm:p-8 h-full">
-            {/* Top Section */}
-            <div className="flex justify-between items-start gap-4">
-                <div className="h-8 flex items-center">{study.logo}</div>
-                <Badge>{study.industry}</Badge>
-            </div>
-            <h3 className="text-xl lg:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white mt-4">{study.company}</h3>
-            
-            {/* Main Content: Carousel + Tabs */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 mt-6 flex-grow">
-                <div className="md:col-span-1">
-                    <ImageCarousel images={study.screenshots} />
+        <>
+            <BentoCard className="!p-6 sm:!p-8 h-full flex flex-col group">
+                <div className="flex justify-between items-start gap-2 flex-wrap">
+                    <Badge>{study.industry}</Badge>
+                    <Badge>{study.budgetContext}</Badge>
                 </div>
-                <div className="md:col-span-1 flex flex-col">
-                    {/* Tab Buttons */}
-                    <div className="flex border-b border-zinc-200/80 dark:border-zinc-800/80 mb-4">
-                        {tabs.map(tab => (
-                            <button
-                                key={tab}
-                                onClick={() => setActiveTab(tab)}
-                                className={`relative w-full py-2.5 text-sm font-semibold transition-colors focus:outline-none ${
-                                    activeTab === tab 
-                                    ? 'text-zinc-900 dark:text-white' 
-                                    : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
-                                }`}
-                            >
-                                <span className="relative z-10">{tab}</span>
-                                {activeTab === tab && (
-                                    <motion.div
-                                        layoutId="case-study-tab-pill"
-                                        className="absolute bottom-[-1px] left-0 right-0 h-[2px] bg-zinc-900 dark:bg-white"
-                                        transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                                    />
-                                )}
-                            </button>
-                        ))}
-                    </div>
+                <h3 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white mt-4">{study.company}</h3>
+                
+                <div className="mt-6">
+                    <ImageCarousel images={study.screenshots} onImageClick={handleImageClick} />
+                </div>
 
-                    {/* Tab Content */}
-                    <div className="relative flex-grow min-h-[150px]">
-                        <AnimatePresence mode="wait">
-                            <TabContent key={activeTab} content={tabContentMap[activeTab]} />
-                        </AnimatePresence>
+                <div className="my-6 border-b border-zinc-200/80 dark:border-zinc-800/80 flex-shrink-0">
+                    <div className="flex items-center gap-2">
+                        <TabButton active={activeTab === 'Problem'} onClick={() => setActiveTab('Problem')}>Problem</TabButton>
+                        <TabButton active={activeTab === 'Solution'} onClick={() => setActiveTab('Solution')}>Solution</TabButton>
+                        <TabButton active={activeTab === 'Outcome'} onClick={() => setActiveTab('Outcome')}>Outcome</TabButton>
                     </div>
                 </div>
-            </div>
 
-            {/* Testimonial Section */}
-            <div className="mt-8 pt-6 border-t border-zinc-200/80 dark:border-zinc-800/80">
-                <div className="relative">
-                    <blockquote className="text-base text-zinc-700 dark:text-zinc-300 italic leading-relaxed">
-                        “{study.quote}”
+                <div className="flex-grow text-sm text-zinc-600 dark:text-zinc-400 relative min-h-[140px]">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeTab}
+                            variants={contentVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                            className="absolute w-full prose prose-sm dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-p:my-2 prose-ul:my-2 prose-li:my-1 whitespace-pre-wrap"
+                        >
+                            {activeTab === 'Problem' && study.problem.split('\n\n').map(renderParagraph)}
+                            {activeTab === 'Solution' && study.solution.split('\n\n').map(renderParagraph)}
+                            {activeTab === 'Outcome' && study.outcome.split('\n\n').map((p, i) => <p key={i}>{p}</p>)}
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+                
+                <div className="mt-auto pt-4">
+                    <h4 className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-4 text-left">
+                        Key Results
+                    </h4>
+                    <div className="pt-4 border-t border-zinc-200/80 dark:border-zinc-800/80">
+                        <KPIBlock kpis={study.kpis} />
+                    </div>
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-zinc-200/80 dark:border-zinc-800/80">
+                    <blockquote className="relative text-sm italic text-zinc-600 dark:text-zinc-400 border-l-2 border-zinc-300 dark:border-zinc-700 pl-4">
+                        <p>"{study.quote}"</p>
                     </blockquote>
-                    <div className="mt-4 flex items-center gap-3">
-                        <p className="font-bold text-zinc-900 dark:text-white text-sm">{study.author}, <span className="text-zinc-500 dark:text-zinc-400 font-normal">{study.title}</span></p>
-                    </div>
                 </div>
-            </div>
-        </BentoCard>
+            </BentoCard>
+
+            <Lightbox
+                isOpen={lightboxOpen}
+                onClose={() => setLightboxOpen(false)}
+                imageUrl={selectedImage}
+            />
+        </>
     );
 };
 

@@ -6,11 +6,12 @@ import InfoIcon from './icons/InfoIcon';
 import CheckIcon from './icons/CheckIcon';
 import Button from './ui/Button';
 import ArrowRightIcon from './icons/ArrowRightIcon';
+import Rocket3D from './icons/Rocket3D';
 
 const services = [
   {
     title: "Traffic",
-    description: "Deploying high-performance landing pages and user flows engineered for a single purpose: converting traffic into revenue.",
+    description: "High-performance landing pages and user flows engineered to convert traffic into revenue.",
     keyActivities: [
       { name: "Conversion Copywriting", tooltip: "Writing direct-response copy using proven frameworks like AIDA and PAS to drive action." },
       { name: "UI/UX Wireframing", tooltip: "Designing user-centric layouts focused on clarity, simplicity, and reducing friction." },
@@ -20,7 +21,7 @@ const services = [
   },
   {
     title: "Leads",
-    description: "Building and managing data-driven paid acquisition systems that generate predictable, scalable, and profitable lead flow.",
+    description: "Data-driven paid acquisition systems that generate predictable, scalable, and profitable lead flow.",
     keyActivities: [
       { name: "Multi-platform Ad Management", tooltip: "Managing campaigns across platforms like Google, LinkedIn, and Meta to reach your ideal customer." },
       { name: "Audience Segmentation", tooltip: "Defining and targeting precise customer segments to maximize ad relevance and ROAS." },
@@ -30,7 +31,7 @@ const services = [
   },
   {
     title: "Nurture",
-    description: "Architecting automated email and in-app messaging sequences that guide users from signup to 'aha!' moment to conversion.",
+    description: "Automated email and messaging sequences that guide users from signup to conversion.",
      keyActivities: [
       { name: "Customer Journey Mapping", tooltip: "Visually mapping out every touchpoint a user has to identify opportunities for automated engagement." },
       { name: "Behavior-triggered Sequences", tooltip: "Creating email flows that are triggered by specific user actions (or inaction) for maximum relevance." },
@@ -40,7 +41,7 @@ const services = [
   },
   {
     title: "AI Stuff",
-    description: "Designing and deploying custom AI agents and internal tools to automate qualification, support, and sales tasks.",
+    description: "Custom AI agents and internal tools to automate qualification, support, and sales tasks.",
      keyActivities: [
       { name: "LLM Prompt Engineering", tooltip: "Crafting precise instructions for Large Language Models to ensure reliable and accurate outputs for your business tasks." },
       { name: "Internal Knowledge Base Setup", tooltip: "Structuring your company's internal data so AI agents can access it to provide accurate, context-aware responses." },
@@ -52,12 +53,12 @@ const services = [
 
 const ServiceModules: React.FC = () => {
   return (
-    <section id="system" className="py-24 sm:py-32">
+    <section id="services" className="py-24 sm:py-32">
       <SectionHeader
         title="Core Capabilities"
         description="These are the four core disciplines I use to build growth systems. Each project is a focused application of these disciplines."
       />
-      <div className="mt-16 -mx-4 sm:-mx-6 lg:-mx-8">
+      <div className="relative mt-16 -mx-4 sm:-mx-6 lg:-mx-8 after:content-[''] after:absolute after:inset-y-0 after:right-0 after:w-16 after:bg-gradient-to-r after:from-transparent after:to-white dark:after:to-zinc-950 after:pointer-events-none">
         <div
           className="flex overflow-x-auto space-x-8 px-4 sm:px-6 lg:px-8 pb-8 no-scrollbar"
         >
@@ -65,9 +66,10 @@ const ServiceModules: React.FC = () => {
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
-              className="flex-shrink-0 w-[90vw] max-w-md md:w-[450px]"
+              className="flex-shrink-0 w-[calc(100vw-48px)] sm:w-[400px] md:w-[450px] max-w-full"
             >
               <BentoCard className="group text-left flex flex-col items-start p-8 h-full">
                   <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">{service.title}</h3>
@@ -108,21 +110,39 @@ const ServiceModules: React.FC = () => {
         </div>
       </div>
       <div className="mt-12 text-center">
-        <a href="#final-cta" className="group block max-w-3xl mx-auto rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-4 focus:ring-zinc-400 dark:focus:ring-offset-zinc-950">
-          <BentoCard className="p-8">
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
-                  <div className="text-left">
-                      <h3 className="text-xl font-bold text-zinc-900 dark:text-white">Ready to Build Your System?</h3>
-                      <p className="mt-2 text-zinc-600 dark:text-zinc-400">
-                          These are the building blocks. Let's combine them into a custom system that solves your specific revenue leak.
-                      </p>
-                  </div>
-                  <Button as="div" variant="primary" size="lg" className="flex-shrink-0 w-full sm:w-auto">
-                      Get Your Free Funnel Audit
-                      <ArrowRightIcon />
-                  </Button>
-              </div>
-          </BentoCard>
+        <a 
+          href="#final-cta" 
+          className="group block max-w-4xl mx-auto rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-4 focus:ring-zinc-400 dark:focus:ring-offset-zinc-950"
+        >
+          <motion.div whileHover="hover">
+            <BentoCard className="p-8">
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
+                    <div className="flex items-center gap-4">
+                        <motion.div
+                          variants={{
+                            hover: { 
+                              y: -8, 
+                              rotate: -3,
+                              transition: { type: 'spring', stiffness: 300, damping: 10 }
+                            }
+                          }}
+                        >
+                          <Rocket3D className="w-12 h-12 sm:w-16 sm:h-16 text-zinc-900 dark:text-white" />
+                        </motion.div>
+                        <div className="text-left">
+                            <h3 className="text-xl font-bold text-zinc-900 dark:text-white">Ready to Build Your System?</h3>
+                            <p className="mt-2 text-zinc-600 dark:text-zinc-400">
+                                These are the building blocks. Let's combine them into a custom system that solves your specific revenue leak.
+                            </p>
+                        </div>
+                    </div>
+                    <Button as="div" variant="primary" size="lg" className="flex-shrink-0 w-full sm:w-auto">
+                        Get Your Free Funnel Audit
+                        <ArrowRightIcon />
+                    </Button>
+                </div>
+            </BentoCard>
+          </motion.div>
         </a>
       </div>
     </section>

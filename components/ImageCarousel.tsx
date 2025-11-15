@@ -15,6 +15,7 @@ const ChevronRightIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 interface ImageCarouselProps {
     images: string[];
+    onImageClick: (imageUrl: string) => void;
 }
 
 const variants = {
@@ -34,7 +35,7 @@ const variants = {
     }),
 };
 
-const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
+const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, onImageClick }) => {
     const [[page, direction], setPage] = useState([0, 0]);
 
     const imageIndex = ((page % images.length) + images.length) % images.length;
@@ -48,7 +49,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
     }
 
     return (
-        <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-800/80">
+        <div className="relative w-full aspect-video rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200/80 dark:border-zinc-800/80 group">
             <AnimatePresence initial={false} custom={direction}>
                 <motion.img
                     key={page}
@@ -62,29 +63,36 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
                         x: { type: 'spring', stiffness: 300, damping: 30 },
                         opacity: { duration: 0.2 },
                     }}
-                    className="absolute h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute h-full w-full object-cover cursor-pointer transition-transform duration-300 group-hover:scale-105"
                     alt={`Case study screenshot ${imageIndex + 1}`}
+                    onClick={() => onImageClick(images[imageIndex])}
                 />
             </AnimatePresence>
+            <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white bg-black/40 px-3 py-1.5 rounded-full text-xs font-semibold backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                Click to expand
+            </div>
             {images.length > 1 && (
                 <>
                     <button
-                        className="absolute top-1/2 left-2 -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white/80 backdrop-blur-sm hover:bg-black/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-white transition"
-                        onClick={() => paginate(-1)}
+                        className="absolute top-1/2 left-2 -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white/80 backdrop-blur-sm hover:bg-black/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-white transition z-10"
+                        onClick={(e) => { e.stopPropagation(); paginate(-1); }}
                         aria-label="Previous image"
                     >
                         <ChevronLeftIcon className="h-5 w-5" />
                     </button>
                     <button
-                        className="absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white/80 backdrop-blur-sm hover:bg-black/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-white transition"
-                        onClick={() => paginate(1)}
+                        className="absolute top-1/2 right-2 -translate-y-1/2 rounded-full bg-black/40 p-1.5 text-white/80 backdrop-blur-sm hover:bg-black/60 hover:text-white focus:outline-none focus:ring-2 focus:ring-white transition z-10"
+                        onClick={(e) => { e.stopPropagation(); paginate(1); }}
                         aria-label="Next image"
                     >
                         <ChevronRightIcon className="h-5 w-5" />
                     </button>
                 </>
             )}
-             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2">
+             <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                 {images.map((_, i) => (
                     <div
                         key={i}

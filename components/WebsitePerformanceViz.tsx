@@ -8,7 +8,7 @@ type VizState = 'before' | 'after';
 
 const NothingFoundScreen: React.FC = () => (
     <motion.div
-        className="absolute inset-0 z-10 p-4 flex flex-col items-center justify-center font-mono text-center bg-black/10 dark:bg-black/20"
+        className="absolute inset-0 z-10 p-4 flex flex-col items-center justify-center font-mono text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.2 } }}
         exit={{ opacity: 0 }}
@@ -22,7 +22,7 @@ const NothingFoundScreen: React.FC = () => (
 
 const ConversionsRecordingScreen: React.FC = () => (
     <motion.div
-        className="absolute inset-0 z-10 p-4 flex flex-col items-center justify-center font-mono text-center bg-black/10 dark:bg-black/20"
+        className="absolute inset-0 z-10 p-4 flex flex-col items-center justify-center font-mono text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 0.2 } }}
         exit={{ opacity: 0 }}
@@ -86,42 +86,34 @@ const WebsitePerformanceViz: React.FC = () => {
         <motion.div 
             ref={scope}
             whileHover={{ scale: 1.02 }}
-            className="relative w-full max-w-4xl mx-auto aspect-[2.2/1] bg-transparent border border-zinc-200/80 dark:border-zinc-800 rounded-xl flex flex-col"
+            className="relative w-full max-w-4xl mx-auto aspect-[1.6/1] sm:aspect-[2.2/1] bg-white/10 dark:bg-zinc-900/10 backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-800/50 rounded-xl flex flex-col shadow-2xl shadow-zinc-900/10 dark:shadow-black/20"
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         >
              <motion.div id="cursor" className="absolute z-20 pointer-events-none" style={{ opacity: 0, x: 150, y: -30 }}>
-                <MouseCursorIcon className="w-5 h-5 text-zinc-900 dark:text-white drop-shadow-lg" />
+                <MouseCursorIcon className="w-5 h-5 text-zinc-500 dark:text-zinc-400 drop-shadow-lg" />
             </motion.div>
-            {/* Browser-style Header */}
-            <div className="flex-shrink-0 px-4 pt-3 flex items-end border-b border-zinc-200/80 dark:border-zinc-800">
-                {/* Tabs */}
-                <button
-                    id="viz-tab-before"
-                    onClick={() => handleToggle('before')}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-t-lg border text-sm transition-colors focus:outline-none -mb-px ${
-                        isBefore
-                        ? 'bg-zinc-50/70 dark:bg-zinc-900/70 border-zinc-200/80 dark:border-zinc-800 border-b-transparent text-red-500 font-semibold z-10'
-                        : 'bg-transparent border-transparent text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/40'
-                    }`}
-                >
-                    <XIcon className="w-4 h-4" />
-                    <span>Your Funnel</span>
-                </button>
-                <button
-                    id="viz-tab-after"
-                    onClick={() => handleToggle('after')}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-t-lg border text-sm transition-colors focus:outline-none -mb-px ${
-                        isAfter
-                        ? 'bg-zinc-50/70 dark:bg-zinc-900/70 border-zinc-200/80 dark:border-zinc-800 border-b-transparent text-green-500 font-semibold z-10'
-                        : 'bg-transparent border-transparent text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/40'
-                    }`}
-                >
-                    <CheckIcon className="w-4 h-4" />
-                    <span>ViziGrowth Funnel</span>
-                </button>
+            <div className="flex-none px-3 py-2 border-b border-zinc-200/50 dark:border-zinc-800/50 flex items-center gap-6">
+                <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-400 dark:bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-400 dark:bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-400 dark:bg-green-500"></div>
+                </div>
+                <div className="flex items-center gap-1">
+                    <button id="viz-tab-before" onClick={() => handleToggle('before')} className={`px-4 py-1.5 text-xs font-semibold rounded-md transition-colors ${isBefore ? 'bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-900 dark:text-white' : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50'}`}>
+                        <div className="flex items-center gap-2">
+                            <XIcon className="w-4 h-4 text-red-500" />
+                            <span>Old Site</span>
+                        </div>
+                    </button>
+                    <button id="viz-tab-after" onClick={() => handleToggle('after')} className={`px-4 py-1.5 text-xs font-semibold rounded-md transition-colors ${isAfter ? 'bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-900 dark:text-white' : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50'}`}>
+                         <div className="flex items-center gap-2">
+                            <CheckIcon className="w-4 h-4 text-green-500" />
+                            <span>ViziGrowth Funnel</span>
+                        </div>
+                    </button>
+                </div>
             </div>
-            
-            <div className="flex-grow relative w-full h-full overflow-hidden">
+            <div className="relative flex-grow">
                 <AnimatePresence mode="wait">
                     {isBefore ? <NothingFoundScreen key="before" /> : <ConversionsRecordingScreen key="after" />}
                 </AnimatePresence>
