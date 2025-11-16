@@ -112,13 +112,13 @@ const WebsitePerformanceViz: React.FC = () => {
                     <button id="viz-tab-before" onClick={() => handleToggle('before')} className={`px-4 py-1.5 text-xs font-semibold rounded-md transition-colors ${isBefore ? 'bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-900 dark:text-white' : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50'}`}>
                         <div className="flex items-center gap-2">
                             <XIcon className="w-4 h-4 text-red-500" />
-                            <span>Old Site</span>
+                            <span>Your Site</span>
                         </div>
                     </button>
                     <button id="viz-tab-after" onClick={() => handleToggle('after')} className={`px-4 py-1.5 text-xs font-semibold rounded-md transition-colors ${isAfter ? 'bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-900 dark:text-white' : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50'}`}>
                          <div className="flex items-center gap-2">
                             <CheckIcon className="w-4 h-4 text-green-500" />
-                            <span>ViziGrowth Funnel</span>
+                            <span>ViziGrowth Site</span>
                         </div>
                     </button>
                 </div>
