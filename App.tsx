@@ -22,7 +22,7 @@ export type View = 'main' | 'privacy';
 
 const Loader: React.FC = () => (
   <div className="w-full h-screen flex items-center justify-center">
-    <div className="w-16 h-16 border-4 border-stone-200 dark:border-stone-700 border-t-stone-900 dark:border-t-stone-300 rounded-full animate-spin"></div>
+    <div className="w-16 h-16 border-4 border-zinc-200 dark:border-zinc-700 border-t-zinc-900 dark:border-t-zinc-300 rounded-full animate-spin"></div>
   </div>
 );
 
@@ -54,12 +54,12 @@ const MainContent: React.FC<{
                 <Container>
                     <ProblemSolution />
                     <CaseStudies />
-                    <About />
                     <ServiceModules />
                 </Container>
                 <Container>
-                    <Investment />
+                    <About />
                     <FitCheck />
+                    <Investment />
                     <FinalCTA />
                 </Container>
             </Suspense>

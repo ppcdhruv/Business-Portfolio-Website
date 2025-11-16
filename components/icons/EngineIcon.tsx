@@ -18,7 +18,7 @@ const EngineIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' })
             @keyframes spin-reverse { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
         `}</style>
         {/* Larger Gear */}
-        <g className="gear-1 text-stone-800 dark:text-stone-200">
+        <g className="gear-1 text-neutral-800 dark:text-neutral-200">
             <circle cx="9.5" cy="9.5" r="5.5" />
             <path d="M9.5 4V2" />
             <path d="M9.5 17V15" />
@@ -28,7 +28,7 @@ const EngineIcon: React.FC<{ className?: string }> = ({ className = 'w-6 h-6' })
             <path d="m13.4 13.4-.9-.9M6.5 6.5l-.9-.9" />
         </g>
         {/* Smaller Gear */}
-        <g className="gear-2 text-stone-500 dark:text-stone-400">
+        <g className="gear-2 text-neutral-500 dark:text-neutral-400">
              <circle cx="16" cy="16" r="4" />
              <path d="M16 12V11" />
              <path d="M16 21V20" />

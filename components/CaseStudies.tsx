@@ -45,7 +45,7 @@ const CaseStudies: React.FC = () => {
   const renderContent = () => {
     if (filteredStudies.length === 0) {
         return (
-            <div className="w-full flex items-center justify-center p-8 text-stone-500 dark:text-stone-400">
+            <div className="w-full flex items-center justify-center p-8 text-zinc-500 dark:text-zinc-400">
                 <p>No case studies found for this category.</p>
             </div>
         );
@@ -68,7 +68,7 @@ const CaseStudies: React.FC = () => {
     <section id="results" className="py-20 sm:py-28">
       <SectionHeader
         title="Real Results for Founders Like You"
-        description={<>Real-world results. Each came from a <strong className="text-stone-800 dark:text-stone-200">better funnel, not more ad spend.</strong></>}
+        description={<>Real-world results. Each came from a <strong className="text-zinc-800 dark:text-zinc-200">better funnel, not more ad spend.</strong></>}
       />
 
       <div className="mt-12 mb-8 flex justify-center flex-wrap gap-2 px-4">
@@ -81,10 +81,10 @@ const CaseStudies: React.FC = () => {
                     scrollContainerRef.current.scrollLeft = 0;
                   }
                 }}
-                className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 dark:focus:ring-offset-stone-950 ${
+                className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 dark:focus:ring-offset-zinc-950 ${
                     activeIndustry === industry
-                        ? 'bg-amber-500 text-white dark:bg-amber-400 dark:text-stone-900'
-                        : 'bg-stone-100 text-stone-600 hover:bg-stone-200 dark:bg-stone-800 dark:text-stone-300 dark:hover:bg-stone-700'
+                        ? 'bg-amber-500 text-white dark:bg-amber-400 dark:text-zinc-900'
+                        : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700'
                 }`}
             >
                 {industry}
@@ -92,18 +92,18 @@ const CaseStudies: React.FC = () => {
         ))}
       </div>
       
-      <div className="text-center text-xs text-stone-500 dark:text-stone-400 font-semibold tracking-wider mb-4 md:hidden">
+      <div className="text-center text-xs text-zinc-500 dark:text-zinc-400 font-semibold tracking-wider mb-4 md:hidden">
           ‹ SCROLL FOR MORE ›
       </div>
 
       <div className="relative mt-8 -mx-4 sm:-mx-6 lg:-mx-8">
-        <div className={`absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-stone-50 to-transparent dark:from-stone-950 pointer-events-none transition-opacity duration-300 ${showLeftFade ? 'opacity-100' : 'opacity-0'}`}></div>
+        <div className={`absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent dark:from-zinc-950 pointer-events-none transition-opacity duration-300 ${showLeftFade ? 'opacity-100' : 'opacity-0'}`}></div>
 
         <div ref={scrollContainerRef} className="flex overflow-x-auto space-x-8 px-4 sm:px-6 lg:px-8 pb-8 no-scrollbar min-h-[400px]">
           {renderContent()}
         </div>
         
-        <div className={`absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-stone-50 to-transparent dark:from-stone-950 pointer-events-none transition-opacity duration-300 ${showRightFade ? 'opacity-100' : 'opacity-0'}`}></div>
+        <div className={`absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent dark:from-zinc-950 pointer-events-none transition-opacity duration-300 ${showRightFade ? 'opacity-100' : 'opacity-0'}`}></div>
       </div>
     </section>
   );

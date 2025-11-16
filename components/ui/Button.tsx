@@ -34,11 +34,11 @@ const Button: React.FC<ButtonProps> = (props) => {
   const className = props.className || '';
   const children = props.children;
 
-  const baseStyles = 'inline-flex items-center justify-center gap-2 font-semibold tracking-tight rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 focus:ring-offset-white dark:focus:ring-offset-stone-950';
+  const baseStyles = 'inline-flex items-center justify-center gap-2 font-semibold tracking-tight rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 focus:ring-offset-white dark:focus:ring-offset-zinc-950';
 
   const variantStyles = {
-    primary: 'bg-amber-500 text-white hover:bg-amber-600 hover:-translate-y-0.5 shadow-md hover:shadow-lg dark:bg-amber-400 dark:text-stone-900 dark:hover:bg-amber-300',
-    secondary: 'bg-white text-stone-800 border border-stone-300/80 hover:bg-stone-100 hover:border-stone-400/80 dark:bg-stone-800 dark:text-stone-200 dark:border-stone-700 dark:hover:bg-stone-700',
+    primary: 'bg-amber-500 text-white hover:bg-amber-600 hover:-translate-y-0.5 shadow-md hover:shadow-lg dark:bg-amber-400 dark:text-zinc-900 dark:hover:bg-amber-300',
+    secondary: 'bg-white text-zinc-800 border border-zinc-300/80 hover:bg-zinc-100 hover:border-zinc-400/80 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 dark:hover:bg-zinc-700',
   };
 
   const sizeStyles = {

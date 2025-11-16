@@ -9,7 +9,7 @@ const CostIcon: React.FC<{ className?: string }> = ({ className = 'w-12 h-12' })
         xmlns="http://www.w3.org/2000/svg"
         strokeWidth="1.5"
     >
-        <g stroke="currentColor" className="text-stone-800 dark:text-stone-200">
+        <g stroke="currentColor" className="text-neutral-800 dark:text-neutral-200">
             {/* Tag body */}
             <path d="M3.23 7.82L7.82 3.23C8.42 2.64 9.28 2.3 10.17 2.3H18.5C19.88 2.3 21 3.42 21 4.8V13.13C21 14.02 20.66 14.88 20.07 15.47L15.48 20.06C14.54 21 12.96 21 12.02 20.06L3.94 11.98C3 11.04 3 9.46 3.94 8.52L3.23 7.82Z" strokeLinecap="round" strokeLinejoin="round"></path>
             {/* Tag hole */}

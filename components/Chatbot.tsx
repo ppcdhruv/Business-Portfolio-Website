@@ -13,9 +13,9 @@ type Message = {
 
 const TypingIndicator = () => (
     <div className="flex items-center gap-2 p-3">
-        <span className="w-2 h-2 bg-stone-300 dark:bg-stone-600 rounded-full animate-pulse" style={{ animationDelay: '0s' }}></span>
-        <span className="w-2 h-2 bg-stone-300 dark:bg-stone-600 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
-        <span className="w-2 h-2 bg-stone-300 dark:bg-stone-600 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
+        <span className="w-2 h-2 bg-zinc-300 dark:bg-zinc-600 rounded-full animate-pulse" style={{ animationDelay: '0s' }}></span>
+        <span className="w-2 h-2 bg-zinc-300 dark:bg-zinc-600 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></span>
+        <span className="w-2 h-2 bg-zinc-300 dark:bg-zinc-600 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></span>
     </div>
 );
 
@@ -124,7 +124,7 @@ const Chatbot: React.FC = () => {
                     exit={{ opacity: 0, y: 20 }}
                     transition={{ duration: 0.3 }}
                     onClick={() => setIsOpen(true)}
-                    className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-[var(--chatbot-primary)] text-[var(--chatbot-primary-fg)] shadow-lg flex items-center justify-center z-[999] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-stone-500"
+                    className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-[var(--chatbot-primary)] text-[var(--chatbot-primary-fg)] shadow-lg flex items-center justify-center z-[999] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500"
                     aria-label="Open chat"
                 >
                     <ChatIcon className="w-8 h-8" />
@@ -150,7 +150,7 @@ const Chatbot: React.FC = () => {
                             </span>
                             <h3 className="text-sm font-bold tracking-tight">ViziGrowth Assistant</h3>
                         </div>
-                        <button onClick={() => setIsOpen(false)} className="p-1 rounded-full hover:bg-stone-200 dark:hover:bg-stone-800" aria-label="Close chat">
+                        <button onClick={() => setIsOpen(false)} className="p-1 rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-800" aria-label="Close chat">
                             <XIcon className="w-5 h-5" />
                         </button>
                     </div>
@@ -166,14 +166,14 @@ const Chatbot: React.FC = () => {
                                 transition={{ duration: 0.3 }}
                             >
                                 <div className={`flex gap-2.5 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                                    <div className={`text-sm max-w-[80%] p-3 rounded-2xl ${msg.sender === 'user' ? 'bg-[var(--chatbot-primary)] text-[var(--chatbot-primary-fg)] rounded-br-lg' : 'bg-stone-100 dark:bg-stone-800/80 rounded-bl-lg'}`}>
+                                    <div className={`text-sm max-w-[80%] p-3 rounded-2xl ${msg.sender === 'user' ? 'bg-[var(--chatbot-primary)] text-[var(--chatbot-primary-fg)] rounded-br-lg' : 'bg-zinc-100 dark:bg-zinc-800/80 rounded-bl-lg'}`}>
                                         {msg.text}
                                     </div>
                                 </div>
                                 {msg.options && (
                                     <div className="flex flex-wrap gap-2 mt-3 justify-start">
                                         {msg.options.map(opt => (
-                                            <button key={opt.text} onClick={() => handleOptionClick(opt)} className="px-3 py-1.5 text-sm font-semibold border border-[var(--chatbot-border)] rounded-full hover:bg-stone-100 dark:hover:bg-stone-800 transition-colors">
+                                            <button key={opt.text} onClick={() => handleOptionClick(opt)} className="px-3 py-1.5 text-sm font-semibold border border-[var(--chatbot-border)] rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
                                                 {opt.text}
                                             </button>
                                         ))}
@@ -188,7 +188,7 @@ const Chatbot: React.FC = () => {
                                 animate={{ opacity: 1, y: 0 }}
                                 className="flex justify-start"
                             >
-                                <div className="bg-stone-100 dark:bg-stone-800/80 rounded-2xl rounded-bl-lg">
+                                <div className="bg-zinc-100 dark:bg-zinc-800/80 rounded-2xl rounded-bl-lg">
                                     <TypingIndicator />
                                 </div>
                             </motion.div>
@@ -205,7 +205,7 @@ const Chatbot: React.FC = () => {
                                     value={userInput}
                                     onChange={(e) => setUserInput(e.target.value)}
                                     placeholder={stage === 'collecting_email' ? "jane@company.com" : stage === 'collecting_url' ? 'https://company.com' : "Type your answer..."}
-                                    className="flex-grow bg-stone-100 dark:bg-stone-800/80 border-transparent focus:ring-2 focus:ring-stone-400 dark:focus:ring-stone-600 rounded-lg px-4 py-2 text-sm w-full"
+                                    className="flex-grow bg-zinc-100 dark:bg-zinc-800/80 border-transparent focus:ring-2 focus:ring-zinc-400 dark:focus:ring-zinc-600 rounded-lg px-4 py-2 text-sm w-full"
                                     autoFocus
                                     required
                                 />

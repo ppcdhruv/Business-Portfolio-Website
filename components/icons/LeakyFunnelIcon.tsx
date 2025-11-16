@@ -10,7 +10,7 @@ const LeakyFunnelIcon: React.FC<{ className?: string }> = ({ className = 'w-12 h
     >
         <g stroke="currentColor">
             {/* Funnel */}
-            <path d="M3 4L10 4L10 8L14 8L14 4L21 4L14 14L10 14L3 4Z" className="text-stone-800 dark:text-stone-200" strokeLinecap="round" strokeLinejoin="round"></path>
+            <path d="M3 4L10 4L10 8L14 8L14 4L21 4L14 14L10 14L3 4Z" className="text-neutral-800 dark:text-neutral-200" strokeLinecap="round" strokeLinejoin="round"></path>
             
             {/* Leaks */}
             <g className="text-red-500">

@@ -11,7 +11,7 @@ import ShieldIcon from './icons/ShieldIcon';
 import AnimatedCheckCircleIcon from './icons/AnimatedCheckCircleIcon';
 
 const Label: React.FC<{ htmlFor: string; children: React.ReactNode }> = ({ htmlFor, children }) => (
-  <label htmlFor={htmlFor} className="block text-sm font-semibold text-stone-700 dark:text-stone-300">
+  <label htmlFor={htmlFor} className="block text-sm font-semibold text-zinc-700 dark:text-zinc-300">
     {children}
   </label>
 );
@@ -19,14 +19,14 @@ const Label: React.FC<{ htmlFor: string; children: React.ReactNode }> = ({ htmlF
 const Input: React.FC<React.InputHTMLAttributes<HTMLInputElement>> = (props) => (
   <input
     {...props}
-    className={`block w-full rounded-lg border border-stone-300/80 bg-white dark:bg-stone-900 dark:border-stone-700/80 px-4 py-3 text-sm text-stone-800 dark:text-stone-200 placeholder:text-stone-400 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 dark:focus:ring-amber-500/50 transition-colors ${props.className}`}
+    className={`block w-full rounded-lg border border-zinc-300/80 bg-white dark:bg-zinc-900 dark:border-zinc-700/80 px-4 py-3 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 dark:focus:ring-amber-500/50 transition-colors ${props.className}`}
   />
 );
 
 const Textarea: React.FC<React.TextareaHTMLAttributes<HTMLTextAreaElement>> = (props) => (
   <textarea
     {...props}
-    className="block w-full rounded-lg border border-stone-300/80 bg-white dark:bg-stone-900 dark:border-stone-700/80 pl-10 pr-4 py-3 text-sm text-stone-800 dark:text-stone-200 placeholder:text-stone-400 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 dark:focus:ring-amber-500/50 transition-colors"
+    className="block w-full rounded-lg border border-zinc-300/80 bg-white dark:bg-zinc-900 dark:border-zinc-700/80 pl-10 pr-4 py-3 text-sm text-zinc-800 dark:text-zinc-200 placeholder:text-zinc-400 focus:border-amber-500 focus:outline-none focus:ring-2 focus:ring-amber-500/50 dark:focus:ring-amber-500/50 transition-colors"
   />
 );
 
@@ -56,7 +56,7 @@ const FinalCTA: React.FC = () => {
                     rx="15"
                     stroke="currentColor"
                     strokeWidth="2"
-                    className="text-stone-300/80 dark:text-stone-700/80"
+                    className="text-zinc-300/80 dark:text-zinc-700/80"
                     initial={{ pathLength: 0 }}
                     animate={{ pathLength: 1 }}
                     transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
@@ -66,14 +66,14 @@ const FinalCTA: React.FC = () => {
             <div className="relative z-10 max-w-2xl mx-auto text-center">
                 {/* --- Merged Header --- */}
                 <div ref={promiseRef} className="flex flex-col items-center">
-                    <div className="inline-block bg-stone-100 dark:bg-stone-800/50 p-3 rounded-xl border border-stone-200/80 dark:border-stone-700/80 mx-auto">
+                    <div className="inline-block bg-zinc-100 dark:bg-zinc-800/50 p-3 rounded-xl border border-zinc-200/80 dark:border-zinc-700/80 mx-auto">
                         <ShieldIcon className="w-12 h-12" animate={isPromiseInView} />
                     </div>
-                    <h3 className="mt-6 text-2xl md:text-3xl font-bold tracking-tight text-stone-900 dark:text-white">
+                    <h3 className="mt-6 text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
                         Ready to stop leaking revenue?
                     </h3>
-                     <p className="mt-3 text-base text-stone-600 dark:text-stone-400">
-                        Let's have a 15-minute chat. No pressure, no sales pitch—just a <strong className="text-stone-800 dark:text-stone-200">frank conversation</strong> about your <strong className="text-stone-800 dark:text-stone-200">growth potential.</strong>
+                     <p className="mt-3 text-base text-zinc-600 dark:text-zinc-400">
+                        Let's have a 15-minute chat. No pressure, no sales pitch—just a <strong className="text-zinc-800 dark:text-zinc-200">frank conversation</strong> about your <strong className="text-zinc-800 dark:text-zinc-200">growth potential.</strong>
                      </p>
                 </div>
 
@@ -85,7 +85,7 @@ const FinalCTA: React.FC = () => {
                                 <Label htmlFor="full-name">Full Name</Label>
                                 <div className="relative mt-2">
                                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                        <UserIcon className="h-5 w-5 text-stone-400" />
+                                        <UserIcon className="h-5 w-5 text-zinc-400" />
                                     </div>
                                     <Input type="text" name="full-name" id="full-name" placeholder="Jane Doe" required autoComplete="name" className="!pl-10" />
                                 </div>
@@ -94,7 +94,7 @@ const FinalCTA: React.FC = () => {
                                 <Label htmlFor="email">Work Email</Label>
                                 <div className="relative mt-2">
                                     <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                        <AtSymbolIcon className="h-5 w-5 text-stone-400" />
+                                        <AtSymbolIcon className="h-5 w-5 text-zinc-400" />
                                     </div>
                                     <Input type="email" name="email" id="email" placeholder="jane@company.com" required autoComplete="email" className="!pl-10" />
                                 </div>
@@ -104,7 +104,7 @@ const FinalCTA: React.FC = () => {
                             <Label htmlFor="website-url">Website URL</Label>
                             <div className="relative mt-2">
                                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <LinkIcon className="h-5 w-5 text-stone-400" />
+                                    <LinkIcon className="h-5 w-5 text-zinc-400" />
                                 </div>
                                 <Input type="url" name="website-url" id="website-url" placeholder="https://company.com" required autoComplete="url" className="!pl-10" />
                             </div>
@@ -113,7 +113,7 @@ const FinalCTA: React.FC = () => {
                             <Label htmlFor="biggest-problem">What's the #1 revenue leak you're trying to fix?</Label>
                              <div className="relative mt-2">
                                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                                    <QuestionMarkCircleIcon className="h-5 w-5 text-stone-400" />
+                                    <QuestionMarkCircleIcon className="h-5 w-5 text-zinc-400" />
                                 </div>
                                 <Input type="text" name="biggest-problem" id="biggest-problem" placeholder="e.g., Low demo bookings from pricing page" required className="!pl-10" />
                             </div>
@@ -121,10 +121,10 @@ const FinalCTA: React.FC = () => {
                          <div className="pt-2">
                             <div className="flex items-start">
                                 <div className="flex-shrink-0">
-                                    <input id="consent" name="consent" type="checkbox" className="h-4 w-4 rounded border-stone-300/80 bg-stone-100 dark:bg-stone-800 text-amber-600 focus:ring-amber-500 focus:ring-offset-white dark:focus:ring-offset-stone-950 dark:border-stone-700/80" required />
+                                    <input id="consent" name="consent" type="checkbox" className="h-4 w-4 rounded border-zinc-300/80 bg-zinc-100 dark:bg-zinc-800 text-amber-600 focus:ring-amber-500 focus:ring-offset-white dark:focus:ring-offset-zinc-950 dark:border-zinc-700/80" required />
                                 </div>
                                 <div className="ml-3 text-sm">
-                                    <label htmlFor="consent" className="text-stone-500 dark:text-stone-400">
+                                    <label htmlFor="consent" className="text-zinc-500 dark:text-zinc-400">
                                         You agree to receive a one-time response to your application. No spam, ever.
                                     </label>
                                 </div>
@@ -148,8 +148,8 @@ const FinalCTA: React.FC = () => {
                             animate={isPromiseInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.5, delay: index * 0.15 + 0.5 }}
                         >
-                            <AnimatedCheckCircleIcon className="w-4 h-4 text-stone-500 dark:text-stone-400 flex-shrink-0" isInView={isPromiseInView} />
-                            <p className="text-xs font-semibold text-stone-700 dark:text-stone-300">{item}</p>
+                            <AnimatedCheckCircleIcon className="w-4 h-4 text-zinc-500 dark:text-zinc-400 flex-shrink-0" isInView={isPromiseInView} />
+                            <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">{item}</p>
                         </motion.li>
                     ))}
                 </ul>

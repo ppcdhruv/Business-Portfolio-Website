@@ -20,13 +20,13 @@ const Promise: React.FC = () => {
             <div className="max-w-4xl mx-auto">
                 <BentoCard className="p-8 sm:p-12">
                     <div className="text-center">
-                        <div className="inline-block bg-stone-100 dark:bg-stone-800/50 p-4 rounded-xl border border-stone-200/80 dark:border-stone-700/80">
+                        <div className="inline-block bg-zinc-100 dark:bg-zinc-800/50 p-4 rounded-xl border border-zinc-200/80 dark:border-zinc-700/80">
                             <ShieldIcon className="w-10 h-10" animate={isInView} />
                         </div>
-                        <h3 className="mt-6 text-2xl md:text-3xl font-bold tracking-tight text-stone-900 dark:text-white">
+                        <h3 className="mt-6 text-2xl md:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
                             Your ROI is Guaranteed
                         </h3>
-                        <p className="mt-4 text-lg text-stone-600 dark:text-stone-400 max-w-2xl mx-auto">
+                        <p className="mt-4 text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
                            Every project comes with a simple, no-nonsense performance guarantee. If we don't hit the mutually agreed-upon KPIs, I will continue working for free until we do.
                         </p>
                     </div>
@@ -41,9 +41,9 @@ const Promise: React.FC = () => {
                                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                                     transition={{ duration: 0.5, delay: index * 0.15 }}
                                 >
-                                    <AnimatedCheckCircleIcon className="w-5 h-5 text-stone-500 dark:text-stone-400 mt-0.5 flex-shrink-0" isInView={isInView} />
+                                    <AnimatedCheckCircleIcon className="w-5 h-5 text-zinc-500 dark:text-zinc-400 mt-0.5 flex-shrink-0" isInView={isInView} />
                                     <div>
-                                        <p className="text-sm font-semibold text-stone-800 dark:text-stone-200">{item.text}</p>
+                                        <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">{item.text}</p>
                                     </div>
                                 </motion.li>
                             ))}

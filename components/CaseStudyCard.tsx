@@ -10,8 +10,8 @@ const TabButton: React.FC<{ active: boolean; onClick: () => void; children: Reac
         onClick={onClick}
         className={`px-4 py-2 text-sm font-semibold rounded-md transition-colors ${
             active
-                ? 'bg-stone-200/80 dark:bg-stone-800/80 text-stone-900 dark:text-white'
-                : 'text-stone-500 dark:text-stone-400 hover:bg-stone-200/50 dark:hover:bg-stone-800/50'
+                ? 'bg-zinc-200/80 dark:bg-zinc-800/80 text-zinc-900 dark:text-white'
+                : 'text-zinc-500 dark:text-zinc-400 hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50'
         }`}
     >
         {children}
@@ -32,7 +32,7 @@ const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
             const [title, ...list] = paragraph.split('\n• ');
             return (
                 <div key={index}>
-                    <h4 className="font-bold text-stone-800 dark:text-stone-200 mt-3">{title.replace(/\*\*/g, '')}</h4>
+                    <h4 className="font-bold text-zinc-800 dark:text-zinc-200 mt-3">{title.replace(/\*\*/g, '')}</h4>
                     <ul className="list-disc pl-5 mt-1 space-y-1">
                         {list.map((item, i) => <li key={i}>{item.trim()}</li>)}
                     </ul>
@@ -49,9 +49,9 @@ const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
                     <Badge>{study.industry}</Badge>
                     <Badge>{study.budgetContext}</Badge>
                 </div>
-                <h3 className="text-xl font-bold tracking-tight text-stone-900 dark:text-white mt-4">{study.company}</h3>
+                <h3 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white mt-4">{study.company}</h3>
                 
-                <div className="my-6 border-b border-stone-200/80 dark:border-stone-800/80 flex-shrink-0">
+                <div className="my-6 border-b border-zinc-200/80 dark:border-zinc-800/80 flex-shrink-0">
                     <div className="flex items-center gap-2">
                         <TabButton active={activeTab === 'Problem'} onClick={() => setActiveTab('Problem')}>Problem</TabButton>
                         <TabButton active={activeTab === 'Solution'} onClick={() => setActiveTab('Solution')}>Solution</TabButton>
@@ -59,7 +59,7 @@ const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
                     </div>
                 </div>
 
-                <div className="flex-grow text-base text-stone-600 dark:text-stone-400 relative min-h-[140px]">
+                <div className="flex-grow text-base text-zinc-600 dark:text-zinc-400 relative min-h-[140px]">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeTab}
@@ -77,16 +77,16 @@ const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
                 </div>
                 
                 <div className="mt-auto pt-4">
-                    <h4 className="text-sm font-bold text-stone-500 dark:text-stone-400 uppercase tracking-wider mb-4 text-left">
+                    <h4 className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-4 text-left">
                         Key Results
                     </h4>
-                    <div className="pt-4 border-t border-stone-200/80 dark:border-stone-800/80">
+                    <div className="pt-4 border-t border-zinc-200/80 dark:border-zinc-800/80">
                         <KPIBlock kpis={study.kpis} />
                     </div>
                 </div>
 
-                <div className="mt-4 pt-4 border-t border-stone-200/80 dark:border-stone-800/80">
-                    <blockquote className="relative text-sm italic text-stone-600 dark:text-stone-400 border-l-2 border-stone-300 dark:border-stone-700 pl-4">
+                <div className="mt-4 pt-4 border-t border-zinc-200/80 dark:border-zinc-800/80">
+                    <blockquote className="relative text-sm italic text-zinc-600 dark:text-zinc-400 border-l-2 border-zinc-300 dark:border-zinc-700 pl-4">
                         <p>"{study.quote}"</p>
                     </blockquote>
                 </div>
