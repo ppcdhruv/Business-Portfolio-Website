@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+// FIX: Removed 'Variants' type which was not found and caused errors.
 import { motion } from 'framer-motion';
 import BentoCard from './ui/BentoCard';
 import SectionHeader from './ui/SectionHeader';
 import InfoIcon from './icons/InfoIcon';
-import CheckIcon from './icons/CheckIcon';
 import Button from './ui/Button';
 import ArrowRightIcon from './icons/ArrowRightIcon';
 import Rocket3D from './icons/Rocket3D';
+import AnimatedCheckmark from './icons/AnimatedCheckmark';
+import Tooltip from './ui/Tooltip';
 
 const services = [
   {
@@ -51,25 +53,85 @@ const services = [
   },
 ];
 
+const listContainerVariants = {
+  visible: { transition: { staggerChildren: 0.08 } }
+};
+
+const listItemVariants = {
+  hidden: { opacity: 0, x: -15 },
+  // FIX: Explicitly cast 'ease' value to its literal type to fix TypeScript error.
+  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' as const } }
+};
+
+const serviceCardVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 }
+};
+
+const rocketIconVariants = {
+    hover: { 
+        y: -8, 
+        rotate: -3,
+        // FIX: Explicitly cast 'spring' to its literal type to fix TypeScript error.
+        transition: { type: 'spring' as const, stiffness: 300, damping: 10 }
+    }
+};
+
 const ServiceModules: React.FC = () => {
+  const [openTooltip, setOpenTooltip] = useState<string | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [showLeftFade, setShowLeftFade] = useState(false);
+  const [showRightFade, setShowRightFade] = useState(true);
+
+  const checkScroll = useCallback(() => {
+    const el = scrollContainerRef.current;
+    if (el) {
+      const isScrollable = el.scrollWidth > el.clientWidth;
+      setShowLeftFade(el.scrollLeft > 5);
+      setShowRightFade(isScrollable && el.scrollLeft < el.scrollWidth - el.clientWidth - 5);
+    }
+  }, []);
+
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (el) {
+      checkScroll();
+      el.addEventListener('scroll', checkScroll, { passive: true });
+      window.addEventListener('resize', checkScroll);
+      const timeoutId = setTimeout(checkScroll, 300);
+      return () => {
+        el.removeEventListener('scroll', checkScroll);
+        window.removeEventListener('resize', checkScroll);
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [checkScroll]);
+
   return (
-    <section id="services" className="py-20 sm:py-28">
+    <section id="services" className="pt-20 sm:pt-28 pb-20 sm:pb-28">
       <SectionHeader
         title="Core Capabilities"
         description={<>Each project is a focused application of these disciplines.</>}
       />
-      <div className="relative mt-16 -mx-4 sm:-mx-6 lg:-mx-8 after:content-[''] after:absolute after:inset-y-0 after:right-0 after:w-16 after:bg-gradient-to-r after:from-transparent after:to-white dark:after:to-zinc-950 after:pointer-events-none">
+       <div className="mt-16 text-center text-xs text-zinc-500 dark:text-zinc-400 font-semibold tracking-wider mb-4 md:hidden">
+          ‹ SCROLL FOR MORE ›
+      </div>
+      <div className="relative mt-8 -mx-4 sm:-mx-6 lg:-mx-8">
+        <div className={`absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent dark:from-zinc-950 pointer-events-none transition-opacity duration-300 ${showLeftFade ? 'opacity-100' : 'opacity-0'}`}></div>
         <div
+          ref={scrollContainerRef}
           className="flex overflow-x-auto space-x-8 px-4 sm:px-6 lg:px-8 pb-8 no-scrollbar"
         >
           {services.map((service, index) => (
+            // FIX: Refactored motion props to use variants to resolve TS errors.
             <motion.div
               key={service.title}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial="hidden"
+              whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
-              className="flex-shrink-0 w-[calc(100vw-48px)] sm:w-[400px] md:w-[450px] max-w-full"
+              variants={serviceCardVariants}
+              className="flex-shrink-0 w-[calc(100vw-48px)] sm:w-[380px] md:w-[420px] max-w-full"
             >
               <BentoCard className="group text-left flex flex-col items-start p-8 h-full">
                   <h3 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">{service.title}</h3>
@@ -79,53 +141,60 @@ const ServiceModules: React.FC = () => {
 
                   <div>
                     <p className="text-sm font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-4">Key Activities</p>
-                    <ul className="space-y-3">
-                      {service.keyActivities.map(activity => (
-                        <li
-                          key={activity.name}
-                          className="group flex items-center justify-between text-base"
-                        >
-                          <div className="flex items-center">
-                            <CheckIcon className="w-5 h-5 mr-3 flex-shrink-0 text-zinc-400 dark:text-zinc-500" />
-                            <span className="font-medium text-zinc-800 dark:text-zinc-200">
-                              {activity.name}
-                            </span>
-                          </div>
-                          <div className="relative flex items-center">
-                            <div className="peer opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                                <InfoIcon className="w-5 h-5 text-zinc-400 dark:text-zinc-500 cursor-help" />
+                    {/* FIX: Refactored motion props to use variants to resolve TS errors. */}
+                    <motion.ul className="space-y-3" variants={listContainerVariants}>
+                      {service.keyActivities.map(activity => {
+                        const tooltipId = `${service.title}-${activity.name}`;
+                        return (
+                          // FIX: Refactored motion props to use variants to resolve TS errors.
+                          <motion.li
+                            key={activity.name}
+                            className="flex items-center justify-between text-base"
+                            variants={listItemVariants}
+                          >
+                            <div className="flex items-center">
+                              <AnimatedCheckmark className="w-5 h-5 mr-3 flex-shrink-0 text-green-600 dark:text-green-500" />
+                              <span className="font-medium text-zinc-800 dark:text-zinc-200">
+                                {activity.name}
+                              </span>
                             </div>
-                            <div className="absolute bottom-full mb-2 w-64 bg-zinc-900 dark:bg-zinc-800 text-white dark:text-zinc-200 text-xs font-medium rounded-md p-3 shadow-lg opacity-0 peer-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 left-1/2 -translate-x-1/2">
-                              {activity.tooltip}
-                              <div className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-zinc-900 dark:border-t-zinc-800"></div>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
+                            <Tooltip
+                              content={activity.tooltip}
+                              isOpen={openTooltip === tooltipId}
+                            >
+                              <button
+                                type="button"
+                                aria-label={`More info about ${activity.name}`}
+                                className="cursor-help p-1 -m-1 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500"
+                                onClick={() => setOpenTooltip(prev => prev === tooltipId ? null : tooltipId)}
+                              >
+                                  <InfoIcon className="w-5 h-5 text-zinc-400 dark:text-zinc-500" />
+                              </button>
+                            </Tooltip>
+                          </motion.li>
+                        )
+                      })}
+                    </motion.ul>
                   </div>
               </BentoCard>
             </motion.div>
           ))}
         </div>
+        <div className={`absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white to-transparent dark:from-zinc-950 pointer-events-none transition-opacity duration-300 ${showRightFade ? 'opacity-100' : 'opacity-0'}`}></div>
       </div>
       <div className="mt-12 text-center">
         <a 
           href="#final-cta" 
           className="group block max-w-4xl mx-auto rounded-2xl focus:outline-none focus:ring-2 focus:ring-offset-4 focus:ring-zinc-400 dark:focus:ring-offset-zinc-950"
         >
+          {/* FIX: Refactored motion props to use variants to resolve TS errors. */}
           <motion.div whileHover="hover">
             <BentoCard className="p-8 hover:scale-[1.01]">
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
                     <div className="flex items-center gap-4">
+                        {/* FIX: Refactored motion props to use variants to resolve TS errors. */}
                         <motion.div
-                          variants={{
-                            hover: { 
-                              y: -8, 
-                              rotate: -3,
-                              transition: { type: 'spring', stiffness: 300, damping: 10 }
-                            }
-                          }}
+                          variants={rocketIconVariants}
                         >
                           <Rocket3D className="w-12 h-12 sm:w-16 sm:h-16 text-zinc-900 dark:text-white" />
                         </motion.div>

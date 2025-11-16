@@ -1,24 +1,27 @@
 import React from 'react';
-import { motion, Variants } from 'framer-motion';
+// FIX: Removed 'Variants' type which was not found and caused errors.
+import { motion } from 'framer-motion';
 
 const CheckCircleIcon: React.FC<{ className?: string, isInView?: boolean }> = ({ className = 'w-5 h-5', isInView = false }) => {
-  const circleVariants: Variants = {
+  const circleVariants = {
     hidden: { pathLength: 0 },
     visible: { 
       pathLength: 1,
-      transition: { duration: 0.5, ease: 'easeOut', delay: 0.2 }
+      // FIX: Explicitly cast 'ease' value to its literal type to fix TypeScript error.
+      transition: { duration: 0.5, ease: 'easeOut' as const, delay: 0.2 }
     }
   };
   
-  const checkVariants: Variants = {
+  const checkVariants = {
     hidden: { pathLength: 0 },
     visible: { 
       pathLength: 1,
-      transition: { duration: 0.3, ease: 'easeOut', delay: 0.7 }
+      // FIX: Explicitly cast 'ease' value to its literal type to fix TypeScript error.
+      transition: { duration: 0.3, ease: 'easeOut' as const, delay: 0.7 }
     }
   };
 
-  const fillVariants: Variants = {
+  const fillVariants = {
     hidden: { fill: "rgba(34, 197, 94, 0)" },
     visible: {
         fill: "rgba(34, 197, 94, 0.1)",
@@ -27,6 +30,7 @@ const CheckCircleIcon: React.FC<{ className?: string, isInView?: boolean }> = ({
   }
 
   return (
+    // FIX: Refactored motion props to use variants to resolve TS errors.
     <motion.svg 
       xmlns="http://www.w3.org/2000/svg" 
       fill="none" 

@@ -4,6 +4,12 @@ import { CaseStudy, caseStudies } from '../data/case-studies';
 import CaseStudyCard from './CaseStudyCard';
 import SectionHeader from './ui/SectionHeader';
 
+// FIX: Created variants to handle animations and fix prop errors.
+const studyCardVariants = {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+};
+
 const CaseStudies: React.FC = () => {
   const [activeIndustry, setActiveIndustry] = useState('All');
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -52,10 +58,12 @@ const CaseStudies: React.FC = () => {
     }
 
     return filteredStudies.map((study, index) => (
+      // FIX: Refactored motion props to use variants to resolve TS errors.
       <motion.div
         key={study.company}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
+        variants={studyCardVariants}
+        initial="initial"
+        animate="animate"
         transition={{ delay: index * 0.1, duration: 0.5, ease: 'easeOut' }}
         className="flex-shrink-0 w-[calc(100vw-48px)] sm:w-[400px] md:w-[450px] max-w-full"
       >
@@ -65,7 +73,7 @@ const CaseStudies: React.FC = () => {
   };
 
   return (
-    <section id="results" className="py-20 sm:py-28">
+    <section id="results" className="pt-20 sm:pt-28 pb-20 sm:pb-28">
       <SectionHeader
         title="Real Results for Founders Like You"
         description={<>Real-world results. Each came from a <strong className="text-zinc-800 dark:text-zinc-200">better funnel, not more ad spend.</strong></>}

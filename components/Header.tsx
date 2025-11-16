@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+// FIX: Removed 'Variants' type which was not found and caused errors.
+import { motion, AnimatePresence } from 'framer-motion';
 import Button from './ui/Button';
-import { Theme } from '../App';
+import { Theme, View } from '../types';
 import ThemeToggle from './ui/ThemeToggle';
 import LinkedInIcon from './icons/LinkedInIcon';
 import InstagramIcon from './icons/InstagramIcon';
@@ -32,7 +33,7 @@ const XIcon = ({ className }: { className?: string }) => (
 );
 
 // Animation variants for the mobile menu
-const navContainerVariants: Variants = {
+const navContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -43,16 +44,17 @@ const navContainerVariants: Variants = {
   },
 };
 
-const navItemVariants: Variants = {
+const navItemVariants = {
   hidden: { opacity: 0, y: -10 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', stiffness: 120, damping: 15 },
+    // FIX: Explicitly cast 'spring' to its literal type to fix TypeScript error.
+    transition: { type: 'spring' as const, stiffness: 120, damping: 15 },
   },
 };
 
-const socialContainerVariants: Variants = {
+const socialContainerVariants = {
     hidden: {},
     visible: {
       transition: {
@@ -61,22 +63,38 @@ const socialContainerVariants: Variants = {
     },
   };
   
-const socialItemVariants: Variants = {
+const socialItemVariants = {
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1 },
 };
 
+// FIX: Added variants for mobile menu container to resolve animation prop errors.
+const mobileMenuVariants = {
+    initial: { y: '-100%' },
+    animate: { y: 0 },
+    exit: { y: '-100%' },
+};
+
+const mobileCtaVariants = {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0, transition: { delay: 0.4, duration: 0.4 } },
+};
+
+
 interface HeaderProps {
   theme: Theme;
   toggleTheme: () => void;
+  view: View;
+  setView: (view: View) => void;
+  mainRef: React.RefObject<HTMLElement>;
 }
 
 const navLinks = [
     { href: '#problem', label: 'Problem' },
+    { href: '#results', label: 'Case Studies' },
     { href: '#solution', label: 'Solution' },
+    { href: '#about', label: 'About' },
     { href: '#services', label: 'Services' },
-    { href: '#pricing', label: 'Pricing' },
-    { href: '#fit-check', label: 'Is It For You?' },
 ];
 
 const socialLinks = [
@@ -85,7 +103,7 @@ const socialLinks = [
     { href: 'https://youtube.com', label: 'YouTube', icon: YoutubeIcon, hoverColor: 'hover:text-red-600' }
 ];
 
-const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
+const Header: React.FC<HeaderProps> = ({ theme, toggleTheme, view, setView, mainRef }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const observer = useRef<IntersectionObserver | null>(null);
@@ -119,22 +137,25 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
     };
   }, [isOpen]);
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    if (view !== 'main') {
+        setView('main');
+    } else {
+        mainRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    if (isOpen) {
+        setIsOpen(false);
+    }
+  };
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
     if (href.startsWith('#')) {
       e.preventDefault();
       const targetId = href.substring(1);
-      
-      // Special case for scrolling to top
-      if (targetId === 'root') {
-          const mainElement = document.querySelector('main');
-          if (mainElement) {
-              mainElement.scrollTo({ top: 0, behavior: 'smooth' });
-          }
-      } else {
-          const targetElement = document.getElementById(targetId);
-          if (targetElement) {
-              targetElement.scrollIntoView({ behavior: 'smooth' });
-          }
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+          targetElement.scrollIntoView({ behavior: 'smooth' });
       }
     }
     if (isOpen) {
@@ -147,7 +168,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-bold tracking-tighter text-zinc-900 dark:text-white flex items-center gap-2" aria-label="ViziGrowth home">
+            <a href="/" onClick={handleLogoClick} className="text-xl font-bold tracking-tighter text-zinc-900 dark:text-white flex items-center gap-2" aria-label="ViziGrowth home">
               <Logo />
               ViziGrowth
             </a>
@@ -162,6 +183,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                     onClick={(e) => handleNavClick(e, link.href)}
                     className={`relative text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white text-sm font-medium hover:font-semibold transition-all duration-200 after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:h-[2px] after:w-full after:bg-zinc-900 dark:after:bg-white after:transition-transform after:duration-300 after:origin-center ${activeSection === link.href.substring(1) ? 'after:scale-x-100' : 'after:scale-x-0 hover:after:scale-x-100'}`}
                 >
+                    {/* FIX: Refactored motion props to use variants to resolve TS errors. */}
                     <motion.span
                         className="inline-block"
                         whileHover={{ y: -2 }}
@@ -194,10 +216,12 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
 
       <AnimatePresence>
         {isOpen && (
+            // FIX: Refactored motion props to use variants to resolve TS errors.
             <motion.div
-                initial={{ y: '-100%' }}
-                animate={{ y: 0 }}
-                exit={{ y: '-100%' }}
+                variants={mobileMenuVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="fixed inset-0 z-[100] bg-zinc-950 dark:bg-zinc-50 md:hidden"
                 role="dialog"
@@ -205,7 +229,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
             >
                 <div className="flex flex-col h-full">
                     <div className="flex items-center justify-between h-16 px-4 sm:px-6 border-b border-zinc-800 dark:border-zinc-200">
-                        <a href="#root" onClick={(e) => handleNavClick(e, '#root')} className="text-xl font-bold tracking-tighter text-white dark:text-zinc-900 flex items-center gap-2" aria-label="ViziGrowth home">
+                        <a href="/" onClick={handleLogoClick} className="text-xl font-bold tracking-tighter text-white dark:text-zinc-900 flex items-center gap-2" aria-label="ViziGrowth home">
                             <Logo />
                             ViziGrowth
                         </a>
@@ -219,6 +243,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                     </div>
                     
                     <nav className="flex-grow flex items-center justify-center">
+                        {/* FIX: Refactored motion props to use variants to resolve TS errors. */}
                         <motion.ul 
                             className="flex flex-col items-center space-y-8"
                             variants={navContainerVariants}
@@ -226,6 +251,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                             animate="visible"
                         >
                             {navLinks.map(link => (
+                                // FIX: Refactored motion props to use variants to resolve TS errors.
                                 <motion.li key={link.href} variants={navItemVariants}>
                                     <a 
                                         href={link.href} 
@@ -239,12 +265,15 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                         </motion.ul>
                     </nav>
                     
+                    {/* FIX: Refactored motion props to use variants to resolve TS errors. */}
                     <motion.div 
                         className="p-6 border-t border-zinc-800 dark:border-zinc-200 text-center"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0, transition: { delay: 0.4, duration: 0.4 } }}
+                        variants={mobileCtaVariants}
+                        initial="initial"
+                        animate="animate"
                     >
                         <Button href="#final-cta" size="lg" className="w-full max-w-xs mx-auto" onClick={(e) => handleNavClick(e, '#final-cta')}>Get Free Audit</Button>
+                        {/* FIX: Refactored motion props to use variants to resolve TS errors. */}
                         <motion.div 
                             className="mt-8 flex justify-center items-center gap-8"
                             variants={socialContainerVariants}
@@ -252,6 +281,7 @@ const Header: React.FC<HeaderProps> = ({ theme, toggleTheme }) => {
                             animate="visible"
                         >
                            {socialLinks.map(link => (
+                                // FIX: Refactored motion props to use variants to resolve TS errors.
                                 <motion.a 
                                     key={link.label}
                                     href={link.href} 

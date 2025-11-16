@@ -5,17 +5,17 @@ import AnimatedNumber from './ui/AnimatedNumber';
 
 const About: React.FC = () => {
   return (
-    <section id="about" className="py-20 sm:py-28">
+    <section id="about" className="pt-20 sm:pt-28 pb-20 sm:pb-28">
       <BentoCard className="max-w-5xl mx-auto p-6">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 items-stretch md:h-96">
-            <div className="md:col-span-2 h-full w-full min-h-[300px]">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8 items-center">
+            <div className="md:col-span-2 h-64 md:h-96 w-full">
                  <img 
                     src="https://raw.githubusercontent.com/ppcdhruv/Business-Portfolio-Website/0804a6475591177194d8b625e684123dd72a820a/data/about-picture"
                     alt="Dhruv, Founder of ViziGrowth"
                     loading="lazy"
                     decoding="async"
                     className="w-full h-full object-cover rounded-xl grayscale transition-all duration-500 ease-in-out hover:grayscale-0"
-                    style={{ objectPosition: 'center 45%' }}
+                    style={{ objectPosition: 'center 65%' }}
                 />
             </div>
             <div className="md:col-span-3 flex flex-col justify-between">
@@ -60,6 +60,7 @@ const About: React.FC = () => {
                                 <p className="text-3xl font-bold tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-500 transition-colors duration-300">
                                     <AnimatedNumber value={4.2} decimals={1} suffix="x" />
                                 </p>
+
                                 <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 whitespace-nowrap">Avg. Lead Lift</p>
                             </div>
                         </div>

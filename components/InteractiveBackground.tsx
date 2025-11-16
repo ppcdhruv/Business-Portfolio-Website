@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import { Theme } from '../App';
+// FIX: Changed import path for Theme type from '../App' to '../types' to resolve module export error.
+import { Theme } from '../types';
 
 interface InteractiveBackgroundProps {
   theme: Theme;

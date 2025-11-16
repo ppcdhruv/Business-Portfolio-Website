@@ -55,6 +55,21 @@ const useInView = (options?: IntersectionObserverInit) => {
   return [ref, isInView] as const;
 };
 
+// FIX: Created variants to handle animations and fix prop errors.
+const cursorVariants = {
+    initial: { opacity: 1 },
+    animate: { opacity: [1, 0, 1] },
+};
+
+const statSpanVariants = {
+    initial: { opacity: 0, y: 5 },
+    animate: { opacity: 1, y: 0 },
+};
+
+const ctaArrowVariants = {
+    hover: { x: 4 }
+};
+
 const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [typedText, setTypedText] = useState('');
@@ -123,7 +138,7 @@ const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
 
   return (
     <section 
-      className="relative py-16 sm:py-24 overflow-hidden min-h-screen flex flex-col justify-center items-center"
+      className="relative pt-24 pb-16 sm:pt-32 sm:pb-24 overflow-hidden flex flex-col justify-center items-center"
     >
        <div 
         className="absolute inset-0 top-0 left-0 w-full h-full bg-white/0 dark:bg-zinc-950/0 [mask-image:radial-gradient(ellipse_at_center,white_10%,transparent_80%)]"
@@ -136,10 +151,12 @@ const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
             <h1 className="text-[28px] leading-tight sm:text-5xl lg:text-6xl font-bold tracking-tighter text-zinc-800 dark:text-zinc-200 flex items-center h-24 sm:h-auto">
               <span>
                 <span>{phrases[phraseIndex].prefix}</span>
-                <span>{typedText}</span>
+                <span className="text-amber-500 dark:text-amber-400">{typedText}</span>
+                {/* FIX: Refactored motion props to use variants to resolve TS errors. */}
                 <motion.span 
-                  initial={{ opacity: 1 }}
-                  animate={{ opacity: [1, 0, 1] }}
+                  variants={cursorVariants}
+                  initial="initial"
+                  animate="animate"
                   transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
                   className="ml-1 text-zinc-800 dark:text-zinc-200"
                 >
@@ -153,8 +170,40 @@ const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
             </p>
             
             {/* Visualization - Central Element */}
-            <div ref={vizRef} className="my-8 w-full">
+            <div ref={vizRef} className="my-6 w-full">
               <WebsitePerformanceViz />
+            </div>
+            
+            {/* CTAs - Directly Below */}
+            <div className="mt-8 w-full sm:w-auto flex flex-col sm:flex-row items-center justify-center gap-4">
+              {/* FIX: Refactored motion props. `whileHover` value must be an object. */}
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative w-full sm:w-auto"
+              >
+                <Button href="#final-cta" size="lg" variant="primary" className="w-full sm:w-auto" onClick={(e) => handleNavClick(e as any, '#final-cta')}>
+                  Get Your Free Funnel Audit
+                  {/* FIX: Refactored motion props to use variants to resolve TS errors. */}
+                  <motion.span
+                    variants={ctaArrowVariants}
+                    transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                    className="inline-block"
+                  >
+                    <ArrowRightIcon />
+                  </motion.span>
+                </Button>
+              </motion.div>
+              {/* FIX: Refactored motion props to use inline objects. */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="relative w-full sm:w-auto"
+              >
+                <Button href="#results" variant="secondary" size="lg" className="w-full sm:w-auto" onClick={(e) => handleNavClick(e as any, '#results')}>
+                  See The Results
+                </Button>
+              </motion.div>
             </div>
 
             {/* Stats Bar */}
@@ -167,9 +216,11 @@ const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
                     <div key={stat.label} className="text-center px-2">
                       <p className="text-lg sm:text-xl font-bold tracking-tighter text-zinc-800 dark:text-zinc-200 flex items-center justify-center gap-1">
                         {statsInView && (
+                          // FIX: Refactored motion props to use variants to resolve TS errors.
                           <motion.span
-                            initial={{ opacity: 0, y: 5 }}
-                            animate={{ opacity: 1, y: 0 }}
+                            variants={statSpanVariants}
+                            initial="initial"
+                            animate="animate"
                             transition={{ duration: 0.5, delay: 0.5 }}
                           >
                             {stat.icon === 'plus' && <PlusIcon className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />}
@@ -190,35 +241,6 @@ const Hero: React.FC<HeroProps> = ({ setHeroRect }) => {
                     </div>
                   ))}
               </div>
-            </div>
-            
-            {/* CTAs - Directly Below */}
-            <div className="mt-10 w-full sm:w-auto flex flex-col sm:flex-row items-center justify-center gap-4">
-              <motion.div
-                whileHover="hover"
-                whileTap={{ scale: 0.95 }}
-                className="relative w-full sm:w-auto"
-              >
-                <Button href="#final-cta" size="lg" variant="primary" className="w-full sm:w-auto" onClick={(e) => handleNavClick(e as any, '#final-cta')}>
-                  Get Your Free Funnel Audit
-                  <motion.span
-                    variants={{ hover: { x: 4 } }}
-                    transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-                    className="inline-block"
-                  >
-                    <ArrowRightIcon />
-                  </motion.span>
-                </Button>
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="relative w-full sm:w-auto"
-              >
-                <Button href="#results" variant="secondary" size="lg" className="w-full sm:w-auto" onClick={(e) => handleNavClick(e as any, '#results')}>
-                  See The Results
-                </Button>
-              </motion.div>
             </div>
       </div>
     </section>

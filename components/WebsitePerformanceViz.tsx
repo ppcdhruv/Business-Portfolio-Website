@@ -6,12 +6,20 @@ import MouseCursorIcon from './icons/MouseCursorIcon';
 
 type VizState = 'before' | 'after';
 
+// FIX: Created variants to handle animations and fix prop errors.
+const screenVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1, transition: { delay: 0.2 } },
+    exit: { opacity: 0 },
+};
+
 const NothingFoundScreen: React.FC = () => (
     <motion.div
         className="absolute inset-0 z-10 p-4 flex flex-col items-center justify-center font-mono text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { delay: 0.2 } }}
-        exit={{ opacity: 0 }}
+        variants={screenVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
     >
         <p className="text-sm sm:text-base text-zinc-500 dark:text-zinc-400">SCANNING FOR CONVERSIONS...</p>
         <p className="text-lg sm:text-xl text-red-500 mt-4">
@@ -23,9 +31,10 @@ const NothingFoundScreen: React.FC = () => (
 const ConversionsRecordingScreen: React.FC = () => (
     <motion.div
         className="absolute inset-0 z-10 p-4 flex flex-col items-center justify-center font-mono text-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: { delay: 0.2 } }}
-        exit={{ opacity: 0 }}
+        variants={screenVariants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
     >
         <p className="text-sm sm:text-base text-zinc-500 dark:text-zinc-400">ANALYZING FUNNEL...</p>
         <p className="text-lg sm:text-xl text-green-500 mt-4">
@@ -83,6 +92,7 @@ const WebsitePerformanceViz: React.FC = () => {
     const isAfter = vizState === 'after';
     
     return (
+        // FIX: Refactored motion props to use inline objects.
         <motion.div 
             ref={scope}
             whileHover={{ scale: 1.02 }}

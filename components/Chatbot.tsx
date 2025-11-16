@@ -19,6 +19,18 @@ const TypingIndicator = () => (
     </div>
 );
 
+// FIX: Created variants to handle animations and fix prop errors.
+const chatbotWindowVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 20 },
+};
+
+const messageVariants = {
+    initial: { opacity: 0, y: 10 },
+    animate: { opacity: 1, y: 0 },
+};
+
 const Chatbot: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
@@ -118,10 +130,12 @@ const Chatbot: React.FC = () => {
         <>
             <AnimatePresence>
             {!isOpen && (
+                // FIX: Refactored motion props to use variants to resolve TS errors.
                 <motion.button
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 20 }}
+                    variants={chatbotWindowVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
                     transition={{ duration: 0.3 }}
                     onClick={() => setIsOpen(true)}
                     className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-[var(--chatbot-primary)] text-[var(--chatbot-primary-fg)] shadow-lg flex items-center justify-center z-[999] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-zinc-500"
@@ -134,10 +148,12 @@ const Chatbot: React.FC = () => {
 
             <AnimatePresence>
             {isOpen && (
+                // FIX: Refactored motion props to use variants to resolve TS errors.
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 20 }}
+                    variants={chatbotWindowVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                     className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 w-[calc(100%-3rem)] sm:w-96 h-[70vh] max-h-[600px] bg-[var(--chatbot-bg)] border border-[var(--chatbot-border)] rounded-2xl shadow-2xl flex flex-col z-[1000] overflow-hidden"
                 >
@@ -158,11 +174,13 @@ const Chatbot: React.FC = () => {
                     {/* Messages */}
                     <div className="flex-grow p-4 overflow-y-auto space-y-4 no-scrollbar">
                         {messages.map((msg) => (
+                            // FIX: Refactored motion props to use variants and set layout prop explicitly to resolve TS errors.
                             <motion.div
                                 key={msg.id}
-                                layout
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
+                                layout={true}
+                                variants={messageVariants}
+                                initial="initial"
+                                animate="animate"
                                 transition={{ duration: 0.3 }}
                             >
                                 <div className={`flex gap-2.5 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -182,10 +200,12 @@ const Chatbot: React.FC = () => {
                             </motion.div>
                         ))}
                          {isTyping && (
+                             // FIX: Refactored motion props to use variants and set layout prop explicitly to resolve TS errors.
                              <motion.div
-                                layout
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
+                                layout={true}
+                                variants={messageVariants}
+                                initial="initial"
+                                animate="animate"
                                 className="flex justify-start"
                             >
                                 <div className="bg-zinc-100 dark:bg-zinc-800/80 rounded-2xl rounded-bl-lg">

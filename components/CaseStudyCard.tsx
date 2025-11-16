@@ -61,6 +61,7 @@ const CaseStudyCard: React.FC<{ study: CaseStudy }> = ({ study }) => {
 
                 <div className="flex-grow text-base text-zinc-600 dark:text-zinc-400 relative min-h-[140px]">
                     <AnimatePresence mode="wait">
+                        {/* FIX: Refactored motion props to use variants to resolve TS errors. */}
                         <motion.div
                             key={activeTab}
                             variants={contentVariants}
