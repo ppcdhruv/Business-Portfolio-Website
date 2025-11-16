@@ -38,19 +38,19 @@ const KPIBlock: React.FC<KPIBlockProps> = ({ kpis }) => {
                 
                 return (
                     <div key={label} className="text-center">
-                        <p className="text-[11px] font-medium text-zinc-500 dark:text-zinc-400 whitespace-nowrap">{label}</p>
-                        <div className="mt-0.5 flex items-baseline justify-center gap-1.5">
+                        <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400 whitespace-nowrap mb-1">{label}</p>
+                        <div>
                             {isNumeric ? (
                                 <>
-                                    <span className={`text-base font-semibold ${isPositiveChange ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
+                                    <span className={`block text-lg font-bold leading-tight ${isPositiveChange ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
                                         {after}
                                     </span>
-                                    <span className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 line-through">{before}</span>
+                                    <span className="block text-xs font-medium text-zinc-400 dark:text-zinc-500 line-through mt-0.5">{before}</span>
                                 </>
                             ) : (
                                 <>
-                                    <span className="text-base font-semibold text-zinc-800 dark:text-zinc-100">{after}</span>
-                                    <span className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 line-through">{before}</span>
+                                    <span className="block text-lg font-bold leading-tight text-zinc-800 dark:text-zinc-100">{after}</span>
+                                    <span className="block text-xs font-medium text-zinc-400 dark:text-zinc-500 line-through mt-0.5">{before}</span>
                                 </>
                             )}
                         </div>
